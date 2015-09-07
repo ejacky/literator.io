@@ -15,7 +15,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'pascalprecht.translate'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -32,4 +33,19 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+  .config(function($translateProvider) {
+    // Configure lang files location
+    $translateProvider.useStaticFilesLoader({
+      prefix: '/languages/',
+      suffix: '.json'
+    });
+
+    // Some security stuff
+    $translateProvider.useSanitizeValueStrategy('escape');
+
+    $translateProvider.preferredLanguage('ru-RU');
+
+    //$translateProvider.useLocalStorage();
+  })
+;
