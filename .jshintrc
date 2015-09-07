@@ -1,4 +1,8 @@
 {
+  "camelcase" : true,
+  "indent": 2,
+  "undef": true,
+  "quotmark": "single",
   "bitwise": true,
   "browser": true,
   "curly": true,
@@ -8,7 +12,6 @@
   "noarg": true,
   "node": true,
   "strict": true,
-  "undef": true,
   "unused": true,
   "globals": {
     "angular": false
