@@ -16,7 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'pascalprecht.translate'
+    'pascalprecht.translate',
+    'angular-google-analytics'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -47,5 +48,25 @@ angular
     $translateProvider.preferredLanguage('ru-RU');
 
     //$translateProvider.useLocalStorage();
+  })
+  .config(function(AnalyticsProvider) {
+    // Set analytics account
+    AnalyticsProvider.setAccount('UA-6315511-11');
+
+    // Track all routes (or not)
+    AnalyticsProvider.trackPages(false);
+
+    // Use display features plugin
+    AnalyticsProvider.useDisplayFeatures(true);
+
+    // Use analytics.js instead of ga.js
+    AnalyticsProvider.useAnalytics(true);
+  })
+  .run(function($rootScope, $location, Analytics) {
+    // Track pageview
+    $rootScope.$on('$routeChangeSuccess',
+      function() {
+        Analytics.trackPage($location.path());
+      });
   })
 ;
