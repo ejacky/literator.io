@@ -1,0 +1,34 @@
+/* Fonts */
+
+@font-face {
+  font-family: 'Classica';
+  src: url('/resources/fonts/classica_two.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'NotoSerif';
+  src: url('/resources/fonts/NotoSerif-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NotoSerif';
+  src: url('/resources/fonts/NotoSerif-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NotoSerif';
+  src: url('/resources/fonts/NotoSerif-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'NotoSerif';
+  src: url('/resources/fonts/NotoSerif-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}

@@ -1,6 +1,41 @@
 @import '../mixins';
-@import 'compass/css3';
 
-.site-main {
+.view-main {
   margin: auto;
+  text-align: center;
+
+  .logo {
+    font-family: 'Classica';
+    font-size: 11vw;
+
+    opacity: 0;
+    transform: scale(0.7);
+
+    animation-duration: 2s;
+    animation-delay: 0;
+    animation-fill-mode: forwards;
+    animation-name: fade-in, zoom-in;
+  }
+
+  .menu {
+    font-size: 5vmin;
+    opacity: 0;
+
+    animation-duration: 1s;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+    animation-name: fade-in;
+  }
+}
+
+@keyframes fade-in {
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes zoom-in {
+  100% {
+    transform: scale(1);
+  }
 }

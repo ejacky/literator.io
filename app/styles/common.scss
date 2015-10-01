@@ -1,16 +1,30 @@
 @import 'mixins';
 @import 'compass/css3';
+@import 'compass/css3/animation';
+
+/* Common */
+$text-color: #333;
+$link-color: $text-color;
 
 * {
   margin: 0;
   padding: 0;
   outline: none;
+  color: $text-color;
 }
+
+a {
+  color: $link-color;
+}
+
+/* Base structure */
 
 body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+
+  font-family: NotoSerif, Times, serif;
 }
 
 #content {
@@ -20,7 +34,7 @@ body {
 }
 
 #footer {
-  height: 82px;
+  height: 60px;
   background-color: rgba(0, 0, 0, 0.32);
 }
 
@@ -30,6 +44,7 @@ body {
   color: #000;
   padding: 0.2em 0;
 }
+
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
