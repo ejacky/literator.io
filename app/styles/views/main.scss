@@ -1,5 +1,3 @@
-@import '../mixins';
-
 .view-main {
   margin: auto;
   text-align: center;
@@ -20,22 +18,11 @@
   .menu {
     font-size: 5vmin;
     opacity: 0;
+    pointer-events: none;
 
     animation-duration: 1s;
     animation-delay: 2s;
     animation-fill-mode: forwards;
-    animation-name: fade-in;
-  }
-}
-
-@keyframes fade-in {
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes zoom-in {
-  100% {
-    transform: scale(1);
+    animation-name: fade-in, enable-interaction; // enable-interactions needed, because delay is used, but "hovering" reset animation
   }
 }

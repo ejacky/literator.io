@@ -1,0 +1,24 @@
+/* Animations */
+
+@keyframes fade-in {
+  100% {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+@keyframes enable-interactions {
+  0% {
+    pointer-events: none;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes zoom-in {
+  100% {
+    transform: scale(1);
+  }
+}
