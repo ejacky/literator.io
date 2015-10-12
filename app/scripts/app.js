@@ -17,7 +17,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'pascalprecht.translate',
-    'angular-google-analytics'
+    'angular-google-analytics',
+    'underscore'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -30,6 +31,11 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
         controllerAs: 'about'
+      })
+      .when('/verse', {
+        templateUrl: 'views/verse.html',
+        controller: 'VerseCtrl',
+        controllerAs: 'verse'
       })
       .otherwise({
         redirectTo: '/'
