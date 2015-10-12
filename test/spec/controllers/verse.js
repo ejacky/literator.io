@@ -1,23 +1,23 @@
 'use strict';
 
-describe('Controller: MainCtrl', function () {
+describe('Controller: VerseCtrl', function () {
 
   // load the controller's module
   beforeEach(module('literatorioApp'));
 
-  var MainCtrl,
+  var VerseCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    MainCtrl = $controller('MainCtrl', {
+    VerseCtrl = $controller('VerseCtrl', {
       $scope: scope
       // place here mocked dependencies
     });
   }));
 
   it('should be loadable', function () {
-    expect(!!MainCtrl).toBe(true);
+    expect(!!VerseCtrl).toBe(true);
   });
 });
