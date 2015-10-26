@@ -8,7 +8,7 @@
  * Controller of the literatorioApp
  */
 angular.module('literatorioApp')
-  .controller('VerseCtrl', function ($scope, $interval, VerseDataStore) {
+  .controller('VerseCtrl', function ($scope, $interval, VerseDataStore, VerseBlock) {
 
     var versePieces = null;
     var narrativeTimer = null;
@@ -29,6 +29,7 @@ angular.module('literatorioApp')
         // Populate scope
         $scope.verse = verse;
         $scope.versePieces = [];
+        $scope.currentBlock = null;
 
         // Start narrative
         continueNarrative();
@@ -69,6 +70,16 @@ angular.module('literatorioApp')
         return stopNarrative();
       }
 
-      $scope.versePieces.push(nextPiece);
+      // Need to stop narrative, if that's a block
+      if (nextPiece instanceof VerseBlock) {
+        stopNarrative();
+        $scope.currentBlock = nextPiece;
+
+        // Focus to input field
+        document.querySelector('input').focus();
+      } else {
+        // Display that piece
+        $scope.versePieces.push(nextPiece);
+      }
     }
   });

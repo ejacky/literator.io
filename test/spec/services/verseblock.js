@@ -24,7 +24,7 @@ describe('Service: VerseBlock', function () {
     var verseBlock = new VerseBlock(testString);
 
     expect(verseBlock).toBeDefined();
-    expect(verseBlock.toString() + '123').toBe(testString + '123');
+    expect(verseBlock + '123').toBe(testString + '123');
   });
 
 });

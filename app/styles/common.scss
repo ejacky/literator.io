@@ -5,6 +5,7 @@
 /* Common */
 $text-color: #333;
 $link-color: $text-color;
+$base-font-family: NotoSerif, Times, serif;
 
 * {
   margin: 0;
@@ -20,7 +21,7 @@ a {
 /* Base structure */
 
 html {
-  font-family: NotoSerif, Times, serif;
+  font-family: $base-font-family;
   font-size: 22px;
 
   @media screen and (max-width: 500px) {

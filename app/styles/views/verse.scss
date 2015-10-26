@@ -1,9 +1,13 @@
 .view-verse {
   margin: auto;
 
-  .content {
+  .content, .verse-width {
     white-space: pre-line;
     font-size: 1rem;
+  }
+
+  .content {
+    min-height: 10rem;
 
     span {
       opacity: 0;
@@ -13,5 +17,25 @@
       animation-fill-mode: forwards;
       animation-name: fade-in, reset-transform;
     }
+
+    input {
+      border: none;
+      font-size: inherit;
+      font-family: inherit;
+
+      .visible {
+        visibility: visible;
+      }
+
+      .hidden {
+        visibility: hidden;
+      }
+    }
+  }
+
+  .verse-width {
+    height: 1px;
+    visibility: hidden;
+    overflow: hidden;
   }
 }
