@@ -1,6 +1,7 @@
 <div class="view-verse">
   <div class="content">
-    <span ng-repeat="piece in versePieces track by $index">{{::piece + ''}}</span><input ng-class="{visible: currentBlock, hidden: !currentBlock}" size="3" />
+    <span ng-repeat="piece in versePieces track by $index">{{::piece + ''}}</span>
+    <input ng-class="{visible: currentBlock, hidden: !currentBlock}" ng-keyup="onInputFieldKeyup($event)" />
   </div>
   <div class="verse-width">{{ ::verse.content }}</div>
 </div>

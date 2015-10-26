@@ -2,7 +2,6 @@
   margin: auto;
 
   .content, .verse-width {
-    white-space: pre-line;
     font-size: 1rem;
   }
 
@@ -10,8 +9,10 @@
     min-height: 10rem;
 
     span {
+      white-space: pre-line;
       opacity: 0;
       transform: translate(1.5em, 0) scale(1.8);
+      //transform: translate(0, 1.5em) scale(1.8);
 
       animation-duration: 0.5s;
       animation-fill-mode: forwards;
@@ -23,17 +24,20 @@
       font-size: inherit;
       font-family: inherit;
 
-      .visible {
-        visibility: visible;
+      &.visible {
+        width: 2.5rem;
+        opacity: 1;
       }
 
-      .hidden {
-        visibility: hidden;
+      &.hidden {
+        width: 0;
+        opacity: 0;
       }
     }
   }
 
   .verse-width {
+    white-space: pre-line;
     height: 1px;
     visibility: hidden;
     overflow: hidden;

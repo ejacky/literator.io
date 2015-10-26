@@ -12,6 +12,7 @@ angular.module('literatorioApp')
 
     var versePieces = null;
     var narrativeTimer = null;
+    var inputField = document.querySelector('.view-verse input');
 
     init();
 
@@ -30,6 +31,7 @@ angular.module('literatorioApp')
         $scope.verse = verse;
         $scope.versePieces = [];
         $scope.currentBlock = null;
+        $scope.onInputFieldKeyup = onInputFieldKeyup;
 
         // Start narrative
         continueNarrative();
@@ -76,10 +78,26 @@ angular.module('literatorioApp')
         $scope.currentBlock = nextPiece;
 
         // Focus to input field
-        document.querySelector('input').focus();
+        inputField.focus();
       } else {
         // Display that piece
         $scope.versePieces.push(nextPiece);
+      }
+    }
+
+    /**
+     * Callback firing on input field keyup
+     */
+    function onInputFieldKeyup() {
+      // Check entered value match block value
+      if ((inputField.value + '').substr(0, 3) === ($scope.currentBlock + '').substr(0, 3)) {
+        // Display that piece
+        var nextPiece = $scope.currentBlock;
+        $scope.currentBlock = null;
+        $scope.versePieces.push(nextPiece);
+
+        inputField.value = '';
+        continueNarrative();
       }
     }
   });
