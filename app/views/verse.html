@@ -1,4 +1,6 @@
 <div class="view-verse">
-  <div class="content">{{ verse.content }}</div>
+  <div class="content">
+    <span ng-repeat="piece in versePieces track by $index">{{::piece + ''}}</span>
+  </div>
 </div>
 

@@ -16,13 +16,11 @@ describe('Service: Verse', function () {
     'path': '/test_path',
     'author': 'test_author'
   };
-  var mockVerseContent = "First line\nSecond line\nThird line";
 
   beforeEach(inject(function ($injector, _Verse_) {
     // Mock backend with $httpBackend
     $httpBackend = $injector.get('$httpBackend');
     $httpBackend.whenGET('/languages/ru-RU.json').respond('');
-    $httpBackend.whenGET(mockVerseData.path + '/content.txt').respond(mockVerseContent);
 
     Verse = _Verse_;
   }));
@@ -49,8 +47,11 @@ describe('Service: Verse', function () {
   });
 
   it('should load its content', function () {
+    var mockVerseContent = 'Test content';
+    $httpBackend.expectGET(verse.path + '/content.txt').respond(mockVerseContent);
+
     verse.loadContent().then(function(){
-      expect(!!verse.content).toBe(true);
+      expect(verse.content).toBe(mockVerseContent);
     });
 
     $httpBackend.flush();
@@ -64,6 +65,27 @@ describe('Service: Verse', function () {
 
   it('should properly normalize string to normal difficulty', function () {
     expect(verse.normalizeStringToDifficulty('The quick brown fox {jumps over the {lazy dog}}', verse.DIFFICULTY_NORMAL)).toBe('The quick brown fox {jumps over the lazy dog}');
+
+    $httpBackend.flush();
+  });
+
+  it('should return proper pieces', function () {
+    var mockVerseContent = 'Word {word {word}}\nWord {word}';
+    $httpBackend.expectGET(verse.path + '/content.txt').respond(mockVerseContent);
+
+    verse.loadContent().then(function(){
+      var pieces = null;
+
+      pieces = verse.getPieces({
+        difficulty: Verse.prototype.DIFFICULTY_EASY
+      });
+      expect(pieces.length).toBe(18, 'for easy difficulty');
+
+      pieces = verse.getPieces({
+        difficulty: Verse.prototype.DIFFICULTY_NORMAL
+      });
+      expect(pieces.length).toBe(13, 'for normal difficulty');
+    });
 
     $httpBackend.flush();
   });

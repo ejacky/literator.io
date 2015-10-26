@@ -17,8 +17,20 @@
   }
 }
 
-@keyframes zoom-in {
+@keyframes zoom-to-1 {
   100% {
     transform: scale(1);
+  }
+}
+
+@keyframes translate-to-0 {
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes reset-transform {
+  100% {
+    transform: none;
   }
 }

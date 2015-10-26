@@ -8,7 +8,7 @@
  * Model to store and manipulate verse data.
  */
 angular.module('literatorioApp')
-  .factory('Verse', function ($http) {
+  .factory('Verse', function ($http, VerseBlock) {
 
     // Constructor
     function Verse(rawData) {
@@ -20,8 +20,8 @@ angular.module('literatorioApp')
       DIFFICULTY_EASY: 'easy',
       DIFFICULTY_NORMAL: 'normal',
 
-      _blockStartChar: '{',
-      _blockEndChar: '}',
+      BLOCK_SEPARATOR_START: '{',
+      BLOCK_SEPARATOR_END: '}',
 
       /**
        * Loads up verse's content
@@ -39,14 +39,47 @@ angular.module('literatorioApp')
         });
       },
 
+      /**
+       * Returns content divided into pieces to display it later
+       * @param options
+       * @returns {Array}
+       */
       getPieces: function(options) {
         var self = this;
 
         options = angular.extend({
-          difficulty: 'normal',
+          difficulty: 'easy',
         }, options);
 
-        self.content = self.normalizeStringToDifficulty(self.content, options.difficulty);
+        // Get normalized content
+        var contentArray = self.normalizeStringToDifficulty(self.content, options.difficulty).split('');
+
+        // Divide into pieces
+        var pieces = [];
+        var isInBlock = false;
+        var blockPiece = null;
+        contentArray.forEach(function(char){
+          switch (char) {
+            case self.BLOCK_SEPARATOR_START:
+              isInBlock = true;
+              blockPiece = '';
+              break;
+
+            case self.BLOCK_SEPARATOR_END:
+              isInBlock = false;
+              pieces.push(new VerseBlock(blockPiece));
+              break;
+
+            default:
+              if (isInBlock) {
+                blockPiece += char;
+              } else {
+                pieces.push(char);
+              }
+          }
+        });
+
+        return pieces;
       },
 
       /**
@@ -69,11 +102,11 @@ angular.module('literatorioApp')
         contentArray.forEach(function(char, index){
           // Count separators
           switch (char) {
-            case self._blockStartChar:
+            case self.BLOCK_SEPARATOR_START:
               startCharPositions.push(index);
               break;
 
-            case self._blockEndChar:
+            case self.BLOCK_SEPARATOR_END:
               endCharPositions.push(index);
               break;
           }

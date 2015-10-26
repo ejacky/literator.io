@@ -4,5 +4,14 @@
   .content {
     white-space: pre-line;
     font-size: 1rem;
+
+    span {
+      opacity: 0;
+      transform: translate(1.5em, 0) scale(1.8);
+
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+      animation-name: fade-in, reset-transform;
+    }
   }
 }
