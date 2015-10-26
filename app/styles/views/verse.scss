@@ -1,5 +1,11 @@
 .view-verse {
   margin: auto;
+  display: flex;
+  flex-direction: row;
+
+  & > div {
+    margin: auto;
+  }
 
   .content, .verse-width {
     font-size: 1rem;
@@ -7,8 +13,10 @@
 
   .content {
     min-height: 10rem;
+    -webkit-font-smoothing: antialiased;
 
     span {
+      //display: inline-block;
       white-space: pre-line;
       opacity: 0;
       transform: translate(1.5em, 0) scale(1.8);

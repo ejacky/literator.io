@@ -8,7 +8,7 @@
  * Controller of the literatorioApp
  */
 angular.module('literatorioApp')
-  .controller('VerseCtrl', function ($scope, $interval, VerseDataStore, VerseBlock) {
+  .controller('VerseCtrl', function ($scope, $timeout, $interval, VerseDataStore, VerseBlock) {
 
     var versePieces = null;
     var narrativeTimer = null;
@@ -78,7 +78,9 @@ angular.module('literatorioApp')
         $scope.currentBlock = nextPiece;
 
         // Focus to input field
-        inputField.focus();
+        $timeout(function(){
+          inputField.focus(); // not working in Mobile Safari. Maybe somebody know some WORKING method?
+        }, 100);
       } else {
         // Display that piece
         $scope.versePieces.push(nextPiece);

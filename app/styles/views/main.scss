@@ -18,11 +18,10 @@
   .menu {
     font-size: 5vmin;
     opacity: 0;
-    pointer-events: none;
 
     animation-duration: 1s;
     animation-delay: 2s;
     animation-fill-mode: forwards;
-    animation-name: fade-in, enable-interaction; // enable-interactions needed, because delay is used, but "hovering" reset animation
+    animation-name: fade-in;
   }
 }
