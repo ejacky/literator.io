@@ -34,7 +34,15 @@ angular.module('literatorioApp')
           method: 'GET',
           url: this.path + '/content.txt'
         }).then(function(response){
-          self.content = response.data;
+          var content = response.data;
+
+          // Post-process received content
+          content = content
+            .replace(/[\s](\x2d|\x2212|\x2010\x2012\x2043)/g, ' —') // some typography
+            .replace(/[\s]{2,}/g, ' ') // remove double spaces
+          ;
+
+          self.content = content;
           return self;
         });
       },
