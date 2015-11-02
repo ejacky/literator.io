@@ -2,7 +2,7 @@
   <div>
     <div class="content">
       <span ng-repeat="piece in versePieces track by $index">{{::piece + ''}}</span>
-      <input ng-class="{visible: currentBlock, hidden: !currentBlock}" ng-keyup="onInputFieldKeyup($event)" />
+      <input ng-class="{visible: currentBlock, hidden: !currentBlock}" ng-keyup="onInputFieldKeyup()" autocorrect="off" autocomplete="off" autocapitalize="off" />
     </div>
     <div class="verse-width">{{ ::verse.content }}</div>
   </div>

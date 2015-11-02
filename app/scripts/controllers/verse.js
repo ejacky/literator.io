@@ -12,6 +12,7 @@ angular.module('literatorioApp')
 
     var versePieces = null;
     var narrativeTimer = null;
+    var siteContentElement = angular.element(document.querySelector('#content'));
     var inputField = document.querySelector('.view-verse input');
 
     init();
@@ -26,6 +27,10 @@ angular.module('literatorioApp')
         return verse.loadContent();
       }).then(function(verse){
         versePieces = verse.getPieces({});
+
+        // Add event listeners
+        $scope.$on('$destroy', onDestroy);
+        siteContentElement.bind('click', onSiteContentClick);
 
         // Populate scope
         $scope.verse = verse;
@@ -92,7 +97,7 @@ angular.module('literatorioApp')
      */
     function onInputFieldKeyup() {
       // Check entered value match block value
-      if ((inputField.value + '').substr(0, 3) === ($scope.currentBlock + '').substr(0, 3)) {
+      if ((inputField.value + '').length === 3 || (inputField.value + '').substr(0, 3) === ($scope.currentBlock + '').substr(0, 3)) {
         // Display that piece
         var nextPiece = $scope.currentBlock;
         $scope.currentBlock = null;
@@ -101,5 +106,26 @@ angular.module('literatorioApp')
         inputField.value = '';
         continueNarrative();
       }
+    }
+
+    /**
+     * Callback firing when user clicks on site content area
+     * @param {Event} event
+     */
+    function onSiteContentClick(event) {
+      // Prevent default unnecessary behavior
+      event.stopPropagation();
+      event.preventDefault();
+
+      // Focus on input field
+      inputField.focus(); // mostly for Mobile Safari
+    }
+
+    /**
+     * Callback firing on scope/controller destruction
+     */
+    function onDestroy() {
+      // Unbind global events to prevent memory leaks
+      siteContentElement.unbind('click', onSiteContentClick);
     }
   });
