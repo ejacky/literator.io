@@ -86,6 +86,7 @@ angular.module('literatorioApp')
         $timeout(function(){
           inputField.focus(); // not working in Mobile Safari. Maybe somebody know some WORKING method?
         }, 100);
+        inputField.value = '';
       } else {
         // Display that piece
         $scope.versePieces.push(nextPiece);
@@ -97,7 +98,7 @@ angular.module('literatorioApp')
      */
     function onInputFieldKeyup() {
       // Check entered value match block value
-      if ((inputField.value + '').length === 3 || (inputField.value + '').substr(0, 3) === ($scope.currentBlock + '').substr(0, 3)) {
+      if ($scope.currentBlock.match(inputField.value, 3)) {
         // Display that piece
         var nextPiece = $scope.currentBlock;
         $scope.currentBlock = null;

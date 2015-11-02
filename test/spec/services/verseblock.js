@@ -27,4 +27,14 @@ describe('Service: VerseBlock', function () {
     expect(verseBlock + '123').toBe(testString + '123');
   });
 
+  it('should match against passed string', function () {
+    var verseBlock = new VerseBlock('зелёный');
+
+    expect(verseBlock).toBeDefined();
+    expect(verseBlock.match('зелёный', 3)).toBe(true, 'exact match');
+    expect(verseBlock.match('зелеfds', 3)).toBe(true, 'partial match');
+    expect(verseBlock.match('ЗеЛен', 3)).toBe(true, 'case-insensitive match');
+    expect(verseBlock.match('зеленый', 4)).toBe(true, 'е-ё match');
+  });
+
 });
