@@ -31,10 +31,24 @@ describe('Service: VerseBlock', function () {
     var verseBlock = new VerseBlock('зелёный');
 
     expect(verseBlock).toBeDefined();
-    expect(verseBlock.match('зелёный', 3)).toBe(true, 'exact match');
+    expect(verseBlock.match('зелёный', 7)).toBe(true, 'exact match');
     expect(verseBlock.match('зелеfds', 3)).toBe(true, 'partial match');
     expect(verseBlock.match('ЗеЛен', 3)).toBe(true, 'case-insensitive match');
     expect(verseBlock.match('зеленый', 4)).toBe(true, 'е-ё match');
+  });
+
+  it('should match against Russian transliterated string', function () {
+    var verseBlock = new VerseBlock('зелёный');
+
+    expect(verseBlock).toBeDefined();
+    expect(verseBlock.match('zelenyj', 3)).toBe(true);
+  });
+
+  it('should match against Russian transliterated string #2', function () {
+    var verseBlock = new VerseBlock('чёрный');
+
+    expect(verseBlock).toBeDefined();
+    expect(verseBlock.match('chernyj', 4)).toBe(true);
   });
 
 });

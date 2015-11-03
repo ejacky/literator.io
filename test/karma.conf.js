@@ -34,6 +34,8 @@ module.exports = function(config) {
       'bower_components/angular-google-analytics/dist/angular-google-analytics.min.js',
       'bower_components/underscore/underscore.js',
       'bower_components/angular-underscore-module/angular-underscore-module.js',
+      'bower_components/speakingurl/speakingurl.min.js',
+      'bower_components/angular-speakingurl/src/angular-speakingurl.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

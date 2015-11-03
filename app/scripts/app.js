@@ -18,7 +18,8 @@ angular
     'ngTouch',
     'pascalprecht.translate',
     'angular-google-analytics',
-    'underscore'
+    'underscore',
+    'angular-speakingurl'
   ])
   .config(function ($routeProvider) {
     $routeProvider

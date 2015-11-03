@@ -8,7 +8,7 @@
  * Represents block of characters in verse.
  */
 angular.module('literatorioApp')
-  .service('VerseBlock', function () {
+  .service('VerseBlock', function ($speakingurl) {
 
     // Constructor
     function VerseBlock(string) {
@@ -25,7 +25,11 @@ angular.module('literatorioApp')
        * @returns {boolean}
        */
       match: function(str, length) {
-        return this._stringNormalized.substr(0, length) === this.normalizeString(str).substr(0, length);
+        if (str.length < length) {
+          return false;
+        }
+
+        return this._stringNormalized.indexOf(this.normalizeString(str.substr(0, length))) === 0;
       },
 
       /**
@@ -39,7 +43,7 @@ angular.module('literatorioApp')
           .replace('ё', 'е') // special Russian conversion
         ;
 
-        return str;
+        return $speakingurl.getSlug(str);
       },
 
       toString: function() {
