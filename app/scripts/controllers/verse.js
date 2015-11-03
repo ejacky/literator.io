@@ -10,10 +10,15 @@
 angular.module('literatorioApp')
   .controller('VerseCtrl', function ($scope, $timeout, $interval, VerseDataStore, VerseBlock) {
 
+    var maxHintsCount = 2;
+    var maxCharsToComplete = 3;
+
     var versePieces = null;
     var narrativeTimer = null;
+    var hintingTimer = null;
+    var currentHint = null;
+    var inputField = null;
     var siteContentElement = angular.element(document.querySelector('#content'));
-    var inputField = document.querySelector('.view-verse input');
 
     init();
 
@@ -22,11 +27,12 @@ angular.module('literatorioApp')
      */
     function init() {
       // Load random verse
-      VerseDataStore.getRandomVerse().then(function(verse){
+      VerseDataStore.getRandomVerse().then(function(verse) {
         // Load all the content of the verse
         return verse.loadContent();
-      }).then(function(verse){
+      }).then(function(verse) {
         versePieces = verse.getPieces({});
+        inputField = document.querySelector('.view-verse input');
 
         // Add event listeners
         $scope.$on('$destroy', onDestroy);
@@ -40,7 +46,7 @@ angular.module('literatorioApp')
 
         // Start narrative
         continueNarrative();
-      }).catch(function(e){
+      }).catch(function(e) {
         console.log(e);
       });
     }
@@ -49,7 +55,7 @@ angular.module('literatorioApp')
      * Continues verse output
      */
     function continueNarrative() {
-      if (angular.isDefined(narrativeTimer)) {
+      if (narrativeTimer) {
         $interval.cancel(narrativeTimer);
       }
 
@@ -60,9 +66,32 @@ angular.module('literatorioApp')
      * Stops verse output
      */
     function stopNarrative() {
-      if (angular.isDefined(narrativeTimer)) {
+      if (narrativeTimer) {
         $interval.cancel(narrativeTimer);
         narrativeTimer = null;
+      }
+    }
+
+    /**
+     * Starts giving delayed hints to user
+     */
+    function startHinting() {
+      if (hintingTimer) {
+        $interval.cancel(hintingTimer);
+      }
+
+      currentHint = '';
+      hintingTimer = $interval(displayNextHint, 5000);
+    }
+
+    /**
+     * Stops giving hints
+     */
+    function stopHinting() {
+      if (hintingTimer) {
+        $interval.cancel(hintingTimer);
+        hintingTimer = null;
+        currentHint = '';
       }
     }
 
@@ -83,10 +112,12 @@ angular.module('literatorioApp')
         $scope.currentBlock = nextPiece;
 
         // Focus to input field
-        $timeout(function(){
+        $timeout(function() {
           inputField.focus(); // not working in Mobile Safari. Maybe somebody know some WORKING method?
         }, 100);
         inputField.value = '';
+
+        startHinting();
       } else {
         // Display that piece
         $scope.versePieces.push(nextPiece);
@@ -94,18 +125,42 @@ angular.module('literatorioApp')
     }
 
     /**
+     * Displays next hint for current block
+     */
+    function displayNextHint() {
+      var nextHintChar = $scope.currentBlock.toString().substr(currentHint.length, 1);
+
+      // Check, if enough hints for that block
+      if (!nextHintChar.length || currentHint.length >= maxHintsCount) {
+        resolveCurrentBlock();
+      } else {
+        currentHint += nextHintChar;
+        $scope.versePieces.push(nextHintChar);
+      }
+    }
+
+    /**
+     * Finishes current block and continues narrative
+     */
+    function resolveCurrentBlock() {
+      var nextPiece = $scope.currentBlock.toString().substr(currentHint.length);
+      $scope.currentBlock = null;
+      $scope.versePieces.push(nextPiece);
+
+      stopHinting();
+      continueNarrative();
+      inputField.value = '';
+    }
+
+    /**
      * Callback firing on input field keyup
      */
     function onInputFieldKeyup() {
       // Check entered value match block value
-      if ($scope.currentBlock.match(inputField.value, 3)) {
-        // Display that piece
-        var nextPiece = $scope.currentBlock;
-        $scope.currentBlock = null;
-        $scope.versePieces.push(nextPiece);
-
-        inputField.value = '';
-        continueNarrative();
+      if ($scope.currentBlock.match(currentHint + inputField.value, maxCharsToComplete)
+        || $scope.currentBlock.match(inputField.value, maxCharsToComplete) // for those, who will enter it fully
+      ) {
+        resolveCurrentBlock();
       }
     }
 
@@ -128,5 +183,9 @@ angular.module('literatorioApp')
     function onDestroy() {
       // Unbind global events to prevent memory leaks
       siteContentElement.unbind('click', onSiteContentClick);
+
+      // Stop timers
+      stopHinting();
+      stopNarrative();
     }
   });
