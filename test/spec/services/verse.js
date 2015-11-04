@@ -57,6 +57,36 @@ describe('Service: Verse', function () {
     $httpBackend.flush();
   });
 
+  it('should replace hyphens to proper dashes (typography)', function () {
+    $httpBackend.expectGET(verse.path + '/content.txt').respond('content-content content -content content - content');
+
+    verse.loadContent().then(function(){
+      expect(verse.content).toBe('content-content content —content content — content');
+    });
+
+    $httpBackend.flush();
+  });
+
+  it('should cleanup content from non-Unix line breaks', function () {
+    $httpBackend.expectGET(verse.path + '/content.txt').respond('content\r\ncontent\rcontent\ncontent');
+
+    verse.loadContent().then(function(){
+      expect(verse.content).toBe('content\ncontent\ncontent\ncontent');
+    });
+
+    $httpBackend.flush();
+  });
+
+  it('should cleanup content from double spaces', function () {
+    $httpBackend.expectGET(verse.path + '/content.txt').respond('content   content  content content');
+
+    verse.loadContent().then(function(){
+      expect(verse.content).toBe('content content content content');
+    });
+
+    $httpBackend.flush();
+  });
+
   it('should properly normalize string to easy difficulty', function () {
     expect(verse.normalizeStringToDifficulty('The quick brown fox {jumps over the {lazy dog}}', verse.DIFFICULTY_EASY)).toBe('The quick brown fox jumps over the {lazy dog}');
 
