@@ -13,6 +13,7 @@
   "node": true,
   "strict": true,
   "unused": true,
+  "laxbreak": false,
   "globals": {
     "angular": false
   }

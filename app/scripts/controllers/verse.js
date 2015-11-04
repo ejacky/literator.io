@@ -18,7 +18,7 @@ angular.module('literatorioApp')
     var hintingTimer = null;
     var currentHint = null;
     var inputField = null;
-    var siteContentElement = angular.element(document.querySelector('#content'));
+    var siteContentElement = angular.element('#content');
 
     init();
 
@@ -156,7 +156,12 @@ angular.module('literatorioApp')
      * Callback firing on input field keyup
      */
     function onInputFieldKeyup() {
-      // Check entered value match block value
+      // Exit, if no block to solve
+      if (!$scope.currentBlock) {
+        return;
+      }
+
+      // Check if entered value matches block value
       if ($scope.currentBlock.match(currentHint + inputField.value, maxCharsToComplete)
         || $scope.currentBlock.match(inputField.value, maxCharsToComplete) // for those, who will enter it fully
       ) {
