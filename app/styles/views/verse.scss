@@ -7,12 +7,11 @@
     margin: auto;
   }
 
-  .content, .verse-width {
+  .content, .verse-width, .content-spacer {
     font-size: 1rem;
   }
 
   .content {
-    min-height: 10rem;
     -webkit-font-smoothing: antialiased;
 
     span {
@@ -42,6 +41,10 @@
         opacity: 0;
       }
     }
+  }
+
+  .content-spacer {
+    height: 10em;
   }
 
   .verse-width {

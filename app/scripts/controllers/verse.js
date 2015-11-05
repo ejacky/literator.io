@@ -12,13 +12,15 @@ angular.module('literatorioApp')
 
     var maxHintsCount = 2;
     var maxCharsToComplete = 3;
+    var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
+    var $ = angular.element;
+    var siteContentElement = $('#content');
     var versePieces = null;
     var narrativeTimer = null;
     var hintingTimer = null;
     var currentHint = null;
     var inputField = null;
-    var siteContentElement = angular.element('#content');
 
     init();
 
@@ -32,7 +34,7 @@ angular.module('literatorioApp')
         return verse.loadContent();
       }).then(function(verse) {
         versePieces = verse.getPieces({});
-        inputField = document.querySelector('.view-verse input');
+        inputField = $('.view-verse input');
 
         // Add event listeners
         $scope.$on('$destroy', onDestroy);
@@ -115,9 +117,10 @@ angular.module('literatorioApp')
         $timeout(function() {
           inputField.focus(); // not working in Mobile Safari. Maybe somebody know some WORKING method?
         }, 100);
-        inputField.value = '';
+        inputField.val('');
 
         startHinting();
+        scrollToInputField();
       } else {
         // Display that piece
         $scope.versePieces.push(nextPiece);
@@ -149,7 +152,15 @@ angular.module('literatorioApp')
 
       stopHinting();
       continueNarrative();
-      inputField.value = '';
+      inputField.val('');
+    }
+
+    /**
+     * Scrolls to input field
+     */
+    function scrollToInputField() {
+      var newScrollTop = inputField.offset().top - window.innerHeight / (isIOS ? 4 : 2);
+      $('html, body').animate({scrollTop: newScrollTop});
     }
 
     /**
@@ -162,8 +173,8 @@ angular.module('literatorioApp')
       }
 
       // Check if entered value matches block value
-      if ($scope.currentBlock.match(currentHint + inputField.value, maxCharsToComplete)
-        || $scope.currentBlock.match(inputField.value, maxCharsToComplete) // for those, who will enter it fully
+      if ($scope.currentBlock.match(currentHint + inputField.val(), maxCharsToComplete)
+        || $scope.currentBlock.match(inputField.val(), maxCharsToComplete) // for those, who will enter it fully
       ) {
         resolveCurrentBlock();
       }
