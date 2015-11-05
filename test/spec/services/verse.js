@@ -88,19 +88,19 @@ describe('Service: Verse', function () {
   });
 
   it('should properly normalize string to easy difficulty', function () {
-    expect(verse.normalizeStringToDifficulty('The quick brown fox {jumps over the {lazy dog}}', verse.DIFFICULTY_EASY)).toBe('The quick brown fox jumps over the {lazy dog}');
+    expect(verse.normalizeStringToDifficulty('The quick brown fox {jumps over the {lazy dog}}', Verse.prototype.DIFFICULTY_EASY)).toBe('The quick brown fox jumps over the {lazy dog}');
 
     $httpBackend.flush();
   });
 
   it('should properly normalize string to normal difficulty', function () {
-    expect(verse.normalizeStringToDifficulty('The quick brown fox {jumps over the {lazy dog}}', verse.DIFFICULTY_NORMAL)).toBe('The quick brown fox {jumps over the lazy dog}');
+    expect(verse.normalizeStringToDifficulty('The quick brown fox {jumps over the {lazy dog}}', Verse.prototype.DIFFICULTY_NORMAL)).toBe('The quick brown fox {jumps over the lazy dog}');
 
     $httpBackend.flush();
   });
 
   it('should return proper pieces', function () {
-    var mockVerseContent = 'Word {word {word}}\nWord {word}';
+    var mockVerseContent = 'Word {word {word}}\nWord {word}\nWord {word word{}}';
     $httpBackend.expectGET(verse.path + '/content.txt').respond(mockVerseContent);
 
     verse.loadContent().then(function(){
@@ -109,12 +109,12 @@ describe('Service: Verse', function () {
       pieces = verse.getPieces({
         difficulty: Verse.prototype.DIFFICULTY_EASY
       });
-      expect(pieces.length).toBe(18, 'for easy difficulty');
+      expect(pieces.length).toBe(33, 'for easy difficulty');
 
       pieces = verse.getPieces({
         difficulty: Verse.prototype.DIFFICULTY_NORMAL
       });
-      expect(pieces.length).toBe(13, 'for normal difficulty');
+      expect(pieces.length).toBe(20, 'for normal difficulty');
     });
 
     $httpBackend.flush();

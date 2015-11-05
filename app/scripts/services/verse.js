@@ -76,7 +76,9 @@ angular.module('literatorioApp')
 
             case self.BLOCK_SEPARATOR_END:
               isInBlock = false;
-              pieces.push(new VerseBlock(blockPiece));
+              if (blockPiece.length) {
+                pieces.push(new VerseBlock(blockPiece));
+              }
               break;
 
             default:
