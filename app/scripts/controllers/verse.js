@@ -15,7 +15,7 @@ angular.module('literatorioApp')
     var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
     var $ = angular.element;
-    var siteContentElement = $('#content');
+    var siteContentElement = null;
     var versePieces = null;
     var narrativeTimer = null;
     var hintingTimer = null;
@@ -34,6 +34,7 @@ angular.module('literatorioApp')
         return verse.loadContent();
       }).then(function(verse) {
         versePieces = verse.getPieces({});
+        siteContentElement = $('#content');
         inputField = $('.view-verse input');
 
         // Add event listeners
@@ -47,7 +48,9 @@ angular.module('literatorioApp')
         $scope.onInputFieldKeyup = onInputFieldKeyup;
 
         // Start narrative
-        continueNarrative();
+        $timeout(function(){
+          continueNarrative();
+        }, 2600); // sync with animation
       }).catch(function(e) {
         console.log(e);
       });

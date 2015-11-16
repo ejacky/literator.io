@@ -7,6 +7,43 @@
     margin: auto;
   }
 
+  .top {
+    margin: 2em 0 0 0;
+    text-align: center;
+
+    opacity: 0;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-name: fade-in, reset-transform;
+
+    .title {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .description {
+      margin: 0;
+      font-size: 0.8rem;
+      font-style: italic;
+    }
+
+    .monogram {
+      margin: 1em 0;
+      height: 15px;
+
+      opacity: 0;
+      transform: scale(0.8);
+      animation-delay: 1.5s;
+      animation-duration: 1.5s, 2s;
+      animation-fill-mode: forwards;
+      animation-name: fade-in, reset-transform;
+
+      @media screen and (max-width: 500px) {
+        height: 10px;
+      }
+    }
+  }
+
   .content, .verse-width, .content-spacer {
     font-size: 1rem;
   }

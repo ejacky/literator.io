@@ -1,6 +1,11 @@
 <div class="view-verse">
   <div>
     <div class="verse-width">{{ ::verse.content }}</div>
+    <div class="top" ng-show="verse">
+      <h1 class="title">{{ ::verse.title }}</h1>
+      <p class="description">{{ ::verse.description }}</p>
+      <img class="monogram" src="/images/verse/mono-medium.png" />
+    </div>
     <div class="content">
       <span ng-repeat="piece in versePieces track by $index">{{::piece + ''}}</span><input ng-class="{visible: currentBlock, hidden: !currentBlock}" ng-keyup="onInputFieldKeyup()" autocorrect="off" autocomplete="off" autocapitalize="off" />
     </div>

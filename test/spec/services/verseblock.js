@@ -27,7 +27,15 @@ describe('Service: VerseBlock', function () {
     expect(verseBlock + '123').toBe(testString + '123');
   });
 
-  it('should match against passed string', function () {
+  it('should not match against wrong string', function () {
+    var verseBlock = new VerseBlock('зелёный');
+
+    expect(verseBlock).toBeDefined();
+    expect(verseBlock.match('dfgiidfg', 7)).toBe(false, 'don\'t allow completely wrong string');
+    expect(verseBlock.match('зе', 3)).toBe(false, 'don\'t allow strings which are shorter than needed');
+  });
+
+  it('should match against proper string', function () {
     var verseBlock = new VerseBlock('зелёный');
 
     expect(verseBlock).toBeDefined();

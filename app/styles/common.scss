@@ -24,7 +24,7 @@ html {
   font-family: $base-font-family;
   font-size: 22px;
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 500px) { // meeh, can't put into var because of some issue with autoprefixer -- it stops to add prefixes if I do! :(
     font-size: 16px;
   }
 }
