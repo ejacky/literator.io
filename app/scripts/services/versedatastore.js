@@ -8,7 +8,7 @@
  * Datastore to retrieve and manipulate all verses existed in system
  */
 angular.module('literatorioApp')
-  .factory('VerseDataStore', function ($q, $http, _, Verse) {
+  .factory('VerseDataStore', function ($q, $http, _, Verse, VerseAuthor) {
     var promises = {};
 
     // Pre-load data structure
@@ -17,6 +17,7 @@ angular.module('literatorioApp')
     // Public API
     return {
       getDataStructure: getDataStructure,
+      getAuthorById: getAuthorById,
       getRandomVerse: getRandomVerse
     };
 
@@ -40,12 +41,33 @@ angular.module('literatorioApp')
     }
 
     /**
-     * Returns list of all verses available
+     * Returns list of all verses available (raw data)
      * @returns {Promise.<Array>}
      */
     function getVersesList() {
       return getDataStructure().then(function(data){
         return data.verses;
+      });
+    }
+
+    /**
+     * Returns list of all authors available (raw data)
+     * @returns {Promise.<Array>}
+     */
+    function getAuthorsList() {
+      return getDataStructure().then(function(data){
+        return data.authors;
+      });
+    }
+
+    /**
+     * Returns author by ID passed
+     * @param {String} authorId
+     * @returns {Promise.<VerseAuthor|null>}
+     */
+    function getAuthorById(authorId) {
+      return getAuthorsList().then(function(authors) {
+        return authors[authorId] ? new VerseAuthor(authors[authorId]) : null;
       });
     }
 

@@ -50,6 +50,15 @@ describe('Service: VerseDataStore', function () {
     $httpBackend.flush();
   });
 
+  it('should return correct author', function () {
+    VerseDataStore.getAuthorById('pushkin_a_s').then(function(author){
+      expect(author).toBeDefined('author should be defined');
+      expect(author.fullName).toBe(mockedStructure.authors.pushkin_a_s.fullName, 'fullname should match');
+    });
+
+    $httpBackend.flush();
+  });
+
   it('should be able to get random verse', function () {
     VerseDataStore.getRandomVerse().then(function(verse){
       expect(verse).toBeDefined('verse should be defined');
