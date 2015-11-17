@@ -45,7 +45,7 @@ angular.module('literatorioApp')
      * @returns {Promise.<Array>}
      */
     function getVersesList() {
-      return getDataStructure().then(function(data){
+      return getDataStructure().then(function(data) {
         return data.verses;
       });
     }
@@ -55,7 +55,7 @@ angular.module('literatorioApp')
      * @returns {Promise.<Array>}
      */
     function getAuthorsList() {
-      return getDataStructure().then(function(data){
+      return getDataStructure().then(function(data) {
         return data.authors;
       });
     }
@@ -76,7 +76,7 @@ angular.module('literatorioApp')
      * @returns {Promise.<Verse|null>}
      */
     function getRandomVerse() {
-      return getVersesList().then(function(verses){
+      return getVersesList().then(function(verses) {
         return verses && verses.length ? new Verse(_.sample(verses)) : null;
       });
     }

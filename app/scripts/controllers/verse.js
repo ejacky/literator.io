@@ -8,7 +8,7 @@
  * Controller of the literatorioApp
  */
 angular.module('literatorioApp')
-  .controller('VerseCtrl', function ($scope, $timeout, $interval, VerseDataStore, VerseBlock) {
+  .controller('VerseCtrl', function ($q, $scope, $timeout, $interval, VerseDataStore, VerseBlock) {
 
     var maxHintsCount = 2;
     var maxCharsToComplete = 3;
@@ -24,15 +24,23 @@ angular.module('literatorioApp')
 
     init();
 
+
     /**
      * Initializes controller
      */
     function init() {
+      var verse = null;
+
       // Load random verse
-      VerseDataStore.getRandomVerse().then(function(verse) {
-        // Load all the content of the verse
-        return verse.loadContent();
-      }).then(function(verse) {
+      VerseDataStore.getRandomVerse().then(function(_verse) {
+        verse = _verse;
+
+        // Load necessary pieces of the verse
+        return $q.all({
+          content: verse.loadContent(),
+          author: verse.getAuthor()
+        });
+      }).then(function(result) {
         versePieces = verse.getPieces({});
         siteContentElement = $('#content');
         inputField = $('.view-verse input');
@@ -43,9 +51,11 @@ angular.module('literatorioApp')
 
         // Populate scope
         $scope.verse = verse;
+        $scope.author = result.author;
         $scope.versePieces = [];
         $scope.currentBlock = null;
         $scope.onInputFieldKeyup = onInputFieldKeyup;
+        $scope.isFinished = false;
 
         // Start narrative
         $timeout(function(){
@@ -108,6 +118,7 @@ angular.module('literatorioApp')
 
       // Exit, if no pieces left
       if (!angular.isDefined(nextPiece)) {
+        $scope.isFinished = true;
         return stopNarrative();
       }
 

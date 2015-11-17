@@ -8,7 +8,7 @@
  * Model to store and manipulate verse data.
  */
 angular.module('literatorioApp')
-  .factory('Verse', function ($http, VerseBlock) {
+  .factory('Verse', function ($injector, $http, VerseBlock) {
 
     // Constructor
     function Verse(rawData) {
@@ -34,7 +34,7 @@ angular.module('literatorioApp')
           method: 'GET',
           url: this.path + '/content.txt'
         }).then(function(response){
-          var content = response.data;
+          var content = response.data.trim();
 
           // Post-process received content
           content = content
@@ -91,6 +91,14 @@ angular.module('literatorioApp')
         });
 
         return pieces;
+      },
+
+      /**
+       * Returns author of the verse
+       * @returns {Object}
+       */
+      getAuthor: function() {
+        return $injector.get('VerseDataStore').getAuthorById(this.authorId);
       },
 
       /**

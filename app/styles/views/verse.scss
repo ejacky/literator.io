@@ -28,8 +28,8 @@
     }
 
     .monogram {
-      margin: 1em 0;
-      height: 15px;
+      margin: 0.8em 0;
+      height: (56px / 2);
 
       opacity: 0;
       transform: scale(0.8);
@@ -39,7 +39,7 @@
       animation-name: fade-in, reset-transform;
 
       @media screen and (max-width: 500px) {
-        height: 10px;
+        height: (56px / 4);
       }
     }
   }
@@ -80,8 +80,41 @@
     }
   }
 
-  .content-spacer {
-    height: 10em;
+  .bottom {
+    min-height: 9em;
+    text-align: center;
+
+    .author {
+
+      & > * {
+        opacity: 0;
+        animation-duration: 3s;
+        animation-fill-mode: forwards;
+        animation-name: fade-in;
+      }
+
+      .monogram {
+        margin: 0.8em 0;
+        height: (36px / 2);
+
+        animation-delay: 0.8s;
+      }
+
+      .name {
+        text-align: right;
+        font-weight: bold;
+
+        animation-delay: 3s;
+      }
+
+      .year {
+        text-align: right;
+        font-style: italic;
+        font-size: 0.8em;
+
+        animation-delay: 5s;
+      }
+    }
   }
 
   .verse-width {

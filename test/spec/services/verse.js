@@ -14,7 +14,7 @@ describe('Service: Verse', function () {
     'title': 'Test title',
     'description': 'Test description',
     'path': '/test_path',
-    'author': 'test_author'
+    'authorId': 'test_author'
   };
 
   beforeEach(inject(function ($injector, _Verse_) {
@@ -41,7 +41,7 @@ describe('Service: Verse', function () {
     expect(verse.title).toBe(mockVerseData.title);
     expect(verse.description).toBe(mockVerseData.description);
     expect(verse.path).toBe(mockVerseData.path);
-    expect(verse.author).toBe(mockVerseData.author);
+    expect(verse.authorId).toBe(mockVerseData.authorId);
 
     $httpBackend.flush();
   });
@@ -52,6 +52,16 @@ describe('Service: Verse', function () {
 
     verse.loadContent().then(function(){
       expect(verse.content).toBe(mockVerseContent);
+    });
+
+    $httpBackend.flush();
+  });
+
+  it('should trim content on load', function () {
+    $httpBackend.expectGET(verse.path + '/content.txt').respond('\t\n content\n\content\r\n');
+
+    verse.loadContent().then(function(){
+      expect(verse.content.length).toBe(15);
     });
 
     $httpBackend.flush();
@@ -115,6 +125,25 @@ describe('Service: Verse', function () {
         difficulty: Verse.prototype.DIFFICULTY_NORMAL
       });
       expect(pieces.length).toBe(20, 'for normal difficulty');
+    });
+
+    $httpBackend.flush();
+  });
+
+  it('should return proper author', function () {
+    var mockedStructure = {
+      "authors": {
+        "test_author": {
+          "id": "test_author",
+          "fullName": "Test Author",
+          "shortName": "Test A."
+        }
+      }
+    };
+    $httpBackend.expectGET('/resources/verses/structure.json').respond(JSON.stringify(mockedStructure)); // for VerseDataStore
+
+    verse.getAuthor().then(function(author){
+      expect(author.fullName).toBe(mockedStructure.authors.test_author.fullName);
     });
 
     $httpBackend.flush();
