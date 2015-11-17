@@ -132,18 +132,18 @@ describe('Service: Verse', function () {
 
   it('should return proper author', function () {
     var mockedStructure = {
-      "authors": {
-        "test_author": {
+      "authors": [
+        {
           "id": "test_author",
           "fullName": "Test Author",
           "shortName": "Test A."
         }
-      }
+      ]
     };
     $httpBackend.expectGET('/resources/verses/structure.json').respond(JSON.stringify(mockedStructure)); // for VerseDataStore
 
     verse.getAuthor().then(function(author){
-      expect(author.fullName).toBe(mockedStructure.authors.test_author.fullName);
+      expect(author.fullName).toBe(mockedStructure.authors[0].fullName);
     });
 
     $httpBackend.flush();

@@ -67,7 +67,8 @@ angular.module('literatorioApp')
      */
     function getAuthorById(authorId) {
       return getAuthorsList().then(function(authors) {
-        return authors[authorId] ? new VerseAuthor(authors[authorId]) : null;
+        var data = _.findWhere(authors, {id: authorId});
+        return data ? new VerseAuthor(data) : null;
       });
     }
 

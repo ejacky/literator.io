@@ -1,11 +1,11 @@
 {
-  "authors": {
-    "pushkin_a_s": {
+  "authors": [
+    {
       "id": "pushkin_a_s",
       "fullName": "Пушкин Александр Сергеевич",
       "shortName": "Пушкин А. С."
     }
-  },
+  ],
 
   "verses": [
     {

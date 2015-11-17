@@ -8,13 +8,13 @@ describe('Service: VerseDataStore', function () {
   var VerseDataStore;
   var $httpBackend;
   var mockedStructure = {
-    "authors": {
-      "pushkin_a_s": {
+    "authors": [
+      {
         "id": "pushkin_a_s",
         "fullName": "Пушкин Александр Сергеевич",
         "shortName": "Пушкин А. С."
       }
-    },
+    ],
 
     "verses": [
       {
@@ -51,9 +51,9 @@ describe('Service: VerseDataStore', function () {
   });
 
   it('should return correct author', function () {
-    VerseDataStore.getAuthorById('pushkin_a_s').then(function(author){
+    VerseDataStore.getAuthorById(mockedStructure.authors[0].id).then(function(author){
       expect(author).toBeDefined('author should be defined');
-      expect(author.fullName).toBe(mockedStructure.authors.pushkin_a_s.fullName, 'fullname should match');
+      expect(author.fullName).toBe(mockedStructure.authors[0].fullName, 'fullname should match');
     });
 
     $httpBackend.flush();
