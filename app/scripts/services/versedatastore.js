@@ -17,7 +17,7 @@ angular.module('literatorioApp')
     // Public API
     return {
       getDataStructure: getDataStructure,
-      getAuthorById: getAuthorById,
+      getAuthorByName: getAuthorByName,
       getRandomVerse: getRandomVerse
     };
 
@@ -62,12 +62,12 @@ angular.module('literatorioApp')
 
     /**
      * Returns author by ID passed
-     * @param {String} authorId
+     * @param {String} authorName
      * @returns {Promise.<VerseAuthor|null>}
      */
-    function getAuthorById(authorId) {
+    function getAuthorByName(authorName) {
       return getAuthorsList().then(function(authors) {
-        var data = _.findWhere(authors, {id: authorId});
+        var data = _.findWhere(authors, {name: authorName});
         return data ? new VerseAuthor(data) : null;
       });
     }

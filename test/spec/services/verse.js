@@ -10,11 +10,11 @@ describe('Service: Verse', function () {
   var verse; // instance of concrete verse
 
   var mockVerseData = {
-    'id': 'test_id',
+    'name': 'test_name',
     'title': 'Test title',
     'description': 'Test description',
     'path': '/test_path',
-    'authorId': 'test_author'
+    'authorName': 'test_author'
   };
 
   beforeEach(inject(function ($injector, _Verse_) {
@@ -37,11 +37,11 @@ describe('Service: Verse', function () {
 
   it('should be properly initialized', function () {
     expect(!!verse).toBe(true);
-    expect(verse.id).toBe(mockVerseData.id);
+    expect(verse.name).toBe(mockVerseData.name);
     expect(verse.title).toBe(mockVerseData.title);
     expect(verse.description).toBe(mockVerseData.description);
     expect(verse.path).toBe(mockVerseData.path);
-    expect(verse.authorId).toBe(mockVerseData.authorId);
+    expect(verse.authorName).toBe(mockVerseData.authorName);
 
     $httpBackend.flush();
   });
@@ -134,7 +134,7 @@ describe('Service: Verse', function () {
     var mockedStructure = {
       "authors": [
         {
-          "id": "test_author",
+          "name": "test_author",
           "fullName": "Test Author",
           "shortName": "Test A."
         }
@@ -143,6 +143,7 @@ describe('Service: Verse', function () {
     $httpBackend.expectGET('/resources/verses/structure.json').respond(JSON.stringify(mockedStructure)); // for VerseDataStore
 
     verse.getAuthor().then(function(author){
+      expect(author).toBeDefined('author should be defined');
       expect(author.fullName).toBe(mockedStructure.authors[0].fullName);
     });
 

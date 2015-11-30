@@ -1,7 +1,7 @@
 {
   "authors": [
     {
-      "id": "pushkin_a_s",
+      "name": "pushkin_a_s",
       "fullName": "Пушкин Александр Сергеевич",
       "shortName": "Пушкин А. С."
     }
@@ -9,12 +9,12 @@
 
   "verses": [
     {
-      "id": "u_lukomorya_dub_zelyonyj",
+      "name": "u_lukomorya_dub_zelyonyj",
       "title": "У лукоморья дуб зелёный",
       "description": "Из поэмы \"Руслан и Людмила\"",
       "year": 1876,
       "path": "/resources/verses/pushkin_a_s/u_lukomorya_dub_zelyonyj",
-      "authorId": "pushkin_a_s"
+      "authorName": "pushkin_a_s"
     }
   ]
 }

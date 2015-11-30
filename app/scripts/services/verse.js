@@ -98,7 +98,7 @@ angular.module('literatorioApp')
        * @returns {Object}
        */
       getAuthor: function() {
-        return $injector.get('VerseDataStore').getAuthorById(this.authorId);
+        return $injector.get('VerseDataStore').getAuthorByName(this.authorName);
       },
 
       /**
