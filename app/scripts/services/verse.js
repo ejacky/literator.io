@@ -13,6 +13,8 @@ angular.module('literatorioApp')
     // Constructor
     function Verse(rawData) {
       angular.extend(this, rawData);
+
+      this.path = [this.PATH_URL_BASE, this.authorName, this.name].join('/');
     }
 
     // Define prototype
@@ -22,6 +24,8 @@ angular.module('literatorioApp')
 
       BLOCK_SEPARATOR_START: '{',
       BLOCK_SEPARATOR_END: '}',
+
+      PATH_URL_BASE: '/resources/verses',
 
       /**
        * Loads up verse's content
@@ -39,7 +43,7 @@ angular.module('literatorioApp')
           // Post-process received content
           content = content
             .replace(/[\s](\x2d|\x2212|\x2010\x2012\x2043)/g, ' —') // some typography
-            .replace(/\n\r|\r\n|\r/g, '\n').replace(/[\n]{3,}/g, '\n\n') // remove non-Unix line breaks (should be before double-spaces cleanup)
+            .replace(/\n\r|\r\n|\r/g, '\n').replace(/[\n]{3,}/g, '\n\n') // remove non-Unix line breaks
             .replace(/[\x20]{2,}/g, ' ') // remove double spaces
           ;
 

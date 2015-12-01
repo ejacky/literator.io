@@ -25,7 +25,6 @@
       "title": "У лукоморья дуб зелёный",
       "description": "Из поэмы \"Руслан и Людмила\"",
       "year": 1820,
-      "path": "/resources/verses/pushkin-a-s/u-lukomorya-dub-zelyonyj",
       "authorName": "pushkin-a-s"
     },
 
@@ -33,7 +32,6 @@
       "name": "uznik",
       "title": "Узник",
       "year": 1822,
-      "path": "/resources/verses/pushkin-a-s/uznik",
       "authorName": "pushkin-a-s"
     },
 
@@ -41,7 +39,6 @@
       "name": "parus",
       "title": "Парус",
       "year": 1832,
-      "path": "/resources/verses/lermontov-m-yu/parus",
       "authorName": "lermontov-m-yu"
     }
   ]

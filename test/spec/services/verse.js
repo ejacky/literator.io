@@ -13,7 +13,6 @@ describe('Service: Verse', function () {
     'name': 'test_name',
     'title': 'Test title',
     'description': 'Test description',
-    'path': '/test_path',
     'authorName': 'test_author'
   };
 
@@ -40,7 +39,7 @@ describe('Service: Verse', function () {
     expect(verse.name).toBe(mockVerseData.name);
     expect(verse.title).toBe(mockVerseData.title);
     expect(verse.description).toBe(mockVerseData.description);
-    expect(verse.path).toBe(mockVerseData.path);
+    expect(verse.path).toBe([verse.PATH_URL_BASE, verse.authorName, verse.name].join('/'));
     expect(verse.authorName).toBe(mockVerseData.authorName);
 
     $httpBackend.flush();
