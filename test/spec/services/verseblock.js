@@ -42,6 +42,7 @@ describe('Service: VerseBlock', function () {
     expect(verseBlock.match('зелёный', 7)).toBe(true, 'exact match');
     expect(verseBlock.match('зелеfds', 3)).toBe(true, 'partial match');
     expect(verseBlock.match('ЗеЛен', 3)).toBe(true, 'case-insensitive match');
+    expect(verseBlock.match('ЗеЛен', 3)).toBe(true, 'case-insensitive match');
     expect(verseBlock.match('зеленый', 4)).toBe(true, 'е-ё match');
   });
 
@@ -57,6 +58,13 @@ describe('Service: VerseBlock', function () {
 
     expect(verseBlock).toBeDefined();
     expect(verseBlock.match('chernyj', 4)).toBe(true);
+  });
+
+  it('should match if block very short', function () {
+    var verseBlock = new VerseBlock('я');
+
+    expect(verseBlock).toBeDefined();
+    expect(verseBlock.match('я', 3)).toBe(true);
   });
 
 });

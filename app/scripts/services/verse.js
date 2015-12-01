@@ -39,8 +39,8 @@ angular.module('literatorioApp')
           // Post-process received content
           content = content
             .replace(/[\s](\x2d|\x2212|\x2010\x2012\x2043)/g, ' —') // some typography
-            .replace(/\r/g, '\n').replace(/[\n]{2,}/g, '\n') // remove non-Unix line breaks (should be before double-spaces cleanup)
-            .replace(/[\s]{2,}/g, ' ') // remove double spaces
+            .replace(/\n\r|\r\n|\r/g, '\n').replace(/[\n]{3,}/g, '\n\n') // remove non-Unix line breaks (should be before double-spaces cleanup)
+            .replace(/[\x20]{2,}/g, ' ') // remove double spaces
           ;
 
           self.content = content;

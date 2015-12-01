@@ -18,10 +18,10 @@ describe('Service: VerseDataStore', function () {
 
     "verses": [
       {
-        "name": "u_lukomorya_dub_zelyonyj",
+        "name": "u-lukomorya-dub-zelyonyj",
         "title": "У лукоморья дуб зелёный",
         "description": "Из поэмы \"Руслан и Людмила\"",
-        "path": "/resources/verses/pushkin_a_s/u_lukomorya_dub_zelyonyj",
+        "path": "/resources/verses/pushkin_a_s/u-lukomorya-dub-zelyonyj",
         "author": "pushkin_a_s"
       }
     ]

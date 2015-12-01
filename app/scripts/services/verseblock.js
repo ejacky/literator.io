@@ -25,7 +25,7 @@ angular.module('literatorioApp')
        * @returns {boolean}
        */
       match: function(str, length) {
-        if (str.length < length) {
+        if (str.length < Math.min(this._string.length, length)) {
           return false;
         }
 

@@ -78,10 +78,10 @@ describe('Service: Verse', function () {
   });
 
   it('should cleanup content from non-Unix line breaks', function () {
-    $httpBackend.expectGET(verse.path + '/content.txt').respond('content\r\ncontent\rcontent\ncontent');
+    $httpBackend.expectGET(verse.path + '/content.txt').respond('content\r\ncontent\rcontent\n\ncontent\n\n\n\ncontent');
 
     verse.loadContent().then(function(){
-      expect(verse.content).toBe('content\ncontent\ncontent\ncontent');
+      expect(verse.content).toBe('content\ncontent\ncontent\n\ncontent\n\ncontent');
     });
 
     $httpBackend.flush();
