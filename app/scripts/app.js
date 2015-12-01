@@ -33,7 +33,7 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
-      .when('/verse', {
+      .when('/verse/:authorName/:verseName', {
         templateUrl: 'views/verse.html',
         controller: 'VerseCtrl',
         controllerAs: 'verse'

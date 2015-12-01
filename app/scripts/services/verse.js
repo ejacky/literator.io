@@ -14,7 +14,8 @@ angular.module('literatorioApp')
     function Verse(rawData) {
       angular.extend(this, rawData);
 
-      this.path = [this.PATH_URL_BASE, this.authorName, this.name].join('/');
+      this.path = [this.PATH_BASE, this.authorName, this.name].join('/');
+      this.url = [this.URL_BASE, this.authorName, this.name].join('/');
     }
 
     // Define prototype
@@ -25,7 +26,8 @@ angular.module('literatorioApp')
       BLOCK_SEPARATOR_START: '{',
       BLOCK_SEPARATOR_END: '}',
 
-      PATH_URL_BASE: '/resources/verses',
+      URL_BASE: '/verse',
+      PATH_BASE: '/resources/verses',
 
       /**
        * Loads up verse's content

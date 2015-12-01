@@ -18,7 +18,8 @@ angular.module('literatorioApp')
     return {
       getDataStructure: getDataStructure,
       getAuthorByName: getAuthorByName,
-      getRandomVerse: getRandomVerse
+      getRandomVerse: getRandomVerse,
+      getVerseByAuthorAndName: getVerseByAuthorAndName
     };
 
 
@@ -79,6 +80,19 @@ angular.module('literatorioApp')
     function getRandomVerse() {
       return getVersesList().then(function(verses) {
         return verses && verses.length ? new Verse(_.sample(verses)) : null;
+      });
+    }
+
+    /**
+     * Returns specific verse by passed params
+     * @param authorName
+     * @param verseName
+     * @returns {Promise.<Verse|null>}
+     */
+    function getVerseByAuthorAndName(authorName, verseName) {
+      return getVersesList().then(function(verses) {
+        var verseData = _.findWhere(verses, {authorName: authorName, name: verseName});
+        return verseData ? new Verse(verseData) : null;
       });
     }
   });
