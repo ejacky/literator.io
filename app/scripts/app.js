@@ -33,6 +33,11 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/verse/404', {
+        templateUrl: 'views/verse404.html',
+        controller: 'Verse404Ctrl',
+        controllerAs: 'verse404'
+      })
       .when('/verse/:authorName/:verseName', {
         templateUrl: 'views/verse.html',
         controller: 'VerseCtrl',
@@ -52,7 +57,17 @@ angular
     // Some security stuff
     $translateProvider.useSanitizeValueStrategy('escape');
 
-    $translateProvider.preferredLanguage('ru-RU');
+    // Setup languages and fallbacks
+    var langMap = {
+      'en-US': 'en',
+      'ru-RU': 'ru'
+    };
+
+    $translateProvider
+      .registerAvailableLanguageKeys(['en', 'ru'], langMap)
+      .fallbackLanguage('en')
+      .determinePreferredLanguage()
+    ;
 
     //$translateProvider.useLocalStorage();
   })

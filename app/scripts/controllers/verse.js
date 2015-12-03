@@ -8,7 +8,7 @@
  * Controller of the literatorioApp
  */
 angular.module('literatorioApp')
-  .controller('VerseCtrl', function ($q, $scope, $routeParams, $timeout, $interval, VerseDataStore, VerseBlock) {
+  .controller('VerseCtrl', function ($q, $scope, $location, $routeParams, $timeout, $interval, VerseDataStore, VerseBlock) {
 
     var maxHintsCount = 2;
     var maxCharsToComplete = 3;
@@ -34,6 +34,11 @@ angular.module('literatorioApp')
       // Load random verse
       VerseDataStore.getVerseByAuthorAndName($routeParams.authorName, $routeParams.verseName).then(function(_verse) {
         verse = _verse;
+
+        // Check, if verse found
+        if (!verse) {
+          throw {type: 404};
+        }
 
         // Load necessary pieces of the verse
         return $q.all({
@@ -62,7 +67,14 @@ angular.module('literatorioApp')
           continueNarrative();
         }, 2600); // sync with animation
       }).catch(function(e) {
-        console.log(e);
+        switch (e.type) {
+          case 404:
+            $location.url('/verse/404');
+            break;
+
+          default:
+            //console.log(e);
+        }
       });
     }
 

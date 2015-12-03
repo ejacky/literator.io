@@ -19,7 +19,8 @@ describe('Service: Verse', function () {
   beforeEach(inject(function ($injector, _Verse_) {
     // Mock backend with $httpBackend
     $httpBackend = $injector.get('$httpBackend');
-    $httpBackend.whenGET('/languages/ru-RU.json').respond('');
+    $httpBackend.whenGET('/languages/en.json').respond('');
+    $httpBackend.whenGET('/languages/ru.json').respond('');
 
     Verse = _Verse_;
   }));

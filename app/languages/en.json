@@ -1,0 +1,9 @@
+{
+  "COMMON_APP_NAME": "Literator.io",
+
+  "VIEW_MAIN_START_LINK": "Start",
+
+  "VIEW_VERSE_SHORT_YEAR": "",
+
+  "VIEW_VERSE_404_MESSAGE": "Verse you're looking for is not exists\nor\nnot yet even written?\n\nCould be..."
+}
