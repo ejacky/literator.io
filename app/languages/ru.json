@@ -1,9 +1,14 @@
 {
   "COMMON_APP_NAME": "Литератор.io",
 
-  "VIEW_MAIN_START_LINK": "Начать",
+  "VIEW_MAIN_START_BTN": "Начать",
 
   "VIEW_VERSE_SHORT_YEAR": "г.",
+  "VIEW_VERSE_RESULT_MESSAGE": "Вы вспомнили за",
+  "VIEW_VERSE_RESULT_MINUTES": "мин.",
+  "VIEW_VERSE_RESULT_SECONDS": "сек.",
+  "VIEW_VERSE_ANOTHER_VERSE_BTN": "Еще стихотворение",
+  "VIEW_VERSE_ANOTHER_VERSE_OF_AUTHOR_BTN": "Еще этого автора",
 
   "VIEW_VERSE_404_MESSAGE": "Стихотворение не найдено\nили\nеще не добавлено.\n\nВсё возможно..."
 }

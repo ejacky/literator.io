@@ -13,10 +13,20 @@
     </div>
 
     <div class="bottom">
-      <div class="author" ng-show="isFinished">
-        <img class="monogram" src="/images/verse/mono-bottom.png" />
-        <p class="name">{{ ::author.shortName }}</p>
-        <p class="year">{{ ::verse.year }} {{ 'VIEW_VERSE_SHORT_YEAR' | translate }}</p>
+      <div ng-show="isFinished">
+
+        <div class="author">
+          <p class="name">{{ ::author.shortName }}</p>
+          <p class="year">{{ ::verse.year }} {{ 'VIEW_VERSE_SHORT_YEAR' | translate }}</p>
+          <img class="monogram" src="/images/verse/mono-bottom.png" />
+        </div>
+
+        <div class="tail">
+          <div class="result">
+            {{ 'VIEW_VERSE_RESULT_MESSAGE' | translate }} <span class="time"><span ng-if="finishedInSeconds > 60">{{ finishedInSeconds / 60 | number: 0 }} {{ 'VIEW_VERSE_RESULT_MINUTES' | translate }}</span> {{ finishedInSeconds % 60 | number: 0 }} {{ 'VIEW_VERSE_RESULT_SECONDS' | translate }}</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

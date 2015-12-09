@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: row;
   max-width: 96%;
+  font-size: 1rem;
 
   & > div {
     margin: auto;
@@ -18,18 +19,18 @@
     animation-name: fade-in, reset-transform;
 
     .title {
-      font-size: 1.1rem;
+      font-size: 1.3em;
       font-weight: bold;
     }
 
     .description {
       margin: 0;
-      font-size: 0.8rem;
+      font-size: 0.8em;
       font-style: italic;
     }
 
     .monogram {
-      margin: 0.8em 0;
+      margin: 0.9em 0;
       height: (56px / 2);
 
       opacity: 0;
@@ -46,7 +47,7 @@
   }
 
   .content, .verse-width, .content-spacer {
-    font-size: 1rem;
+    font-size: 1em;
   }
 
   .content {
@@ -70,7 +71,7 @@
       font-family: inherit;
 
       &.visible {
-        width: 2.5rem;
+        width: 2.5em;
         opacity: 1;
       }
 
@@ -86,6 +87,7 @@
     text-align: center;
 
     .author {
+      margin: 1em 0;
 
       & > * {
         opacity: 0;
@@ -95,17 +97,21 @@
       }
 
       .monogram {
-        margin: 0.8em 0;
+        margin-top: 1em;
         height: (36px / 2);
 
-        animation-delay: 0.8s;
+        animation-delay: 4s;
+
+        @media screen and (max-width: 500px) {
+          height: (36px / 2.5);
+        }
       }
 
       .name {
         text-align: right;
         font-weight: bold;
 
-        animation-delay: 3s;
+        animation-delay: 0.8s;
       }
 
       .year {
@@ -113,7 +119,34 @@
         font-style: italic;
         font-size: 0.8em;
 
-        animation-delay: 5s;
+        animation-delay: 2s;
+      }
+    }
+
+    .tail {
+      margin: 1em 0;
+      opacity: 0;
+
+      animation-duration: 3s;
+      animation-fill-mode: forwards;
+      animation-name: fade-in;
+      animation-delay: 6s;
+
+      .result {
+        font-size: 1.4em;
+
+        .time {
+          white-space: nowrap;
+        }
+      }
+
+      .buttons {
+        margin: 1em 0;
+
+        a {
+          margin: 0.3em 0;
+          min-width: 240px;
+        }
       }
     }
   }

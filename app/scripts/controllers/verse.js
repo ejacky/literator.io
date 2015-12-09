@@ -19,6 +19,7 @@ angular.module('literatorioApp')
     var versePieces = null;
     var narrativeTimer = null;
     var hintingTimer = null;
+    var narrativeStartTime = null;
     var currentHint = null;
     var inputField = null;
 
@@ -65,6 +66,7 @@ angular.module('literatorioApp')
         // Start narrative
         $timeout(function(){
           continueNarrative();
+          narrativeStartTime = new Date();
         }, 2600); // sync with animation
       }).catch(function(e) {
         switch (e.type) {
@@ -131,7 +133,10 @@ angular.module('literatorioApp')
       // Exit, if no pieces left
       if (!angular.isDefined(nextPiece)) {
         $scope.isFinished = true;
-        return stopNarrative();
+        $scope.finishedInSeconds = Math.floor((Date.now() - narrativeStartTime.getTime()) / 1000);
+
+        stopNarrative();
+        return;
       }
 
       // Need to stop narrative, if that's a block
