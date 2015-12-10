@@ -46,12 +46,25 @@
     }
   }
 
-  .content, .verse-width, .content-spacer {
+  .content, .content-spacer {
     font-size: 1em;
   }
 
   .content {
+    display: flex;
+    flex-direction: row;
     -webkit-font-smoothing: antialiased;
+
+    & > div {
+      margin: auto;
+    }
+
+    .width-spacer {
+      white-space: pre-line;
+      height: 1px;
+      visibility: hidden;
+      overflow: hidden;
+    }
 
     span {
       //display: inline-block;
@@ -80,13 +93,9 @@
         opacity: 0;
       }
     }
-  }
-
-  .bottom {
-    min-height: 9em;
-    text-align: center;
 
     .author {
+      text-align: center;
       margin: 1em 0;
 
       & > * {
@@ -122,8 +131,13 @@
         animation-delay: 2s;
       }
     }
+  }
 
-    .tail {
+  .bottom {
+    min-height: 9em;
+    text-align: center;
+
+    .ending {
       margin: 1em 0;
       opacity: 0;
 
@@ -149,12 +163,5 @@
         }
       }
     }
-  }
-
-  .verse-width {
-    white-space: pre-line;
-    height: 1px;
-    visibility: hidden;
-    overflow: hidden;
   }
 }

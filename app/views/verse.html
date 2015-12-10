@@ -1,6 +1,5 @@
 <div class="view-verse">
   <div>
-    <div class="verse-width">{{ ::verse.content }}</div>
 
     <div class="top" ng-show="verse">
       <h1 class="title">{{ ::verse.title }}</h1>
@@ -9,31 +8,32 @@
     </div>
 
     <div class="content">
-      <span ng-repeat="piece in versePieces track by $index">{{::piece + ''}}</span><input ng-class="{visible: currentBlock, hidden: !currentBlock}" ng-keyup="onInputFieldKeyup()" autocorrect="off" autocomplete="off" autocapitalize="off" />
-    </div>
-
-    <div class="bottom">
-      <div ng-show="isFinished">
-
-        <div class="author">
+      <div>
+        <div class="width-spacer">{{ ::verse.content }}</div>
+        <div class="pieces">
+          <span ng-repeat="piece in versePieces track by $index">{{::piece + ''}}</span><input ng-class="{visible: currentBlock, hidden: !currentBlock}" ng-keyup="onInputFieldKeyup()" autocorrect="off" autocomplete="off" autocapitalize="off" />
+        </div>
+        <div class="author" ng-show="isFinished">
           <p class="name">{{ ::author.shortName }}</p>
           <p class="year">{{ ::verse.year }} {{ 'VIEW_VERSE_SHORT_YEAR' | translate }}</p>
           <img class="monogram" src="/images/verse/mono-bottom.png" />
         </div>
-
-        <div class="tail">
-          <div class="result">
-            {{ 'VIEW_VERSE_RESULT_MESSAGE' | translate }} <span class="time"><span ng-if="finishedInSeconds > 60">{{ finishedInSeconds / 60 | number: 0 }} {{ 'VIEW_VERSE_RESULT_MINUTES' | translate }}</span> {{ finishedInSeconds % 60 | number: 0 }} {{ 'VIEW_VERSE_RESULT_SECONDS' | translate }}</span>
-          </div>
-
-          <div class="buttons">
-            <div><a href="" class="button" ng-click="onAnotherVerseButtonClick()">{{ 'VIEW_VERSE_ANOTHER_VERSE_BTN' | translate }}</a></div>
-            <div><a href="" class="button" ng-click="onAnotherVerseOfAuthorButtonClick()">{{ 'VIEW_VERSE_ANOTHER_VERSE_OF_AUTHOR_BTN' | translate }}</a></div>
-          </div>
-        </div>
-
       </div>
     </div>
+
+    <div class="bottom">
+      <div class="ending" ng-show="isFinished">
+        <div class="result">
+          {{ 'VIEW_VERSE_RESULT_MESSAGE' | translate }} <span class="time"><span ng-if="finishedInSeconds > 60">{{ finishedInSeconds / 60 | number: 0 }} {{ 'VIEW_VERSE_RESULT_MINUTES' | translate }}</span> {{ finishedInSeconds % 60 | number: 0 }} {{ 'VIEW_VERSE_RESULT_SECONDS' | translate }}</span>
+        </div>
+
+        <div class="buttons">
+          <div><a href="" class="button" ng-click="onAnotherVerseButtonClick()">{{ 'VIEW_VERSE_ANOTHER_VERSE_BTN' | translate }}</a></div>
+          <div><a href="" class="button" ng-click="onAnotherVerseOfAuthorButtonClick()">{{ 'VIEW_VERSE_ANOTHER_VERSE_OF_AUTHOR_BTN' | translate }}</a></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
