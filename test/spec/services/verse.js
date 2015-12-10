@@ -151,4 +151,25 @@ describe('Service: Verse', function () {
     $httpBackend.flush();
   });
 
+  it('should match verses properly', function () {
+    var verseToMatch = new Verse({
+      'name': 'test_name',
+      'authorName': 'test_author'
+    });
+    var verseToNotMatch = new Verse({
+      'name': 'test_name',
+      'authorName': 'test_author2'
+    });
+    var verseToNotMatch2 = new Verse({
+      'name': 'test_nam',
+      'authorName': 'test_author'
+    });
+
+    expect(verse.isMatch(verseToMatch)).toBe(true, 'should match');
+    expect(verse.isMatch(verseToNotMatch)).toBe(false, 'should not match');
+    expect(verse.isMatch(verseToNotMatch2)).toBe(false, 'should not match');
+
+    $httpBackend.flush();
+  });
+
 });

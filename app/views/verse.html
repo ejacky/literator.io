@@ -25,6 +25,11 @@
           <div class="result">
             {{ 'VIEW_VERSE_RESULT_MESSAGE' | translate }} <span class="time"><span ng-if="finishedInSeconds > 60">{{ finishedInSeconds / 60 | number: 0 }} {{ 'VIEW_VERSE_RESULT_MINUTES' | translate }}</span> {{ finishedInSeconds % 60 | number: 0 }} {{ 'VIEW_VERSE_RESULT_SECONDS' | translate }}</span>
           </div>
+
+          <div class="buttons">
+            <div><a href="" class="button" ng-click="onAnotherVerseButtonClick()">{{ 'VIEW_VERSE_ANOTHER_VERSE_BTN' | translate }}</a></div>
+            <div><a href="" class="button" ng-click="onAnotherVerseOfAuthorButtonClick()">{{ 'VIEW_VERSE_ANOTHER_VERSE_OF_AUTHOR_BTN' | translate }}</a></div>
+          </div>
         </div>
 
       </div>

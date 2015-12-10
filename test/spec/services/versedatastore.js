@@ -34,7 +34,7 @@ describe('Service: VerseDataStore', function () {
         "title": "У лукоморья дуб зелёный",
         "description": "Из поэмы \"Руслан и Людмила\"",
         "path": "/resources/verses/pushkin_a_s/u-lukomorya-dub-zelyonyj",
-        "author": "pushkin_a_s"
+        "authorName": "pushkin-a-s"
       },
 
       {
@@ -83,6 +83,15 @@ describe('Service: VerseDataStore', function () {
     VerseDataStore.getRandomVerse().then(function(verse){
       expect(verse).toBeDefined('verse should be defined');
       expect(verse.title).toBeDefined('title should be defined');
+    });
+
+    $httpBackend.flush();
+  });
+
+  it('should return random verse for author passed', function () {
+    VerseDataStore.getRandomVerseForAuthor('pushkin-a-s').then(function(verse){
+      expect(verse).toBeDefined('verse should be defined');
+      expect(verse.authorName).toBe('pushkin-a-s', 'author should match');
     });
 
     $httpBackend.flush();

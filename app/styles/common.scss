@@ -46,6 +46,15 @@ body {
   background-color: rgba(0, 0, 0, 0.32);
 }
 
+a.button {
+  display: inline-block;
+  padding: 0.5em 1em;
+  border-radius: 0.3em;
+  border: 2px solid $link-color;
+
+  text-decoration: none;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;

@@ -108,6 +108,15 @@ angular.module('literatorioApp')
       },
 
       /**
+       * Returns TRUE if passed verse matches current verse
+       * @param {Verse} verse
+       * @returns {Boolean}
+       */
+      isMatch: function(verse) {
+        return this.name === verse.name && this.authorName === verse.authorName;
+      },
+
+      /**
        * Returns string, which normalized to passed difficulty (removes other difficulties' markup)
        * @param {String} string
        * @param {String} difficulty

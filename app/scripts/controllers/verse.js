@@ -60,8 +60,11 @@ angular.module('literatorioApp')
         $scope.author = result.author;
         $scope.versePieces = [];
         $scope.currentBlock = null;
-        $scope.onInputFieldKeyup = onInputFieldKeyup;
         $scope.isFinished = false;
+        $scope.onInputFieldKeyup = onInputFieldKeyup;
+        $scope.onAnotherVerseButtonClick = onAnotherVerseButtonClick;
+        $scope.onAnotherVerseOfAuthorButtonClick = onAnotherVerseOfAuthorButtonClick;
+
 
         // Start narrative
         $timeout(function(){
@@ -222,6 +225,36 @@ angular.module('literatorioApp')
 
       // Focus on input field
       inputField.focus(); // mostly for Mobile Safari
+    }
+
+    /**
+     * Callback firing on "Another verse" click
+     */
+    function onAnotherVerseButtonClick() {
+      VerseDataStore.getRandomVerse().then(function(newVerse) {
+        // Check, if new verse is the same one as current and re-pick
+        if ($scope.verse.isMatch(newVerse)) {
+          return onAnotherVerseButtonClick();
+        }
+
+        // Redirect to new verse
+        $location.url(newVerse.url);
+      });
+    }
+
+    /**
+     * Callback firing on "Another author's verse" click
+     */
+    function onAnotherVerseOfAuthorButtonClick() {
+      VerseDataStore.getRandomVerseForAuthor($routeParams.authorName).then(function(newVerse) {
+        // Check, if new verse is the same one as current and re-pick
+        if ($scope.verse.isMatch(newVerse)) {
+          return onAnotherVerseButtonClick();
+        }
+
+        // Redirect to new verse
+        $location.url(newVerse.url);
+      });
     }
 
     /**
