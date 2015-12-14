@@ -16,7 +16,8 @@ module.exports = function (grunt) {
   require('jit-grunt')(grunt, {
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
-    cdnify: 'grunt-google-cdn'
+    cdnify: 'grunt-google-cdn',
+    protractor: 'grunt-protractor-runner'
   });
 
   // Configurable paths for the application
@@ -44,9 +45,13 @@ module.exports = function (grunt) {
           livereload: '<%= connect.options.livereload %>'
         }
       },
-      jsTest: {
+      karma: {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma:unit']
+      },
+      protractor: {
+        files: ['test/e2e/{,*/}*.js'],
+        tasks: ['newer:jshint:test', 'protractor:e2e']
       },
       compass: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -427,7 +432,7 @@ module.exports = function (grunt) {
       ]
     },
 
-    // Test settings
+    // Unit test settings
     karma: {
       unit: {
         configFile: 'test/karma.conf.js',
@@ -437,6 +442,36 @@ module.exports = function (grunt) {
       server: {
         configFile: 'test/karma.conf.js',
         autoWatch: true
+      }
+    },
+
+    // E2E test settings
+    protractor: {
+      options: {
+        // Location of your protractor config file
+        configFile: 'test/protractor-conf.js',
+
+        // Do you want the output to use fun colors?
+        noColor: false,
+
+        // Set to true if you would like to use the Protractor command line debugging tool
+        // debug: true,
+
+        // Additional arguments that are passed to the webdriver command
+        args: { }
+      },
+
+      e2e: {
+        options: {
+          // Stops Grunt process if a test fails
+          keepAlive: false
+        }
+      },
+
+      server: {
+        options: {
+          keepAlive: true
+        }
       }
     }
   });
@@ -468,7 +503,8 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma:unit'
+    'karma:unit',
+    'protractor:e2e'
   ]);
 
   grunt.registerTask('testserver', [
@@ -477,7 +513,8 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma:server'
+    'karma:server',
+    'protractor:server'
   ]);
 
   grunt.registerTask('build', [
