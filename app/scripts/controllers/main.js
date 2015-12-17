@@ -8,7 +8,7 @@
  * Controller of the literatorioApp
  */
 angular.module('literatorioApp')
-  .controller('MainCtrl', function ($scope, $location, VerseDataStore) {
+  .controller('MainCtrl', function ($rootScope, $scope, $location, $translate, VerseDataStore) {
 
     init();
 
@@ -17,6 +17,8 @@ angular.module('literatorioApp')
      * Initializes controller
      */
     function init() {
+      $rootScope.pageTitle = $translate.instant('COMMON_APP_NAME');
+
       // Populate scope
       $scope.onStartButtonClick = onStartButtonClick;
     }

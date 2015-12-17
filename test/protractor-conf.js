@@ -21,7 +21,20 @@ exports.config = {
   // or configure a single browser
 
   capabilities: {
-    'browserName': 'chrome'
+    browserName: 'chrome',
+    chromeOptions: {
+      // How to set browser language (menus & so on)
+      args: [
+        'lang=en-US'
+      ],
+
+      // How to set Accept-Language header
+      prefs: {
+        intl: {
+          accept_languages: 'en-US'
+        }
+      }
+    }
   },
 
 

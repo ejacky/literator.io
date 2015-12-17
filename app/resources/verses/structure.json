@@ -1,6 +1,15 @@
 {
   "authors": [
     {
+      "name": "test-a-t",
+      "fullName": "Test Author",
+      "shortName": "Test A. T.",
+      "birthYear": 1799,
+      "deathYear": 1837,
+      "wikiLink": "http://bobrosoft.com"
+    },
+
+    {
       "name": "pushkin-a-s",
       "fullName": "Пушкин Александр Сергеевич",
       "shortName": "Пушкин А. С.",
@@ -20,6 +29,14 @@
   ],
 
   "verses": [
+    {
+      "name": "test",
+      "title": "Винни-Пух",
+      "description": "Из далекого детсва...",
+      "year": 1969,
+      "authorName": "test-a-t"
+    },
+
     {
       "name": "u-lukomorya-dub-zelyonyj",
       "title": "У лукоморья дуб зелёный",

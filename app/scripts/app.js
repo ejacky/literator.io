@@ -60,7 +60,8 @@ angular
     // Setup languages and fallbacks
     var langMap = {
       'en-US': 'en',
-      'ru-RU': 'ru'
+      'ru-RU': 'ru',
+      '*': 'en'
     };
 
     $translateProvider

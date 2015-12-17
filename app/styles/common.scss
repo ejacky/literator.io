@@ -18,6 +18,13 @@ a {
   color: $link-color;
 }
 
+.notransitions * {
+  transition: none !important;
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  transform: none !important;
+}
+
 /* Base structure */
 
 html {
