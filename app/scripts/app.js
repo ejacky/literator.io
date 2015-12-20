@@ -85,7 +85,10 @@ angular
     // Use analytics.js instead of ga.js
     AnalyticsProvider.useAnalytics(true);
   })
-  .run(function($rootScope, $location, Analytics) {
+  .run(function($rootScope, $location, $translate, Analytics) {
+    // Fill in global vars
+    $rootScope.currentLang = $translate.preferredLanguage();
+
     // Track pageview
     $rootScope.$on('$routeChangeSuccess',
       function() {

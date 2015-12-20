@@ -1,6 +1,9 @@
 <div class="view-main">
-  <div class="logo">
+  <!--<div class="logo">
     {{ 'COMMON_APP_NAME' | translate }}
+  </div> -->
+  <div class="logo">
+    <img ng-src="/images/main/logo_{{ currentLang }}.png" />
   </div>
   <div class="menu">
     <a href="" class="button start" ng-click="onStartButtonClick()">{{ 'VIEW_MAIN_START_BTN' | translate }}</a>
