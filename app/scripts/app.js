@@ -19,7 +19,8 @@ angular
     'pascalprecht.translate',
     'angular-google-analytics',
     'underscore',
-    'angular-speakingurl'
+    'angular-speakingurl',
+    'webfont-loader'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -85,7 +86,7 @@ angular
     // Use analytics.js instead of ga.js
     AnalyticsProvider.useAnalytics(true);
   })
-  .run(function($rootScope, $location, $translate, Analytics) {
+  .run(function($rootScope, $window, $location, $translate, Analytics) {
     // Fill in global vars
     $rootScope.currentLang = $translate.preferredLanguage();
 
@@ -94,5 +95,12 @@ angular
       function() {
         Analytics.trackPage($location.path());
       });
+
+    // Load custom fonts
+    $window.WebFont.load({
+      custom: {
+        families: ['NotoSerif:n4,i4,n7']
+      }
+    });
   })
 ;

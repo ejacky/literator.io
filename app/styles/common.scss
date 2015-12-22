@@ -5,7 +5,8 @@
 /* Common */
 $text-color: #3C1212;
 $link-color: $text-color;
-$base-font-family: Georgia, serif;
+$base-font-family-initial: Georgia, serif;
+$base-font-family: NotoSerif, Georgia, serif;
 
 * {
   margin: 0;
@@ -28,12 +29,16 @@ a {
 /* Base structure */
 
 html {
-  font-family: $base-font-family;
+  font-family: $base-font-family-initial;
   font-size: 22px;
 
   @media screen and (max-width: 500px) { // meeh, can't put into var because of some issue with autoprefixer -- it stops to add prefixes if I do! :(
     font-size: 16px;
   }
+}
+
+html.wf-active { // when Web Fonts loaded
+  font-family: $base-font-family;
 }
 
 body {

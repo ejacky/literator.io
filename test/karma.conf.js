@@ -37,6 +37,8 @@ module.exports = function(config) {
       'bower_components/angular-underscore-module/angular-underscore-module.js',
       'bower_components/speakingurl/speakingurl.min.js',
       'bower_components/angular-speakingurl/src/angular-speakingurl.js',
+      'bower_components/webfontloader/webfontloader.js',
+      'bower_components/angular-webfontloader/webfontLoader.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",
