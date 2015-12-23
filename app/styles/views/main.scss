@@ -3,6 +3,12 @@
   text-align: center;
   width: 100%;
 
+  &.leaving {
+    animation-duration: 1.2s;
+    animation-fill-mode: forwards;
+    animation-name: fade-out;
+  }
+
   .logo {
     opacity: 0;
     transform: scale(0.7);

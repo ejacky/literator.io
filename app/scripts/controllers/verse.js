@@ -61,6 +61,7 @@ angular.module('literatorioApp')
         $scope.versePieces = [];
         $scope.currentBlock = null;
         $scope.isFinished = false;
+        $scope.isLeaving = false;
         $scope.onInputFieldKeyup = onInputFieldKeyup;
         $scope.onAnotherVerseButtonClick = onAnotherVerseButtonClick;
         $scope.onAnotherVerseOfAuthorButtonClick = onAnotherVerseOfAuthorButtonClick;
@@ -198,6 +199,19 @@ angular.module('literatorioApp')
     }
 
     /**
+     * Leaves the page and redirects to URL passed
+     * @param {String} url
+     */
+    function leavePageWithNewUrl(url) {
+      $scope.isLeaving = true;
+      $('html, body').animate({scrollTop: 0});
+
+      $timeout(function(){
+        $location.url(url);
+      }, 1500); // sync with animation
+    }
+
+    /**
      * Callback firing on input field keyup
      */
     function onInputFieldKeyup() {
@@ -238,7 +252,7 @@ angular.module('literatorioApp')
         }
 
         // Redirect to new verse
-        $location.url(newVerse.url);
+        leavePageWithNewUrl(newVerse.url);
       });
     }
 
@@ -253,7 +267,7 @@ angular.module('literatorioApp')
         }
 
         // Redirect to new verse
-        $location.url(newVerse.url);
+        leavePageWithNewUrl(newVerse.url);
       });
     }
 

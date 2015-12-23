@@ -5,6 +5,12 @@
   max-width: 96%;
   font-size: 1rem;
 
+  &.leaving {
+    animation-duration: 1.2s;
+    animation-fill-mode: forwards;
+    animation-name: fade-out;
+  }
+
   & > div {
     margin: auto;
   }

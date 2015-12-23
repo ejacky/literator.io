@@ -7,6 +7,13 @@
   }
 }
 
+@keyframes fade-out {
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
 @keyframes enable-interactions {
   0% {
     pointer-events: none;
