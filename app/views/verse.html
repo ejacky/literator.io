@@ -9,7 +9,7 @@
 
     <div class="content">
       <div>
-        <div class="width-spacer">{{ ::verse.content }}</div>
+        <div class="width-spacer">{{ ::verse.plainText }}</div>
         <div class="pieces">
           <span ng-repeat="piece in versePieces track by $index">{{::piece + ''}}</span><input ng-class="{visible: currentBlock, hidden: !currentBlock}" ng-keyup="onInputFieldKeyup()" autocorrect="off" autocomplete="off" autocapitalize="off" />
         </div>

@@ -50,6 +50,7 @@ angular.module('literatorioApp')
           ;
 
           self.content = content;
+          self.plainText = content.replace(new RegExp('\\' + self.BLOCK_SEPARATOR_START + '|\\' + self.BLOCK_SEPARATOR_END, 'g'), '');
           return self;
         });
       },
