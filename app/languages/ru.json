@@ -10,5 +10,8 @@
   "VIEW_VERSE_ANOTHER_VERSE_BTN": "Еще стихотворение",
   "VIEW_VERSE_ANOTHER_VERSE_OF_AUTHOR_BTN": "Еще этого автора",
 
-  "VIEW_VERSE_404_MESSAGE": "Стихотворение не найдено\nили\nеще не добавлено.\n\nВсё возможно..."
+  "VIEW_VERSE_404_MESSAGE": "Стихотворение не найдено\nили\nеще не добавлено.\n\nВсё возможно...",
+
+  "FOOTER_MAIN_PHRASE_LEFT": "Сделано с",
+  "FOOTER_MAIN_PHRASE_RIGHT": "к поэзии"
 }

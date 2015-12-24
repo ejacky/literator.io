@@ -3,12 +3,13 @@ describe('Main page', function() {
   beforeEach(function(){
     browser.get('#/');
     browser.executeScript("document.body.className += ' notransitions';");
+    browser.driver.sleep(300);
   });
 
   it('should load', function() {
-    var el = element(by.css('.view-main .logo'));
+    var el = $('.view-main .logo');
     browser.driver.wait(protractor.until.elementIsVisible(el));
-    expect(el.getText()).toMatch('\.io', 'title should match');
+    expect(el.isPresent()).toBe(true, 'logo shown');
 
     var el = element(by.css('.view-main .menu .button.start'));
     browser.driver.wait(protractor.until.elementIsVisible(el));

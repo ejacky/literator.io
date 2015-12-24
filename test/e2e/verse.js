@@ -53,6 +53,6 @@ describe('Verse page', function() {
     element(by.css('.bottom .another-verse')).click();
     expect(browser.getCurrentUrl()).not.toBe(oldUrl, 'URL should be different');
 
-  }, 30000); // need to give 30 sec on that test
+  }, 35000); // need to give it 35 sec on that test
 
 });

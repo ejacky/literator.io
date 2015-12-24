@@ -204,7 +204,7 @@ angular.module('literatorioApp')
      */
     function leavePageWithNewUrl(url) {
       $scope.isLeaving = true;
-      $('html, body').animate({scrollTop: 0});
+      $('html, body').animate({scrollTop: 0}, 1200);
 
       $timeout(function(){
         $location.url(url);

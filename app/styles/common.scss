@@ -3,20 +3,21 @@
 @import 'compass/css3/animation';
 
 /* Common */
-$text-color: #3C1212;
-$link-color: $text-color;
-$base-font-family-initial: Georgia, serif;
-$base-font-family: NotoSerif, Georgia, serif;
+$color-text: #3C1212;
+$color-link: $color-text;
+$color-heart: #d70000;
+$font-family-base-initial: Georgia, serif;
+$font-family-base: NotoSerif, Georgia, serif;
 
 * {
   margin: 0;
   padding: 0;
   outline: none;
-  color: $text-color;
+  color: $color-text;
 }
 
 a {
-  color: $link-color;
+  color: $color-link;
 }
 
 .notransitions * {
@@ -29,7 +30,7 @@ a {
 /* Base structure */
 
 html {
-  font-family: $base-font-family-initial;
+  font-family: $font-family-base-initial;
   font-size: 22px;
 
   @media screen and (max-width: 500px) { // meeh, can't put into var because of some issue with autoprefixer -- it stops to add prefixes if I do! :(
@@ -38,14 +39,14 @@ html {
 }
 
 html.wf-active { // when Web Fonts loaded
-  font-family: $base-font-family;
+  font-family: $font-family-base;
 }
 
 body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  background: #e8cbad url("/images/main/background.jpg");
+  background: #e8cbad url("/images/common/background.jpg");
 }
 
 #content {
@@ -54,17 +55,11 @@ body {
   flex-direction: column;
 }
 
-#footer {
-  visibility: hidden;
-  height: 60px;
-  background-color: rgba(0, 0, 0, 0.32);
-}
-
 a.button {
   display: inline-block;
   padding: 0.5em 1em;
   border-radius: 0.3em;
-  border: 2px solid $link-color;
+  border: 2px solid $color-link;
 
   text-decoration: none;
 }
