@@ -8,7 +8,7 @@
  * Controller of the literatorioApp
  */
 angular.module('literatorioApp')
-  .controller('VerseCtrl', function ($q, $scope, $location, $routeParams, $timeout, $interval, VerseDataStore, VerseBlock) {
+  .controller('VerseCtrl', function ($q, $rootScope, $scope, $location, $routeParams, $timeout, $interval, VerseDataStore, VerseBlock) {
 
     var maxHintsCount = 2;
     var maxCharsToComplete = 3;
@@ -138,6 +138,11 @@ angular.module('literatorioApp')
       if (!angular.isDefined(nextPiece)) {
         $scope.isFinished = true;
         $scope.finishedInSeconds = Math.floor((Date.now() - narrativeStartTime.getTime()) / 1000);
+
+        // Show footer
+        setTimeout(function(){
+          $rootScope.$broadcast('FooterCtrl.doShow');
+        }, 8000); // sync with animation
 
         stopNarrative();
         return;

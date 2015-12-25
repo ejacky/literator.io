@@ -22,19 +22,33 @@ angular.module('literatorioApp')
       // Populate scope
       $scope.isLeaving = false;
       $scope.onStartButtonClick = onStartButtonClick;
+
+      // Show footer
+      setTimeout(function(){
+        $rootScope.$broadcast('FooterCtrl.doShow');
+      }, 3000); // sync with animation
     }
 
     /**
      * Callback firing on start button click
      */
     function onStartButtonClick() {
+      VerseDataStore.getRandomVerse().then(function(verse) {
+        leavePageWithNewUrl(verse.url);
+      });
+    }
+
+    /**
+     * Leaves the page and redirects to URL passed
+     * @param {String} url
+     */
+    function leavePageWithNewUrl(url) {
       $scope.isLeaving = true;
 
-      // Sync with animation
       $timeout(function(){
-        VerseDataStore.getRandomVerse().then(function(verse) {
-          $location.url(verse.url);
-        });
-      }, 1500);
+        $location.url(url);
+      }, 1500); // sync with animation
+
+      $rootScope.$broadcast('FooterCtrl.doHide');
     }
   });
