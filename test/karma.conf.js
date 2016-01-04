@@ -39,6 +39,8 @@ module.exports = function(config) {
       'bower_components/angular-speakingurl/src/angular-speakingurl.js',
       'bower_components/webfontloader/webfontloader.js',
       'bower_components/angular-webfontloader/webfontLoader.js',
+      'bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js',
+      'bower_components/angular-translate-storage-local/angular-translate-storage-local.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

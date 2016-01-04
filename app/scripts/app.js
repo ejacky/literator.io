@@ -71,7 +71,7 @@ angular
       .determinePreferredLanguage()
     ;
 
-    //$translateProvider.useLocalStorage();
+    $translateProvider.useLocalStorage();
   })
   .config(function(AnalyticsProvider) {
     // Set analytics account
@@ -87,13 +87,16 @@ angular
     AnalyticsProvider.useAnalytics(true);
   })
   .run(function($rootScope, $window, $location, $translate, Analytics) {
-    // Fill in global vars
-    $rootScope.currentLang = $translate.preferredLanguage();
-
     // Track pageview
     $rootScope.$on('$routeChangeSuccess',
       function() {
         Analytics.trackPage($location.path());
+      });
+
+    // Watch for language change
+    $rootScope.$on('$translateChangeEnd',
+      function() {
+        $rootScope.currentLang = $translate.proposedLanguage() || $translate.use();
       });
 
     // Load custom fonts
