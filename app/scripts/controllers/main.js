@@ -23,8 +23,9 @@ angular.module('literatorioApp')
       $scope.isLeaving = false;
       $scope.onStartButtonClick = onStartButtonClick;
 
-      // Show footer
+      // Show header and footer
       setTimeout(function(){
+        $rootScope.$broadcast('HeaderCtrl.doShow');
         $rootScope.$broadcast('FooterCtrl.doShow');
       }, 3000); // sync with animation
     }
@@ -49,6 +50,7 @@ angular.module('literatorioApp')
         $location.url(url);
       }, 1500); // sync with animation
 
+      $rootScope.$broadcast('HeaderCtrl.doHide');
       $rootScope.$broadcast('FooterCtrl.doHide');
     }
   });

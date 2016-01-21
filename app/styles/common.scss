@@ -6,6 +6,7 @@
 $color-text: #3C1212;
 $color-link: $color-text;
 $color-heart: #d70000;
+$color-main-background: #e8cbad;
 $font-family-base-initial: Georgia, serif;
 $font-family-base: NotoSerif, Georgia, serif;
 
@@ -46,7 +47,7 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  background: #e8cbad url("/images/common/background.jpg");
+  background: $color-main-background url("/images/common/background.jpg");
 }
 
 #content {

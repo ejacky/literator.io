@@ -73,6 +73,9 @@ angular.module('literatorioApp')
           continueNarrative();
           narrativeStartTime = new Date();
         }, 2600); // sync with animation
+
+        $rootScope.$broadcast('HeaderCtrl.doHide');
+        $rootScope.$broadcast('FooterCtrl.doHide');
       }).catch(function(e) {
         switch (e.type) {
           case 404:
@@ -140,8 +143,9 @@ angular.module('literatorioApp')
         $scope.isFinished = true;
         $scope.finishedInSeconds = Math.floor((Date.now() - narrativeStartTime.getTime()) / 1000);
 
-        // Show footer
+        // Show header and footer
         setTimeout(function(){
+          $rootScope.$broadcast('HeaderCtrl.doShow');
           $rootScope.$broadcast('FooterCtrl.doShow');
         }, 8000); // sync with animation
 

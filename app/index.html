@@ -19,9 +19,7 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div id="header">
-    </div>
+    <ng-include src="'views/header.html'"></ng-include>
 
     <div id="content" ng-view="">
       <div class="view-loader">Loading<span class="point">.</span><span class="point">.</span><span class="point">.</span></div>
@@ -64,6 +62,9 @@
         <script src="scripts/services/verseauthor.js"></script>
         <script src="scripts/controllers/verse404.js"></script>
         <script src="scripts/controllers/footer.js"></script>
+        <script src="scripts/controllers/countrymenu.js"></script>
+        <script src="scripts/services/countriesdatastore.js"></script>
+        <script src="scripts/controllers/header.js"></script>
         <!-- endbuild -->
 </body>
 </html>
