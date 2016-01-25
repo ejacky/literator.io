@@ -150,6 +150,7 @@ angular.module('literatorioApp')
         }, 8000); // sync with animation
 
         stopNarrative();
+        inputField.blur();
         return;
       }
 
@@ -183,6 +184,13 @@ angular.module('literatorioApp')
         resolveCurrentBlock();
       } else {
         currentHint += nextHintChar;
+
+        // Remove hint char from input, if it's there
+        if (String(inputField.val()).indexOf(nextHintChar) === 0) {
+          inputField.val(String(inputField.val()).substr(1));
+        }
+
+        // Display hint char
         $scope.versePieces.push(nextHintChar);
       }
     }
