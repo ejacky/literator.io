@@ -49,8 +49,8 @@ describe('Service: VerseDataStore', function () {
   beforeEach(inject(function ($injector, _VerseDataStore_) {
     // Mock backend with $httpBackend
     $httpBackend = $injector.get('$httpBackend');
-    $httpBackend.whenGET('/languages/en.json').respond('');
-    $httpBackend.whenGET('/languages/ru.json').respond('');
+    $httpBackend.whenGET('/i18n/en.json').respond('');
+    $httpBackend.whenGET('/i18n/ru.json').respond('');
     $httpBackend.expectGET('/resources/verses/structure.json').respond(JSON.stringify(mockedStructure));
 
     VerseDataStore = _VerseDataStore_;

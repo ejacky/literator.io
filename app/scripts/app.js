@@ -51,7 +51,7 @@ angular
   .config(function($translateProvider) {
     // Configure lang files location
     $translateProvider.useStaticFilesLoader({
-      prefix: '/languages/',
+      prefix: '/i18n/',
       suffix: '.json'
     });
 
