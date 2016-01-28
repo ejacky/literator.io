@@ -21,6 +21,10 @@
       </div>
     </div>
 
+    <div class="controls-hint" ng-class="{show: isControlsHintVisible}" ng-show="!isFinished">
+      <p>{{ (isIOS ? 'VIEW_VERSE_CONTROLS_HINT_IOS' : 'VIEW_VERSE_CONTROLS_HINT') | translate }}</p>
+    </div>
+
     <div class="bottom">
       <div class="ending" ng-show="isFinished">
         <div class="result">

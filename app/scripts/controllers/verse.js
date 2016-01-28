@@ -21,6 +21,7 @@ angular.module('literatorioApp')
     var narrativeTimer = null;
     var hintingTimer = null;
     var narrativeStartTime = null;
+    var wasControlsHintShown = false;
     var currentHint = null;
     var inputField = null;
 
@@ -61,8 +62,10 @@ angular.module('literatorioApp')
         $scope.author = result.author;
         $scope.versePieces = [];
         $scope.currentBlock = null;
+        $scope.isIOS = isIOS;
         $scope.isFinished = false;
         $scope.isLeaving = false;
+        $scope.isControlsHintVisible = false;
         $scope.onInputFieldKeyup = onInputFieldKeyup;
         $scope.onAnotherVerseButtonClick = onAnotherVerseButtonClick;
         $scope.onAnotherVerseOfAuthorButtonClick = onAnotherVerseOfAuthorButtonClick;
@@ -167,6 +170,7 @@ angular.module('literatorioApp')
 
         startHinting();
         scrollToInputField();
+        displayControlsHintOnce();
       } else {
         // Display that piece
         $scope.versePieces.push(nextPiece);
@@ -196,9 +200,30 @@ angular.module('literatorioApp')
     }
 
     /**
+     * Displays hint about controls only once
+     */
+    function displayControlsHintOnce() {
+      if (wasControlsHintShown) {
+        return;
+      }
+
+      wasControlsHintShown = true;
+      $scope.isControlsHintVisible = true;
+    }
+
+    /**
+     * Hides hint about controls
+     */
+    function hideControlsHint() {
+      $scope.isControlsHintVisible = false;
+      $scope.$applyAsync(); // needed if executed outside $scope
+    }
+
+    /**
      * Finishes current block and continues narrative
      */
     function resolveCurrentBlock() {
+      // Display rest of the current block
       var nextPiece = $scope.currentBlock.toString().substr(currentHint.length);
       $scope.currentBlock = null;
       $scope.versePieces.push(nextPiece);
@@ -244,6 +269,8 @@ angular.module('literatorioApp')
       ) {
         resolveCurrentBlock();
       }
+
+      hideControlsHint();
     }
 
     /**
@@ -257,6 +284,8 @@ angular.module('literatorioApp')
 
       // Focus on input field
       inputField.focus(); // mostly for Mobile Safari
+
+      hideControlsHint();
     }
 
     /**
