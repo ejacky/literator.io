@@ -8,7 +8,7 @@
  * Controller of the literatorioApp
  */
 angular.module('literatorioApp')
-  .controller('VerseCtrl', function ($q, $rootScope, $scope, $location, $routeParams, $timeout, $interval, VerseDataStore, VerseBlock) {
+  .controller('VerseCtrl', function ($q, $rootScope, $scope, $location, $routeParams, $timeout, $interval, $translate, VerseDataStore, VerseBlock) {
 
     var maxHintsCount = 2;
     var maxCharsToComplete = 3;
@@ -77,6 +77,7 @@ angular.module('literatorioApp')
           narrativeStartTime = new Date();
         }, 2600); // sync with animation
 
+        $rootScope.pageTitle = verse.title + ' | ' + $translate.instant('COMMON_APP_NAME');
         $rootScope.$broadcast('HeaderCtrl.doHide');
         $rootScope.$broadcast('FooterCtrl.doHide');
       }).catch(function(e) {

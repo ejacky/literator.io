@@ -87,16 +87,21 @@ angular
     AnalyticsProvider.useAnalytics(true);
   })
   .run(function($rootScope, $window, $location, $translate, Analytics) {
+    // Add global scope vars
+    $rootScope.global = {};
+
     // Track pageview
     $rootScope.$on('$routeChangeSuccess',
-      function() {
+      function(event, currentRoute) {
+        $rootScope.global.currentPage = currentRoute.$$route.controllerAs;
+
         Analytics.trackPage($location.path());
       });
 
     // Watch for language change
     $rootScope.$on('$translateChangeEnd',
       function() {
-        $rootScope.currentLang = $translate.proposedLanguage() || $translate.use();
+        $rootScope.global.currentLang = $translate.proposedLanguage() || $translate.use();
       });
 
     // Load custom fonts
