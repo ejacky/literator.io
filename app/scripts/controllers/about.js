@@ -8,10 +8,18 @@
  * Controller of the literatorioApp
  */
 angular.module('literatorioApp')
-  .controller('AboutCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('AboutCtrl', function ($rootScope, $translate) {
+
+    init();
+
+
+    /**
+     * Initializes controller
+     */
+    function init() {
+      $rootScope.pageTitle = $translate.instant('COMMON_APP_NAME');
+
+      $rootScope.$broadcast('HeaderCtrl.doShow');
+      $rootScope.$broadcast('FooterCtrl.doShow');
+    }
   });

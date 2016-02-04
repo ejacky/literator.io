@@ -14,6 +14,17 @@
 
   "VIEW_VERSE_404_MESSAGE": "Verse you're looking for is not exists\nor\nnot yet even written?\n\nCould be...",
 
+  "VIEW_ABOUT_CREATOR_TITLE": "Idea, Programming and Design",
+  "VIEW_ABOUT_CREATOR_NAME": "Vladimir Tolstikov aka Bobr",
+  "VIEW_ABOUT_CONTRIBUTE_TITLE": "Have something to add?",
+  "VIEW_ABOUT_CONTRIBUTE_APP_REPO": "App repository",
+  "VIEW_ABOUT_CONTRIBUTE_VERSES_REPO": "Verses repository",
+  "VIEW_ABOUT_VERSES_TITLE": "Verses",
+  "VIEW_ABOUT_VERSES_DISCLAIMER": "All verses and poetry from this site are in Public Domain and belong to all the people of the world.",
+  "VIEW_ABOUT_VERSES_HOW_TO_ADD": "Didn't find your favorite verse? You could add it",
+  "VIEW_ABOUT_VERSES_HOW_TO_ADD_LINK": "here.",
+  "VIEW_ABOUT_CONTACTS_TITLE": "Questions and suggestions",
+
   "FOOTER_MAIN_PHRASE_LEFT": "Made with",
   "FOOTER_MAIN_PHRASE_RIGHT": "to poetry"
 }
