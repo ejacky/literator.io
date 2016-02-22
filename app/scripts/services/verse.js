@@ -14,7 +14,7 @@ angular.module('literatorioApp')
     function Verse(rawData) {
       angular.extend(this, rawData);
 
-      this.path = [this.PATH_BASE, this.authorName, this.name].join('/');
+      this.path = [this.PATH_BASE, this.authorName, 'verses', this.name].join('/');
       this.url = [this.URL_BASE, this.authorName, this.name].join('/');
     }
 
