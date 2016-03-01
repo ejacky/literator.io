@@ -17,7 +17,10 @@ angular.module('literatorioApp')
      * Initializes controller
      */
     function init() {
-      $rootScope.pageTitle = $translate.instant('COMMON_APP_NAME');
+      // Set page title
+      $translate('COMMON_APP_NAME').then(function(translation) {
+        $rootScope.pageTitle = translation;
+      });
 
       // Populate scope
       $scope.isLeaving = false;
