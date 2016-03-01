@@ -1,0 +1,30 @@
+{
+  "COMMON_APP_NAME": "Литератор.io",
+
+  "VIEW_MAIN_START_BTN": "Начать",
+
+  "VIEW_VERSE_SHORT_YEAR": "г.",
+  "VIEW_VERSE_RESULT_MESSAGE": "Вы вспомнили за",
+  "VIEW_VERSE_RESULT_MINUTES": "мин.",
+  "VIEW_VERSE_RESULT_SECONDS": "сек.",
+  "VIEW_VERSE_ANOTHER_VERSE_BTN": "Еще стихотворение",
+  "VIEW_VERSE_ANOTHER_VERSE_OF_AUTHOR_BTN": "Еще этого автора",
+  "VIEW_VERSE_CONTROLS_HINT": "Начните печатать и закончите стихотворение",
+  "VIEW_VERSE_CONTROLS_HINT_IOS": "Тапните по экрану, чтобы начать печатать и закончите стихотворение",
+
+  "VIEW_VERSE_404_MESSAGE": "Стихотворение не найдено\nили\nеще не добавлено.\n\nВсё возможно...",
+
+  "VIEW_ABOUT_CREATOR_TITLE": "Идея, реализация и дизайн",
+  "VIEW_ABOUT_CREATOR_NAME": "Толстиков Владимир aka Bobr",
+  "VIEW_ABOUT_CONTRIBUTE_TITLE": "Есть что добавить?",
+  "VIEW_ABOUT_CONTRIBUTE_APP_REPO": "Репозиторий приложения",
+  "VIEW_ABOUT_CONTRIBUTE_VERSES_REPO": "Репозиторий стихов",
+  "VIEW_ABOUT_VERSES_TITLE": "Стихи",
+  "VIEW_ABOUT_VERSES_DISCLAIMER": "Все стихи и литературные произведения, представленные на сайте, являются всемирным общественным достоянием.",
+  "VIEW_ABOUT_VERSES_HOW_TO_ADD": "Не нашли любимое стихотворение? Можно добавить",
+  "VIEW_ABOUT_VERSES_HOW_TO_ADD_LINK": "здесь.",
+  "VIEW_ABOUT_CONTACTS_TITLE": "Вопросы и предложения",
+
+  "FOOTER_MAIN_PHRASE_LEFT": "Сделано с",
+  "FOOTER_MAIN_PHRASE_RIGHT": "к поэзии"
+}
