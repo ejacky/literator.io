@@ -41,7 +41,7 @@ describe('Service: Verse', function () {
     expect(verse.title).toBe(mockVerseData.title);
     expect(verse.description).toBe(mockVerseData.description);
     expect(verse.authorName).toBe(mockVerseData.authorName);
-    expect(verse.path).toBe([verse.PATH_BASE, verse.authorName, verse.name].join('/'));
+    expect(verse.path).toBe([verse.PATH_BASE, verse.authorName, 'verses', verse.name].join('/'));
     expect(verse.url).toBe([verse.URL_BASE, verse.authorName, verse.name].join('/'));
 
     $httpBackend.flush();
