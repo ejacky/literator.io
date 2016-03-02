@@ -83,6 +83,12 @@ angular.module('literatorioApp')
       } catch (e) {}
     }
 
+    /**
+     * Returns country determined by input params and special algo
+     * @param {Array} languages
+     * @param {Array} countries
+     * @returns {Object|null}
+     */
     function determineCountryByLanguage(languages, countries) {
       var lowerCaseLanguages = languages.map(function(value){return ('' + value).toLowerCase();});
 
