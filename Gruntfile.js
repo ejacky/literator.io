@@ -403,7 +403,9 @@ module.exports = function (grunt) {
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*',
             'resources/**/*',
-            'i18n/**/*'
+            'i18n/**/*',
+            '!**/*.git*',
+            '!**/*.DS*'
           ]
         }, {
           expand: true,
