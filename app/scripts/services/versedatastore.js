@@ -32,7 +32,7 @@ angular.module('literatorioApp')
       if (!promises.getDataStructure) {
         promises.getDataStructure = $http({
           method: 'GET',
-          url: '/resources/verses/structure.json',
+          url: 'resources/verses/structure.json',
           responseType: 'json'
         }).then(function(response) {
           return response.data;

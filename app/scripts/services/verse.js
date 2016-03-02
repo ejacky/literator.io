@@ -27,7 +27,7 @@ angular.module('literatorioApp')
       BLOCK_SEPARATOR_END: '}',
 
       URL_BASE: '/verse',
-      PATH_BASE: '/resources/verses',
+      PATH_BASE: 'resources/verses',
 
       /**
        * Loads up verse's content
