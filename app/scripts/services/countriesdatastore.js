@@ -8,7 +8,7 @@
  * Service in the literatorioApp.
  */
 angular.module('literatorioApp')
-  .service('CountriesDataStore', function ($translate, $window, _) {
+  .service('CountriesDataStore', function ($rootScope, $translate, $window, _) {
 
     var localStorageCurrentCountryCodeKey = 'CountriesDataStore.currentCountryCode';
     var availableCountries = [
@@ -81,6 +81,8 @@ angular.module('literatorioApp')
       try {
         $window.localStorage.setItem(localStorageCurrentCountryCodeKey, country.countryCode);
       } catch (e) {}
+
+      $rootScope.global.currentLang = country.language;
     }
 
     /**

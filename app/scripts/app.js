@@ -68,7 +68,6 @@ angular
     $translateProvider
       .registerAvailableLanguageKeys(['en', 'ru'], langMap)
       .fallbackLanguage('en')
-      .determinePreferredLanguage()
     ;
 
     $translateProvider.useLocalStorage();
@@ -86,23 +85,16 @@ angular
     // Use analytics.js instead of ga.js
     AnalyticsProvider.useAnalytics(true);
   })
-  .run(function($rootScope, $window, $location, $translate, Analytics) {
+  .run(function($rootScope, $injector, $window, $location, $translate, Analytics) {
     // Add global scope vars
     $rootScope.global = {};
 
     // Track pageview
-    $rootScope.$on('$routeChangeSuccess',
-      function(event, currentRoute) {
-        $rootScope.global.currentPage = currentRoute.$$route.controllerAs;
+    $rootScope.$on('$routeChangeSuccess', function(event, currentRoute) {
+      $rootScope.global.currentPage = currentRoute.$$route.controllerAs;
 
-        Analytics.trackPage($location.path());
-      });
-
-    // Watch for language change
-    $rootScope.$on('$translateChangeEnd',
-      function() {
-        $rootScope.global.currentLang = $translate.proposedLanguage() || $translate.use();
-      });
+      Analytics.trackPage($location.path());
+    });
 
     // Load custom fonts
     $window.WebFont.load({
@@ -110,5 +102,8 @@ angular
         families: ['NotoSerif:n4,i4,n7']
       }
     });
+
+    // Need to manually init CountriesDataStore to determine country
+    $injector.get('CountriesDataStore'); // $injector needed because of $rootScope.global
   })
 ;
