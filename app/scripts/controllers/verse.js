@@ -12,6 +12,7 @@ angular.module('literatorioApp')
 
     var maxHintsCount = 2;
     var maxCharsToComplete = 3;
+    var typingInterval = 100;
     var hintingInterval = 4000;
     var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
@@ -100,7 +101,7 @@ angular.module('literatorioApp')
         $interval.cancel(narrativeTimer);
       }
 
-      narrativeTimer = $interval(displayNextVersePiece, 100);
+      narrativeTimer = $interval(displayNextVersePiece, typingInterval);
     }
 
     /**

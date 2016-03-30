@@ -3,6 +3,7 @@
   text-align: center;
   transition: all 1.2s;
   opacity: 0;
+  overflow: hidden; // for Firefox
 
   &.show {
     opacity: 1;
