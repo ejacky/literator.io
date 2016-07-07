@@ -39,7 +39,7 @@ exports.config = {
 
 
   // url where your app is running, relative URLs are prepending with this URL
-  baseUrl: 'http://localhost:9000/',
+  baseUrl: 'http://localhost:9001/',
 
   // testing framework, jasmine is the default
   framework: 'jasmine2'
