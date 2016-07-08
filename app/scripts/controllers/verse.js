@@ -21,6 +21,7 @@ angular.module('literatorioApp')
     var versePieces = null;
     var narrativeTimer = null;
     var hintingTimer = null;
+    var otherTimers = []; // only timeouts should be here
     var narrativeStartTime = null;
     var wasControlsHintShown = false;
     var currentHint = null;
@@ -73,10 +74,10 @@ angular.module('literatorioApp')
 
 
         // Start narrative
-        $timeout(function(){
+        otherTimers.push($timeout(function(){
           continueNarrative();
           narrativeStartTime = new Date();
-        }, 2600); // sync with animation
+        }, 2600)); // sync with animation
 
         $rootScope.pageTitle = verse.title + ' | ' + $translate.instant('COMMON_APP_NAME');
         $rootScope.$broadcast('HeaderCtrl.doHide');
@@ -149,10 +150,10 @@ angular.module('literatorioApp')
         $scope.finishedInSeconds = Math.floor((Date.now() - narrativeStartTime.getTime()) / 1000);
 
         // Show header and footer
-        setTimeout(function(){
+        otherTimers.push($timeout(function(){
           $rootScope.$broadcast('HeaderCtrl.doShow');
           $rootScope.$broadcast('FooterCtrl.doShow');
-        }, 8000); // sync with animation
+        }, 8000)); // sync with animation
 
         stopNarrative();
         inputField.blur();
@@ -253,9 +254,9 @@ angular.module('literatorioApp')
       $scope.isLeaving = true;
       $('html, body').animate({scrollTop: 0}, 1200);
 
-      $timeout(function(){
+      otherTimers.push($timeout(function(){
         $location.url(url);
-      }, 1500); // sync with animation
+      }, 1500)); // sync with animation
     }
 
     /**
@@ -332,5 +333,8 @@ angular.module('literatorioApp')
       // Stop timers
       stopHinting();
       stopNarrative();
+      otherTimers.forEach(function(timer) {
+        $timeout.cancel(timer);
+      });
     }
   });
