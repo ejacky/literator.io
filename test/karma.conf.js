@@ -41,6 +41,8 @@ module.exports = function(config) {
       'bower_components/angular-webfontloader/webfontLoader.js',
       'bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js',
       'bower_components/angular-translate-storage-local/angular-translate-storage-local.js',
+      'bower_components/audiocontext-patch/AudioContextMonkeyPatch.js',
+      'bower_components/angular-sound/dist/main.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

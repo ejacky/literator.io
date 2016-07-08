@@ -20,7 +20,8 @@ angular
     'angular-google-analytics',
     'underscore',
     'angular-speakingurl',
-    'webfont-loader'
+    'webfont-loader',
+    'mcwebb.sound'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -102,6 +103,17 @@ angular
         families: ['NotoSerif:n4,i4,n7']
       }
     });
+
+    // Load sounds
+    try {
+      var SoundService = $injector.get('CountriesDataStore');
+      SoundService.loadSound({
+        name: 'bell',
+        src: 'resources/sounds/bell.mp3'
+      });
+    } catch (e) {
+
+    }
 
     // Need to manually init CountriesDataStore to determine country
     $injector.get('CountriesDataStore'); // $injector needed because of $rootScope.global

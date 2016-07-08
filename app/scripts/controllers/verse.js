@@ -8,7 +8,7 @@
  * Controller of the literatorioApp
  */
 angular.module('literatorioApp')
-  .controller('VerseCtrl', function ($q, $rootScope, $scope, $location, $routeParams, $timeout, $interval, $translate, VerseDataStore, VerseBlock) {
+  .controller('VerseCtrl', function ($q, $rootScope, $scope, $location, $routeParams, $timeout, $interval, $translate, VerseDataStore, VerseBlock, SoundManager) {
 
     var maxHintsCount = 2;
     var maxCharsToComplete = 3;
@@ -230,9 +230,11 @@ angular.module('literatorioApp')
       $scope.currentBlock = null;
       $scope.versePieces.push(nextPiece);
 
+      inputField.val('');
+
+      SoundManager.playSound('bell');
       stopHinting();
       continueNarrative();
-      inputField.val('');
     }
 
     /**
