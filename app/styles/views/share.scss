@@ -1,0 +1,24 @@
+.view-share {
+  margin: 1em 0;
+
+  a {
+    box-sizing: border-box;
+
+    $width: 60px;
+    display: inline-block;
+    width: $width;
+    height: $width;
+    border: 2px solid $color-link;
+    border-radius: $width / 2;
+
+    svg {
+      pointer-events: none; // IMPORTANT
+      margin-top: 17%;
+      width: 66%;
+
+      path {
+        fill: $color-link;
+      }
+    }
+  }
+}

@@ -283,9 +283,11 @@ angular.module('literatorioApp')
      * @param {Event} event
      */
     function onSiteContentClick(event) {
-      // Prevent default unnecessary behavior
-      event.stopPropagation();
-      event.preventDefault();
+      if (['A', 'BUTTON'].indexOf(event.target.tagName) === -1) {
+        // Prevent default unnecessary behavior
+        event.stopPropagation();
+        event.preventDefault();
+      }
 
       // Focus on input field
       inputField.focus(); // mostly for Mobile Safari

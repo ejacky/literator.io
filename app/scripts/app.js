@@ -23,6 +23,9 @@ angular
     'webfont-loader',
     'mcwebb.sound'
   ])
+  .filter('encodeURIComponent', function($window) {
+    return $window.encodeURIComponent;
+  })
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
