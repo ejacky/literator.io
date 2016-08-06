@@ -254,6 +254,9 @@ angular.module('literatorioApp')
       $scope.isLeaving = true;
       $('html, body').animate({scrollTop: 0}, 1200);
 
+      $rootScope.$broadcast('HeaderCtrl.doHide');
+      $rootScope.$broadcast('FooterCtrl.doHide');
+
       otherTimers.push($timeout(function(){
         $location.url(url);
       }, 1500)); // sync with animation
