@@ -4,13 +4,18 @@
   100% {
     opacity: 1;
     pointer-events: auto;
+    visibility: visible;
   }
 }
 
 @keyframes fade-out {
+  99% {
+    opacity: 0;
+  }
   100% {
     opacity: 0;
     pointer-events: none;
+    visibility: hidden;
   }
 }
 

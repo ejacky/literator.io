@@ -1,12 +1,15 @@
 #footer {
   font-size: 0.8rem;
   text-align: center;
+  overflow: hidden; // for Firefox
+
   transition: all 1.2s;
   opacity: 0;
-  overflow: hidden; // for Firefox
+  pointer-events: none;
 
   &.show {
     opacity: 1;
+    pointer-events: auto;
   }
 
   .top-border {

@@ -10,8 +10,8 @@ I wanted to create something interesting using modern Web technologies and Angul
 Idea came accidentally when I thought: "Wondering how many poems from the school course
 do I still remember?".
 
-Second goal was to write some *Perfect Code* every good developer seek for in their work.
-Code fully covered with Unit and End-to-end tests.
+Second goal was to polish skills, write some *Perfect Code* every good developer seek for in their work, 
+and I hope I succeed with it. Also code is fully covered with set of Unit and End-to-end tests.
 
 ## Prerequisites
 

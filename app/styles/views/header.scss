@@ -1,18 +1,19 @@
 #header {
+  display: flex;
+  flex-flow: row wrap;
   width: 90%;
   max-width: 1108px;
   margin: auto;
   padding: 0;
   list-style: none;
 
-  display: flex;
-  flex-flow: row wrap;
-
   transition: all 1.2s;
   opacity: 0;
+  pointer-events: none;
 
   &.show {
     opacity: 1;
+    pointer-events: auto;
   }
 
   ul {
