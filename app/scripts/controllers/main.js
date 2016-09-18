@@ -27,7 +27,7 @@ angular.module('literatorioApp')
       $scope.onStartButtonClick = onStartButtonClick;
 
       // Show header and footer
-      setTimeout(function(){
+      $timeout(function(){
         $rootScope.$broadcast('HeaderCtrl.doShow');
         $rootScope.$broadcast('FooterCtrl.doShow');
       }, 3000); // sync with animation

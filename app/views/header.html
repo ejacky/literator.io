@@ -1,4 +1,4 @@
-<ul id="header" ng-controller="HeaderCtrl">
+<ul id="header" ng-controller="HeaderCtrl" ng-class="{show: isVisible}">
   <a class="logo" href="#/" ng-class="{show: global.currentPage != 'main'}">{{ 'COMMON_APP_NAME' | translate }}</a>
   <span class="spacer"></span>
   <ng-include src="'views/countrymenu.html'"></ng-include>

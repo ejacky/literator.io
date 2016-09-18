@@ -8,10 +8,7 @@
  * Controller of the literatorioApp
  */
 angular.module('literatorioApp')
-  .controller('FooterCtrl', function ($rootScope) {
-
-    var $ = angular.element;
-    var footerElement = $('#footer');
+  .controller('FooterCtrl', function ($scope, $rootScope) {
 
     init();
 
@@ -20,6 +17,8 @@ angular.module('literatorioApp')
      * Initializes controller
      */
     function init() {
+      $scope.isVisible = false;
+
       $rootScope.$on('FooterCtrl.doShow', show);
       $rootScope.$on('FooterCtrl.doHide', hide);
     }
@@ -28,13 +27,13 @@ angular.module('literatorioApp')
      * Hides footer
      */
     function hide() {
-      footerElement.removeClass('show');
+      $scope.isVisible = false;
     }
 
     /**
      * Shows footer
      */
     function show() {
-      footerElement.addClass('show');
+      $scope.isVisible = true;
     }
   });
