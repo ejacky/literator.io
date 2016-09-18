@@ -21,5 +21,6 @@ angular.module('literatorioApp')
 
       $rootScope.$broadcast('HeaderCtrl.doShow');
       $rootScope.$broadcast('FooterCtrl.doShow');
+      $rootScope.$broadcast('GitHubRibbonCtrl.doHide');
     }
   });

@@ -1,0 +1,22 @@
+.view-github-ribbon {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30vw;
+  height: 30vw;
+  max-width: 140px;
+  max-height: 140px;
+  text-indent: -9999px;
+  background: url("../images/main/github_ribbon.png") no-repeat;
+  background-size: contain;
+  
+  transition: opacity 1.2s;
+  opacity: 0;
+  pointer-events: none;
+
+  &.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

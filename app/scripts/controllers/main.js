@@ -30,6 +30,7 @@ angular.module('literatorioApp')
       $timeout(function(){
         $rootScope.$broadcast('HeaderCtrl.doShow');
         $rootScope.$broadcast('FooterCtrl.doShow');
+        $rootScope.$broadcast('GitHubRibbonCtrl.doShow');
       }, 3000); // sync with animation
     }
 
@@ -55,5 +56,6 @@ angular.module('literatorioApp')
 
       $rootScope.$broadcast('HeaderCtrl.doHide');
       $rootScope.$broadcast('FooterCtrl.doHide');
+      $rootScope.$broadcast('GitHubRibbonCtrl.doHide');
     }
   });
