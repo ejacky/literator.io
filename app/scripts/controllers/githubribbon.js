@@ -8,7 +8,7 @@
  * Controller of the literatorioApp
  */
 angular.module('literatorioApp')
-  .controller('GitHubRibbonCtrl', function ($scope, $rootScope) {
+  .controller('GitHubRibbonCtrl', function ($scope) {
 
     init();
 
@@ -19,8 +19,8 @@ angular.module('literatorioApp')
     function init() {
       $scope.isVisible = false;
 
-      $rootScope.$on('GitHubRibbonCtrl.doShow', show);
-      $rootScope.$on('GitHubRibbonCtrl.doHide', hide);
+      $scope.$on('GitHubRibbonCtrl.doShow', show);
+      $scope.$on('GitHubRibbonCtrl.doHide', hide);
     }
 
     /**
