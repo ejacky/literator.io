@@ -538,6 +538,11 @@ module.exports = function (grunt) {
     'usemin',
     'htmlmin'
   ]);
+  
+  grunt.registerTask('push', 'Will push changes to gh-pages', function () {
+    var execSync = require('child_process').execSync;
+    execSync('git subtree push --prefix dist origin gh-pages');
+  });
 
   grunt.registerTask('default', [
     'newer:jshint',
