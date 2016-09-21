@@ -8,7 +8,8 @@
  * Controller of the literatorioApp
  */
 angular.module('literatorioApp')
-  .controller('VerseCtrl', function ($q, $rootScope, $scope, $location, $routeParams, $timeout, $interval, $translate, VerseDataStore, VerseBlock, SoundManager) {
+  .controller('VerseCtrl', function ($q, $rootScope, $scope, $location, $routeParams, $timeout, $interval, 
+                                     $translate, VerseDataStore, VerseBlock, SoundManager, Analytics) {
 
     var maxHintsCount = 2;
     var maxCharsToComplete = 3;
@@ -16,6 +17,7 @@ angular.module('literatorioApp')
     var hintingInterval = 4000;
     var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
+    var analyticsLabel = null;
     var $ = angular.element;
     var siteContentElement = null;
     var versePieces = null;
@@ -24,6 +26,7 @@ angular.module('literatorioApp')
     var otherTimers = []; // only timeouts should be here
     var narrativeStartTime = null;
     var wasControlsHintShown = false;
+    var hintsDisplayedCount = 0;
     var currentHint = null;
     var inputField = null;
 
@@ -51,6 +54,7 @@ angular.module('literatorioApp')
           author: verse.getAuthor()
         });
       }).then(function(result) {
+        analyticsLabel = verse.authorName + '/' + verse.name;
         versePieces = verse.getPieces({});
         siteContentElement = $('#content');
         inputField = $('.view-verse input');
@@ -82,7 +86,11 @@ angular.module('literatorioApp')
         $rootScope.pageTitle = verse.title + ' | ' + $translate.instant('COMMON_APP_NAME');
         $rootScope.$broadcast('HeaderCtrl.doHide');
         $rootScope.$broadcast('FooterCtrl.doHide');
+
+        Analytics.trackEvent('web', 'verse-init', analyticsLabel);
       }).catch(function(e) {
+        Analytics.trackEvent('web', 'verse-init-error', analyticsLabel);
+        
         switch (e.type) {
           case 404:
             $location.url('/verse/404');
@@ -157,6 +165,11 @@ angular.module('literatorioApp')
 
         stopNarrative();
         inputField.blur();
+
+        // Track results
+        Analytics.trackEvent('web', 'verse-complete', analyticsLabel);
+        Analytics.trackEvent('web', 'verse-complete-seconds', analyticsLabel, $scope.finishedInSeconds);
+        Analytics.trackEvent('web', 'verse-complete-hints', analyticsLabel, hintsDisplayedCount);
         return;
       }
 
@@ -199,6 +212,7 @@ angular.module('literatorioApp')
 
         // Display hint char
         $scope.versePieces.push(nextHintChar);
+        hintsDisplayedCount++;
       }
     }
 
@@ -302,6 +316,8 @@ angular.module('literatorioApp')
      * Callback firing on "Another verse" click
      */
     function onAnotherVerseButtonClick() {
+      Analytics.trackEvent('web', 'verse-another-verse-btn-click', analyticsLabel);
+      
       VerseDataStore.getRandomVerse().then(function(newVerse) {
         // Check, if new verse is the same one as current and re-pick
         if ($scope.verse.isMatch(newVerse)) {
@@ -317,6 +333,8 @@ angular.module('literatorioApp')
      * Callback firing on "Another author's verse" click
      */
     function onAnotherVerseOfAuthorButtonClick() {
+      Analytics.trackEvent('web', 'verse-another-verse-of-author-btn-click', analyticsLabel);
+      
       VerseDataStore.getRandomVerseForAuthor($routeParams.authorName).then(function(newVerse) {
         // Check, if new verse is the same one as current and re-pick
         if ($scope.verse.isMatch(newVerse)) {
@@ -341,5 +359,9 @@ angular.module('literatorioApp')
       otherTimers.forEach(function(timer) {
         $timeout.cancel(timer);
       });
+
+      if (!$scope.isFinished) {
+        Analytics.trackEvent('web', 'verse-leave-uncompleted', analyticsLabel);
+      }
     }
   });

@@ -8,7 +8,7 @@
  * Controller of the literatorioApp
  */
 angular.module('literatorioApp')
-  .controller('AboutCtrl', function ($rootScope, $translate) {
+  .controller('AboutCtrl', function ($rootScope, $translate, Analytics) {
 
     init();
 
@@ -22,5 +22,7 @@ angular.module('literatorioApp')
       $rootScope.$broadcast('HeaderCtrl.doShow');
       $rootScope.$broadcast('FooterCtrl.doShow');
       $rootScope.$broadcast('GitHubRibbonCtrl.doHide');
+
+      Analytics.trackEvent('web', 'about-init');
     }
   });

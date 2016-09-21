@@ -8,9 +8,15 @@
  * Controller of the literatorioApp
  */
 angular.module('literatorioApp')
-  .controller('ShareCtrl', function ($scope) {
+  .controller('ShareCtrl', function ($scope, Analytics) {
     $scope.shareUrl = window.location.href;
     $scope.shareTitle = ''; // Pass it in onload
     $scope.shareDescription = ''; // Pass it in onload
     $scope.shareImage = ''; //window.location.href.replace(/#.*/, '') + 'images/apple-touch-icon-precomposed.png'; // Pass it in onload
+    
+    $scope.onClick = onClick;
+
+    function onClick(snName) {
+      Analytics.trackEvent('web', 'share-click', snName);
+    }
   });

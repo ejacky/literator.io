@@ -8,7 +8,7 @@
  * Controller of the literatorioApp
  */
 angular.module('literatorioApp')
-  .controller('MainCtrl', function ($rootScope, $scope, $location, $timeout, $translate, VerseDataStore) {
+  .controller('MainCtrl', function ($rootScope, $scope, $location, $timeout, $translate, VerseDataStore, Analytics) {
 
     init();
 
@@ -32,6 +32,8 @@ angular.module('literatorioApp')
         $rootScope.$broadcast('FooterCtrl.doShow');
         $rootScope.$broadcast('GitHubRibbonCtrl.doShow');
       }, 3000); // sync with animation
+      
+      Analytics.trackEvent('web', 'main-init');
     }
 
     /**
@@ -40,6 +42,8 @@ angular.module('literatorioApp')
     function onStartButtonClick() {
       VerseDataStore.getRandomVerse().then(function(verse) {
         leavePageWithNewUrl(verse.url);
+
+        Analytics.trackEvent('web', 'main-start-btn-click');
       });
     }
 

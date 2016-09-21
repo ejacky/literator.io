@@ -8,7 +8,7 @@
  * Controller of the literatorioApp
  */
 angular.module('literatorioApp')
-  .controller('GitHubRibbonCtrl', function ($scope) {
+  .controller('GitHubRibbonCtrl', function ($scope, Analytics) {
 
     init();
 
@@ -21,6 +21,8 @@ angular.module('literatorioApp')
 
       $scope.$on('GitHubRibbonCtrl.doShow', show);
       $scope.$on('GitHubRibbonCtrl.doHide', hide);
+
+      $scope.onClick = onClick;
     }
 
     /**
@@ -35,5 +37,9 @@ angular.module('literatorioApp')
      */
     function show() {
       $scope.isVisible = true;
+    }
+    
+    function onClick() {
+      Analytics.trackEvent('web', 'git-hub-ribbon-click');
     }
   });
