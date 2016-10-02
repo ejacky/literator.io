@@ -83,9 +83,10 @@ angular.module('literatorioApp')
           narrativeStartTime = new Date();
         }, 2600)); // sync with animation
 
-        $rootScope.pageTitle = verse.title + ' | ' + $translate.instant('COMMON_APP_NAME');
+        $rootScope.global.pageTitle = verse.title + ' | ' + $translate.instant('COMMON_APP_NAME');
         $rootScope.$broadcast('HeaderCtrl.doHide');
         $rootScope.$broadcast('FooterCtrl.doHide');
+        $rootScope.$broadcast('GitHubRibbonCtrl.doHide');
 
         Analytics.trackEvent('web', 'verse-init', analyticsLabel);
       }).catch(function(e) {

@@ -17,7 +17,7 @@ angular.module('literatorioApp')
      * Initializes controller
      */
     function init() {
-      $rootScope.pageTitle = $translate.instant('COMMON_APP_NAME');
+      $rootScope.global.pageTitle = $translate.instant('COMMON_APP_NAME');
 
       $rootScope.$broadcast('HeaderCtrl.doShow');
       $rootScope.$broadcast('FooterCtrl.doShow');

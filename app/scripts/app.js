@@ -92,6 +92,7 @@ angular
   .run(function($rootScope, $injector, $window, $location, $translate, Analytics) {
     // Add global scope vars
     $rootScope.global = {};
+    $rootScope.global.pageTitle = 'Literator.io'; // to solve possible translation glitch
 
     // Track pageview
     $rootScope.$on('$routeChangeSuccess', function(event, currentRoute) {
