@@ -96,8 +96,15 @@
       }
 
       &.hidden {
-        width: 0;
+        width: 1px;
         opacity: 0;
+        transform: scale(0); // set of hacks :)
+      }
+      
+      &::-webkit-input-placeholder {
+        color: $color-text;
+        text-shadow: none;
+        -webkit-text-fill-color: initial;
       }
     }
 
