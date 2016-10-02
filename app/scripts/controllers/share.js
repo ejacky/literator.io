@@ -12,7 +12,7 @@ angular.module('literatorioApp')
     $scope.shareUrl = window.location.href;
     $scope.shareTitle = ''; // Pass it in onload
     $scope.shareDescription = ''; // Pass it in onload
-    $scope.shareImage = ''; //window.location.href.replace(/#.*/, '') + 'images/apple-touch-icon-precomposed.png'; // Pass it in onload
+    $scope.shareImage = window.location.href.replace(/#.*/, '') + 'images/og_image_560x292.jpg'; // Pass it in onload
     
     $scope.onClick = onClick;
 

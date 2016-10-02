@@ -1,6 +1,6 @@
 <div class="view-share">
   <a target="_blank" href="https://vk.com/share.php?url={{shareUrl | encodeURIComponent}}&title={{shareTitle | encodeURIComponent}}&description={{shareDescription | encodeURIComponent}}&image={{shareImage | encodeURIComponent}}&noparse=true" ng-click="onClick('vk')" ng-include="'images/common/share/vk.svg'">Vkontakte</a>
   <a target="_blank" href="https://www.ok.ru/dk?st.cmd=addShare&st.s=1&st._surl={{shareUrl | encodeURIComponent}}&st.comments={{shareTitle | encodeURIComponent}}" ng-click="onClick('ok')" ng-include="'images/common/share/ok.svg'">Odnoklassniki</a>
-  <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{shareUrl | encodeURIComponent}}" ng-click="onClick('facebook')" ng-include="'images/common/share/facebook.svg'">Facebook</a>
+  <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{shareUrl | encodeURIComponent}}&title={{shareTitle | encodeURIComponent}}&description={{shareDescription | encodeURIComponent}}" ng-click="onClick('facebook')" ng-include="'images/common/share/facebook.svg'">Facebook</a>
   <a target="_blank" href="https://twitter.com/intent/tweet?url={{shareUrl | encodeURIComponent}}&text={{shareTitle | encodeURIComponent}}" ng-click="onClick('twitter')" ng-include="'images/common/share/twitter.svg'">Twitter</a>
 </div>

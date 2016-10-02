@@ -31,7 +31,7 @@
           {{ 'VIEW_VERSE_RESULT_MESSAGE' | translate }} <span class="time"><span ng-if="finishedInSeconds > 60">{{ finishedInSeconds / 60 | number: 0 }} {{ 'VIEW_VERSE_RESULT_MINUTES' | translate }}</span> {{ finishedInSeconds % 60 | number: 0 }} {{ 'VIEW_VERSE_RESULT_SECONDS' | translate }}</span>
         </div>
 
-        <ng-include src="'views/share.html'" ng-if="verse.title" ng-controller="ShareCtrl" ng-init='tmp = ("VIEW_VERSE_SHARE_TITLE_PRE" | translate) + " \"" + verse.title + "\""' onload="shareTitle=tmp"></ng-include>
+        <ng-include src="'views/share.html'" ng-if="verse.title" ng-controller="ShareCtrl" ng-init='shareTitle = ("VIEW_VERSE_SHARE_TITLE_PRE" | translate) + " \"" + verse.title + "\" (" + author.shortName + ")"'></ng-include>
 
         <div class="buttons">
           <div><a href="" class="button another-verse" ng-click="onAnotherVerseButtonClick()">{{ 'VIEW_VERSE_ANOTHER_VERSE_BTN' | translate }}</a></div>
