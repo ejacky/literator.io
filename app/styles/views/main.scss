@@ -28,6 +28,7 @@
     margin-top: 1em;
     font-size: 5vmin;
     opacity: 0;
+    min-height: 80px; // fix for height flickering
 
     animation-duration: 1s;
     animation-delay: 2s;
