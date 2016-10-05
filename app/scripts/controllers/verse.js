@@ -68,6 +68,7 @@ angular.module('literatorioApp')
         $scope.author = result.author;
         $scope.versePieces = [];
         $scope.currentBlock = null;
+        $scope.inputFieldMaxLength = maxCharsToComplete + 1;
         $scope.isIOS = isIOS;
         $scope.isFinished = false;
         $scope.isLeaving = false;
