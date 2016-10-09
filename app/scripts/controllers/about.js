@@ -10,6 +10,8 @@
 angular.module('literatorioApp')
   .controller('AboutCtrl', function ($rootScope, $translate, Analytics) {
 
+    var $ = angular.element;
+    
     init();
 
 
@@ -18,6 +20,8 @@ angular.module('literatorioApp')
      */
     function init() {
       $rootScope.global.pageTitle = $translate.instant('COMMON_APP_NAME');
+
+      $('html, body').animate({scrollTop: 0});
 
       $rootScope.$broadcast('HeaderCtrl.doShow');
       $rootScope.$broadcast('FooterCtrl.doShow');

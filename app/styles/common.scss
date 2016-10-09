@@ -37,6 +37,11 @@ html {
   @media screen and (max-width: 500px) { // meeh, can't put into var because of some issue with autoprefixer -- it stops to add prefixes if I do! :(
     font-size: 16px;
   }
+
+  // IE hacks
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    height: 100%;
+  }
 }
 
 html.wf-active { // when Web Fonts loaded
@@ -48,12 +53,22 @@ body {
   min-height: 100vh;
   flex-direction: column;
   background: $color-main-background url("../images/common/background.jpg");
+
+  // IE hacks
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    height: 100%;
+  }
 }
 
 #content {
   flex: 1;
   display: flex;
   flex-direction: column;
+
+  // IE hacks
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { 
+    flex: 1 0 auto;
+  }
 }
 
 a.button {

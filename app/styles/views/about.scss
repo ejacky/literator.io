@@ -9,6 +9,11 @@
     max-width: 96%;
   }
 
+  // IE hacks
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    width: 100%;
+  }
+
   h3 {
     margin: 1.2em 0 0.3em;
     font-size: 1.4em;

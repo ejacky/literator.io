@@ -9,19 +9,20 @@
  */
 angular.module('literatorioApp')
   .service('SoundManager', function ($injector) {
-    var SoundService = null;
+    var soundService = null;
 
     // Init SoundService
     try {
-      SoundService = $injector.get('SoundService');
+      soundService = $injector.get('SoundService');
 
       // Load sounds
-      SoundService.loadSound({
+      soundService.loadSound({
         name: 'bell',
         src: 'resources/sounds/bell.mp3'
       });
     } catch (e) {
       // SoundService throws error on construction, if WebAudio not supported. Lead to failures in unit tests (PhantomJS)
+      console.warn('[SoundManager] WebAudio is not supported');
     }
 
     // Public API
@@ -34,6 +35,10 @@ angular.module('literatorioApp')
      * @param name
      */
     function playSound(name) {
-      SoundService.getSound(name).start();
+      if (!soundService) {
+        return;
+      }
+      
+      soundService.getSound(name).start();
     }
   });
