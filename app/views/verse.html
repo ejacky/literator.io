@@ -21,13 +21,22 @@
       </div>
     </div>
 
-    <div class="controls-hint" ng-class="{show: isControlsHintVisible}" ng-show="!isFinished">
-      <p>{{ (isIOS ? 'VIEW_VERSE_CONTROLS_HINT_IOS' : 'VIEW_VERSE_CONTROLS_HINT') | translate }}</p>
+    <div class="panels" ng-show="!isFinished">
+      <div class="panel hint" ng-class="{show: isControlsHintVisible}" >
+        <p>{{ (isIOS ? 'VIEW_VERSE_CONTROLS_HINT_IOS' : 'VIEW_VERSE_CONTROLS_HINT') | translate }}</p>
+      </div>
+
+      <div class="panel skip" ng-class="{show: isSkipVerseOptionsVisible}">
+        <p>
+          <a href="" class="button" ng-click="onSkipVerseAcceptClick()">{{ 'VIEW_VERSE_SKIP_ACCEPT_BTN' | translate}}</a>
+          <a href="" class="button" ng-click="onSkipVerseDeclineClick()">{{ 'VIEW_VERSE_SKIP_DECLINE_BTN' | translate}}</a>
+        </p>
+      </div>
     </div>
 
     <div class="bottom">
       <div class="ending" ng-show="isFinished">
-        <div class="result">
+        <div class="result" ng-show="!isSkipped">
           {{ 'VIEW_VERSE_RESULT_MESSAGE' | translate }} <span class="time"><span ng-if="finishedInSeconds > 60">{{ finishedInSeconds / 60 | number: 0 }} {{ 'VIEW_VERSE_RESULT_MINUTES' | translate }}</span> {{ finishedInSeconds % 60 | number: 0 }} {{ 'VIEW_VERSE_RESULT_SECONDS' | translate }}</span>
         </div>
 

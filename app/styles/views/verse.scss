@@ -179,27 +179,49 @@
     }
   }
 
-  .controls-hint {
+  .panels {
     margin: 1em auto;
+  }
+  
+  .panel {
     height: 1px;
     max-width: 470px;
     overflow: visible;
-    pointer-events: none;
+    font-size: 1rem;
+    text-align: center;
 
+    //display: none; // not used because of content "jump"
+    pointer-events: none;
     transition: all 0.6s;
     opacity: 0;
+    
+    &.hint {
+      pointer-events: none !important;
+      
+      p {
+        background: $color-text;
+        color: $color-main-background;
+      }
+    }
+    
+    &.skip {
+      font-size: 0.9em;
+      
+      .button {
+        min-width: 240px;
+        margin-bottom: 0.4em;
+      }
+    }
 
     &.show {
+      //display: block; // not used because of content "jump"
+      pointer-events: auto;
       opacity: 0.6;
     }
 
     p {
       padding: 0.5em 1em;
       border-radius: 0.3em;
-      background: $color-text;
-      font-size: 1rem;
-      text-align: center;
-      color: $color-main-background;
     }
   }
 }

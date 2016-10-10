@@ -13,6 +13,7 @@ angular.module('literatorioApp')
 
     var maxHintsCount = 2;
     var maxCharsToComplete = 3;
+    var maxUnsolvedBlocksBeforeSkipHint = 3;
     var typingInterval = 100;
     var hintingInterval = 4000;
     var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -20,13 +21,15 @@ angular.module('literatorioApp')
     var analyticsLabel = null;
     var $ = angular.element;
     var siteContentElement = null;
-    var versePieces = null;
+    var remainingVersePieces = null;
     var narrativeTimer = null;
     var hintingTimer = null;
     var otherTimers = []; // only timeouts should be here
     var narrativeStartTime = null;
     var wasControlsHintShown = false;
     var hintsDisplayedCount = 0;
+    var unsolvedBlocks = 0;
+    var continuousUnsolvedBlocks = 0;
     var currentHint = null;
     var inputField = null;
 
@@ -55,7 +58,7 @@ angular.module('literatorioApp')
         });
       }).then(function(result) {
         analyticsLabel = verse.authorName + '/' + verse.name;
-        versePieces = verse.getPieces({});
+        remainingVersePieces = verse.getPieces({});
         siteContentElement = $('#content');
         inputField = $('.view-verse input');
 
@@ -71,11 +74,15 @@ angular.module('literatorioApp')
         $scope.inputFieldMaxLength = maxCharsToComplete + 1;
         $scope.isIOS = isIOS;
         $scope.isFinished = false;
+        $scope.isSkipped = false;
         $scope.isLeaving = false;
         $scope.isControlsHintVisible = false;
+        $scope.isSkipVerseOptionsVisible = false;
         $scope.onInputFieldKeyup = onInputFieldKeyup;
         $scope.onAnotherVerseButtonClick = onAnotherVerseButtonClick;
         $scope.onAnotherVerseOfAuthorButtonClick = onAnotherVerseOfAuthorButtonClick;
+        $scope.onSkipVerseAcceptClick = onSkipVerseAcceptClick;
+        $scope.onSkipVerseDeclineClick = onSkipVerseDeclineClick;
 
 
         // Start narrative
@@ -152,10 +159,13 @@ angular.module('literatorioApp')
      * Getting next piece of verse and displaying it based on its type
      */
     function displayNextVersePiece() {
-      var nextPiece = versePieces.shift();
+      var nextPiece = remainingVersePieces.shift();
 
-      // Exit, if no pieces left
+      // Finish verse if no pieces left
       if (!angular.isDefined(nextPiece)) {
+        stopNarrative();
+        inputField.blur();
+
         $scope.isFinished = true;
         $scope.finishedInSeconds = Math.floor((Date.now() - narrativeStartTime.getTime()) / 1000);
 
@@ -165,18 +175,17 @@ angular.module('literatorioApp')
           $rootScope.$broadcast('FooterCtrl.doShow');
         }, 8000)); // sync with animation
 
-        stopNarrative();
-        inputField.blur();
-
         // Track results
-        Analytics.trackEvent('web', 'verse-complete', analyticsLabel);
-        Analytics.trackEvent('web', 'verse-complete-seconds', analyticsLabel, $scope.finishedInSeconds);
-        Analytics.trackEvent('web', 'verse-complete-hints', analyticsLabel, hintsDisplayedCount);
+        if (!$scope.isSkipped) {
+          Analytics.trackEvent('web', 'verse-complete', analyticsLabel);
+          Analytics.trackEvent('web', 'verse-complete-seconds', analyticsLabel, $scope.finishedInSeconds);
+          Analytics.trackEvent('web', 'verse-complete-hints', analyticsLabel, hintsDisplayedCount);
+        }
         return;
       }
 
       // Need to stop narrative, if that's a block
-      if (nextPiece instanceof VerseBlock) {
+      if (!$scope.isSkipped && nextPiece instanceof VerseBlock) {
         stopNarrative();
         $scope.currentBlock = nextPiece;
 
@@ -204,6 +213,14 @@ angular.module('literatorioApp')
       // Check, if enough hints for that block
       if (!nextHintChar.length || currentHint.length >= maxHintsCount) {
         resolveCurrentBlock();
+        unsolvedBlocks++;
+        continuousUnsolvedBlocks++;
+
+        // Check if need to show skip verse options
+        if (continuousUnsolvedBlocks > 0 && continuousUnsolvedBlocks % maxUnsolvedBlocksBeforeSkipHint === 0
+          && !$scope.isControlsHintVisible) {
+          displaySkipVerseOptions();
+        }
       } else {
         currentHint += nextHintChar;
 
@@ -231,6 +248,20 @@ angular.module('literatorioApp')
     }
 
     /**
+     * Displays skip verse options
+     */
+    function displaySkipVerseOptions() {
+      $scope.isSkipVerseOptionsVisible = true;
+    }
+
+    /**
+     * Hides skip verse options
+     */
+    function hideSkipVerseOptions() {
+      $scope.isSkipVerseOptionsVisible = false;
+    }
+
+    /**
      * Hides hint about controls
      */
     function hideControlsHint() {
@@ -242,6 +273,10 @@ angular.module('literatorioApp')
      * Finishes current block and continues narrative
      */
     function resolveCurrentBlock() {
+      if (!$scope.currentBlock) {
+        return;
+      }
+      
       // Display rest of the current block
       var nextPiece = $scope.currentBlock.toString().substr(currentHint.length);
       $scope.currentBlock = null;
@@ -292,6 +327,7 @@ angular.module('literatorioApp')
         || $scope.currentBlock.match(inputField.val(), maxCharsToComplete) // for those, who will enter it fully
       ) {
         resolveCurrentBlock();
+        continuousUnsolvedBlocks = 0;
       }
 
       hideControlsHint();
@@ -346,6 +382,29 @@ angular.module('literatorioApp')
         // Redirect to new verse
         leavePageWithNewUrl(newVerse.url);
       });
+    }
+
+    /**
+     * Callback firing when user accepted to skip this verse
+     */
+    function onSkipVerseAcceptClick() {
+      Analytics.trackEvent('web', 'verse-skip-verse-accept', analyticsLabel);
+      
+      $scope.isSkipped = true;
+      hideSkipVerseOptions();
+      
+      // Speedup narrative
+      typingInterval = 30;
+      resolveCurrentBlock();
+    }
+
+    /**
+     * Callback firing when user denied to skip this verse
+     */
+    function onSkipVerseDeclineClick() {
+      Analytics.trackEvent('web', 'verse-skip-verse-decline', analyticsLabel);
+
+      $scope.isSkipVerseOptionsVisible = false;
     }
 
     /**
