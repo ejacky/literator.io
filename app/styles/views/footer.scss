@@ -1,7 +1,9 @@
 #footer {
+  position: relative;
   font-size: 0.8rem;
   text-align: center;
   overflow: hidden; // for Firefox
+  height: 2rem;
 
   transition: all 1.2s;
   opacity: 0;
@@ -21,9 +23,20 @@
     background: url("../images/common/border.png");
   }
 
-  .main-phrase {
-    margin: 0.4em 0 0.5em;
+  .phrase {
+    position: absolute;
+    width: 100%;
+    line-height: 1.84rem;
     vertical-align: middle;
+
+    animation-name: footer-slide;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-direction:alternate;
+
+    &:nth-of-type(1) {
+      animation-delay: 6s;
+    }
 
     &:hover {
       a {
@@ -71,5 +84,23 @@
 
   100% {
     transform: scale(1);
+  }
+}
+
+@keyframes footer-slide {
+  0% {
+    transform: initial;
+  }
+
+  42% {
+    transform: initial;
+  }
+
+  58% {
+    transform: translate(0, 200%);
+  }
+
+  100% {
+    transform: translate(0, 200%);
   }
 }
