@@ -36,4 +36,8 @@ angular.module('literatorioApp')
     function show() {
       $scope.isVisible = true;
     }
+    
+    function onSocialClick(snName) {
+      Analytics.trackEvent('web', 'header-social-click', snName);
+    }
   });

@@ -33,6 +33,16 @@
       opacity: 1;
     }
   }
+  
+  .social {
+    width: 30px;
+    height: 30px;
+    margin-left: 0.3em;
+    
+    svg {
+      vertical-align: middle;
+    }
+  }
 
   .spacer {
     flex: 2;

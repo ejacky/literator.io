@@ -8,7 +8,7 @@
     display: inline-block;
     width: $width;
     height: $width;
-    border: 2px solid $color-link;
+    border: 2px solid;
     border-radius: $width / 2;
 
     svg {
@@ -16,10 +16,6 @@
       margin-top: 17%;
       width: 66%;
       height: 66%;
-
-      path {
-        fill: $color-link;
-      }
     }
   }
 }
