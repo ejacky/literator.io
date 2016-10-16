@@ -542,6 +542,13 @@ module.exports = function (grunt) {
   
   grunt.registerTask('push', 'Will push changes to gh-pages', function () {
     var execSync = require('child_process').execSync;
+    
+    if (execSync('git status -s').length !== 0) {
+      execSync('git add -A');
+      execSync('git commit -m "App: push changes to gh-pages"');
+    }
+
+    execSync('git push origin');
     execSync('git subtree push --prefix dist origin gh-pages');
   });
 
