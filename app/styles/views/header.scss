@@ -35,9 +35,23 @@
   }
   
   .social {
-    width: 30px;
-    height: 30px;
-    margin-left: 0.3em;
+    @media screen and (max-width: 320px) {
+      position: relative;
+      left: 10px;
+    }
+    
+    a {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      margin-left: 0.3em;
+
+      @media screen and (max-width: 320px) {
+        display: block;
+        width: 25px;
+        height: 30px;
+      }
+    }
     
     svg {
       vertical-align: middle;

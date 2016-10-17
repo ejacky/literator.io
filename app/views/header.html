@@ -1,7 +1,9 @@
 <ul id="header" ng-controller="HeaderCtrl" ng-class="{show: isVisible}">
-  <a class="logo" href="#/" ng-class="{show: global.currentPage != 'main'}">{{ 'COMMON_APP_NAME' | translate }}</a>
-  <span class="spacer"></span>
+  <li><a class="logo" href="#/" ng-class="{show: global.currentPage != 'main'}">{{ 'COMMON_APP_NAME' | translate }}</a></li>
+  <li class="spacer"></li>
   <ng-include src="'views/countrymenu.html'"></ng-include>
-  <a class="social vk" target="_blank" href="https://vk.com/literatorio" ng-click="onSocialClick('vk')" ng-include="'images/common/share/vk.svg'" aria-label="Vkontakte"></a>
-  <a class="social fb" target="_blank" href="https://www.facebook.com/LiteratorioApp/" ng-click="onSocialClick('fb')" ng-include="'images/common/share/facebook.svg'" aria-label="Facebook"></a>
+  <li class="social">
+    <a class="vk" target="_blank" href="https://vk.com/literatorio" ng-click="onSocialClick('vk')" ng-include="'images/common/share/vk.svg'" aria-label="Vkontakte"></a>
+    <a class="fb" target="_blank" href="https://www.facebook.com/LiteratorioApp/" ng-click="onSocialClick('fb')" ng-include="'images/common/share/facebook.svg'" aria-label="Facebook"></a>
+  </li>
 </ul>
