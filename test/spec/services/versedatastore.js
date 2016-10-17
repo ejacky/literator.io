@@ -15,7 +15,8 @@ describe('Service: VerseDataStore', function () {
         "shortName": "Пушкин А. С.",
         "birthYear": 1799,
         "deathYear": 1837,
-        "wikiLink": "https://ru.wikipedia.org/wiki/%D0%9F%D1%83%D1%88%D0%BA%D0%B8%D0%BD,_%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80_%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B5%D0%B2%D0%B8%D1%87"
+        "wikiLink": "https://ru.wikipedia.org/wiki/%D0%9F%D1%83%D1%88%D0%BA%D0%B8%D0%BD,_%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80_%D0%A1%D0%B5%D1%80%D0%B3%D0%B5%D0%B5%D0%B2%D0%B8%D1%87",
+        "studiedInCountries": ["ru", "ua", "by", "kz"]
       },
 
       {
@@ -24,7 +25,8 @@ describe('Service: VerseDataStore', function () {
         "shortName": "Лермонтов М. Ю.",
         "birthYear": 1814,
         "deathYear": 1841,
-        "wikiLink": "https://ru.wikipedia.org/wiki/%D0%9B%D0%B5%D1%80%D0%BC%D0%BE%D0%BD%D1%82%D0%BE%D0%B2,_%D0%9C%D0%B8%D1%85%D0%B0%D0%B8%D0%BB_%D0%AE%D1%80%D1%8C%D0%B5%D0%B2%D0%B8%D1%87"
+        "wikiLink": "https://ru.wikipedia.org/wiki/%D0%9B%D0%B5%D1%80%D0%BC%D0%BE%D0%BD%D1%82%D0%BE%D0%B2,_%D0%9C%D0%B8%D1%85%D0%B0%D0%B8%D0%BB_%D0%AE%D1%80%D1%8C%D0%B5%D0%B2%D0%B8%D1%87",
+        "studiedInCountries": ["ru", "us"]
       }
     ],
 
@@ -70,6 +72,26 @@ describe('Service: VerseDataStore', function () {
     $httpBackend.flush();
   });
 
+  it('should return correct author list', function () {
+    VerseDataStore.getAuthorsList().then(function(authors){
+      expect(authors.length).toBe(2);
+    });
+
+    VerseDataStore.getAuthorsList('ru').then(function(authors){
+      expect(authors.length).toBe(2);
+    });
+
+    VerseDataStore.getAuthorsList('us').then(function(authors){
+      expect(authors.length).toBe(1);
+    });
+
+    VerseDataStore.getAuthorsList('zz').then(function(authors){
+      expect(authors.length).toBe(0);
+    });
+
+    $httpBackend.flush();
+  });
+
   it('should return correct author', function () {
     VerseDataStore.getAuthorByName(mockedStructure.authors[0].name).then(function(author){
       expect(author).toBeDefined('author should be defined');
@@ -83,6 +105,20 @@ describe('Service: VerseDataStore', function () {
     VerseDataStore.getRandomVerse().then(function(verse){
       expect(verse).toBeDefined('verse should be defined');
       expect(verse.title).toBeDefined('title should be defined');
+    });
+
+    VerseDataStore.getRandomVerse('kz').then(function(verse){
+      expect(verse).toBeDefined('verse for "ru" should be defined');
+      expect(verse.title).toBe(mockedStructure.verses[0].title);
+    });
+
+    VerseDataStore.getRandomVerse('us').then(function(verse){
+      expect(verse).toBeDefined('verse for "us" should be defined');
+      expect(verse.title).toBe(mockedStructure.verses[1].title);
+    });
+
+    VerseDataStore.getRandomVerse('zz').then(function(verse){
+      expect(verse).toBeNull('verse for "zz" should be null');
     });
 
     $httpBackend.flush();

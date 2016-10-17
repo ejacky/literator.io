@@ -17,6 +17,7 @@ angular.module('literatorioApp')
     // Public API
     return {
       getDataStructure: getDataStructure,
+      getAuthorsList: getAuthorsList,
       getAuthorByName: getAuthorByName,
       getRandomVerse: getRandomVerse,
       getRandomVerseForAuthor: getRandomVerseForAuthor,
@@ -25,8 +26,8 @@ angular.module('literatorioApp')
 
 
     /**
-     * Returns data structure
-     * @returns {Promise}
+     * Returns data structure (raw data)
+     * @returns {Promise<Object>}
      */
     function getDataStructure() {
       if (!promises.getDataStructure) {
@@ -43,22 +44,17 @@ angular.module('literatorioApp')
     }
 
     /**
-     * Returns list of all verses available (raw data)
-     * @returns {Promise.<Array>}
+     * Returns list of all authors available
+     * @param {String} [countryCode]
+     * @returns {Promise.<Array<VerseAuthor>>}
      */
-    function getVersesList() {
+    function getAuthorsList(countryCode) {
       return getDataStructure().then(function(data) {
-        return data.verses;
-      });
-    }
-
-    /**
-     * Returns list of all authors available (raw data)
-     * @returns {Promise.<Array>}
-     */
-    function getAuthorsList() {
-      return getDataStructure().then(function(data) {
-        return data.authors;
+        return data.authors.filter(function(item) {
+          return !countryCode || !item.studiedInCountries || item.studiedInCountries.indexOf(countryCode) !== -1;
+        }).map(function(data) {
+          return new VerseAuthor(data);
+        });
       });
     }
 
@@ -68,9 +64,9 @@ angular.module('literatorioApp')
      * @returns {Promise.<VerseAuthor|null>}
      */
     function getAuthorByName(authorName) {
-      return getAuthorsList().then(function(authors) {
-        var data = _.findWhere(authors, {name: authorName});
-        return data ? new VerseAuthor(data) : null;
+      return getDataStructure().then(function(data) {
+        var author = _.findWhere(data.authors, {name: authorName});
+        return author ? new VerseAuthor(author) : null;
       });
     }
 
@@ -78,10 +74,30 @@ angular.module('literatorioApp')
      * Returns random verse
      * @returns {Promise.<Verse|null>}
      */
-    function getRandomVerse() {
-      return getVersesList().then(function(verses) {
-        return verses && verses.length ? new Verse(_.sample(verses)) : null;
-      });
+    function getRandomVerse(countryCode) {
+      if (countryCode) {
+        var authorNames;
+
+        return getAuthorsList(countryCode).then(function(authors) {
+          // Get only names
+          authorNames = authors.map(function(author) {
+            return author.name;
+          });
+
+          return getDataStructure();
+        }).then(function(data) {
+          // Get only verses of authorNames
+          var verses = data.verses.filter(function(verse) {
+            return authorNames.indexOf(verse.authorName) !== -1;
+          });
+
+          return verses && verses.length ? new Verse(_.sample(verses)) : null;
+        });
+      } else {
+        return getDataStructure().then(function(data) {
+          return data.verses && data.verses.length ? new Verse(_.sample(data.verses)) : null;
+        });
+      }
     }
 
     /**
@@ -90,8 +106,8 @@ angular.module('literatorioApp')
      * @returns {Promise.<Verse|null>}
      */
     function getRandomVerseForAuthor(authorName) {
-      return getVersesList().then(function(verses) {
-        var verseData = _.sample(_.where(verses, {authorName: authorName}));
+      return getDataStructure().then(function(data) {
+        var verseData = _.sample(_.where(data.verses, {authorName: authorName}));
         return verseData ? new Verse(verseData) : null;
       });
     }
@@ -103,8 +119,8 @@ angular.module('literatorioApp')
      * @returns {Promise.<Verse|null>}
      */
     function getVerseByAuthorAndName(authorName, verseName) {
-      return getVersesList().then(function(verses) {
-        var verseData = _.findWhere(verses, {authorName: authorName, name: verseName});
+      return getDataStructure().then(function(data) {
+        var verseData = _.findWhere(data.verses, {authorName: authorName, name: verseName});
         return verseData ? new Verse(verseData) : null;
       });
     }

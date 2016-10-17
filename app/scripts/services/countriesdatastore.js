@@ -88,7 +88,7 @@ angular.module('literatorioApp')
     /**
      * Returns country determined by input params and special algo
      * @param {Array} languages
-     * @param {Array} countries
+     * @param {Array} [countries]
      * @returns {Object|null}
      */
     function determineCountryByLanguage(languages, countries) {
@@ -107,7 +107,7 @@ angular.module('literatorioApp')
 
           var index = lowerCaseLanguages.indexOf(languageCode);
 
-          // Check if current languageCode closer to the beginnig of the list, i.e. if country match is better
+          // Check if current languageCode closer to the beginning of the list, i.e. if country match is better
           if (index !== -1 && (currentMinimum === null || (index / country.languageCodes.length) < currentMinimum)) {
             currentMinimum = (index / country.languageCodes.length);
             detectedCountry = country;
