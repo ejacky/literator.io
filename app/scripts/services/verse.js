@@ -57,7 +57,7 @@ angular.module('literatorioApp')
 
       /**
        * Returns content divided into pieces to display it later
-       * @param options
+       * @param [options]
        * @returns {Array}
        */
       getPieces: function(options) {
@@ -65,7 +65,7 @@ angular.module('literatorioApp')
 
         options = angular.extend({
           difficulty: 'easy',
-        }, options);
+        }, options || {});
 
         // Get normalized content
         var contentArray = self.normalizeStringToDifficulty(self.content, options.difficulty).split('');

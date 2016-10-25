@@ -9,7 +9,7 @@
  */
 angular.module('literatorioApp')
   .controller('VerseCtrl', function ($q, $rootScope, $scope, $location, $routeParams, $timeout, $interval, 
-                                     $translate, VerseDataStore, VerseBlock, SoundManager, Analytics) {
+                                     $translate, VerseDataStore, VerseBlock, SoundManager, CountriesDataStore, Analytics) {
 
     var maxHintsCount = 2;
     var maxCharsToComplete = 3;
@@ -30,6 +30,7 @@ angular.module('literatorioApp')
     var hintsDisplayedCount = 0;
     var unsolvedBlocks = 0;
     var continuousUnsolvedBlocks = 0;
+    var totalBlocksCount = 0;
     var currentHint = null;
     var inputField = null;
 
@@ -58,7 +59,7 @@ angular.module('literatorioApp')
         });
       }).then(function(result) {
         analyticsLabel = verse.authorName + '/' + verse.name;
-        remainingVersePieces = verse.getPieces({});
+        remainingVersePieces = verse.getPieces();
         siteContentElement = $('#content');
         inputField = $('.view-verse input');
 
@@ -167,19 +168,42 @@ angular.module('literatorioApp')
         inputField.blur();
 
         $scope.isFinished = true;
-        $scope.finishedInSeconds = Math.floor((Date.now() - narrativeStartTime.getTime()) / 1000);
+        $scope.resultSeconds = Math.floor((Date.now() - narrativeStartTime.getTime()) / 1000);
+        $scope.resultPercents = Math.ceil((totalBlocksCount - unsolvedBlocks) / (totalBlocksCount + 0.01) * 100);
+        $scope.resultPercentsAnimated = 0;
+        $scope.resultMark = CountriesDataStore.getMarkForPercents($scope.resultPercents);
 
-        // Show header and footer
         otherTimers.push($timeout(function(){
+          $scope.isBottomVisible = true;
+
           $rootScope.$broadcast('HeaderCtrl.doShow');
           $rootScope.$broadcast('FooterCtrl.doShow');
-        }, 8000)); // sync with animation
+
+          otherTimers.push($timeout(function(){
+            scrollTo('.view-verse .bottom');
+          }, 50));
+        }, 6000)); // sync with animation
+
+        otherTimers.push($timeout(function(){
+          $scope.resultPercentsAnimated = 0;
+
+          // Animate percents counter
+          var timer = $interval(function() {
+            $scope.resultPercentsAnimated += 1;
+            if ($scope.resultPercentsAnimated >= $scope.resultPercents) {
+              $interval.cancel(timer);
+              $scope.isMarkVisible = true;
+            }
+          }, 30);
+          otherTimers.push(timer);
+        }, 6500)); // sync with animation
 
         // Track results
         if (!$scope.isSkipped) {
           Analytics.trackEvent('web', 'verse-complete', analyticsLabel);
-          Analytics.trackEvent('web', 'verse-complete-seconds', analyticsLabel, $scope.finishedInSeconds);
-          Analytics.trackEvent('web', 'verse-complete-hints', analyticsLabel, hintsDisplayedCount);
+          Analytics.trackEvent('web', 'verse-complete-percents', analyticsLabel, $scope.resultPercents);
+          Analytics.trackEvent('web', 'verse-complete-mark-' + $scope.resultMark, analyticsLabel);
+          Analytics.trackEvent('web', 'verse-complete-seconds', analyticsLabel, $scope.resultSeconds);
         }
         return;
       }
@@ -188,15 +212,16 @@ angular.module('literatorioApp')
       if (!$scope.isSkipped && nextPiece instanceof VerseBlock) {
         stopNarrative();
         $scope.currentBlock = nextPiece;
+        totalBlocksCount++;
 
         // Focus to input field
         $timeout(function() {
-          inputField.focus(); // not working in Mobile Safari. Maybe somebody know some WORKING method?
+          inputField.focus(); // not working in Mobile Safari. Maybe somebody know some WORKING solution?
         }, 100);
         inputField.val('');
 
         startHinting();
-        scrollToInputField();
+        scrollTo(inputField);
         displayControlsHintOnce();
       } else {
         // Display that piece
@@ -290,11 +315,18 @@ angular.module('literatorioApp')
     }
 
     /**
-     * Scrolls to input field
+     * Scrolls to selector
+     * @param selector
+     * @param duration
      */
-    function scrollToInputField() {
-      var newScrollTop = inputField.offset().top - window.innerHeight / (isIOS ? 4 : 2);
-      $('html, body').animate({scrollTop: newScrollTop});
+    function scrollTo(selector, duration) {
+      var el = $(selector);
+      if (!el.size()) {
+        return;
+      }
+      
+      var newScrollTop = Math.max(0, el.offset().top - window.innerHeight / (isIOS ? 4 : 2));
+      $('html, body').animate({scrollTop: newScrollTop}, duration || 300);
     }
 
     /**
@@ -303,7 +335,7 @@ angular.module('literatorioApp')
      */
     function leavePageWithNewUrl(url) {
       $scope.isLeaving = true;
-      $('html, body').animate({scrollTop: 0}, 1200);
+      scrollTo('body', 1200);
 
       $rootScope.$broadcast('HeaderCtrl.doHide');
       $rootScope.$broadcast('FooterCtrl.doHide');
@@ -419,6 +451,7 @@ angular.module('literatorioApp')
       stopNarrative();
       otherTimers.forEach(function(timer) {
         $timeout.cancel(timer);
+        $interval.cancel(timer); // they're in same array
       });
 
       if (!$scope.isFinished) {

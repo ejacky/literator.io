@@ -12,9 +12,33 @@ angular.module('literatorioApp')
 
     var localStorageCurrentCountryCodeKey = 'CountriesDataStore.currentCountryCode';
     var availableCountries = [
-      {countryCode: 'ru', title: 'Россия', languageCodes: ['ru', 'ru-RU'], language: 'ru'},
-      {countryCode: 'us', title: 'USA', languageCodes: ['us', 'en-US', 'en'], language: 'en'},
-      {countryCode: 'ie', title: 'Ireland', languageCodes: ['ie', 'en-IE', 'ga-IE', 'gd-IE', 'ga', 'en-GB', 'en'], language: 'en'}
+      {
+        countryCode: 'ru',
+        title: 'Россия',
+        languageCodes: ['ru', 'ru-RU'],
+        language: 'ru',
+        percentsToMark: function (val) {
+          return val < 50 ? '3' : (val < 60 ? '4-' : (val < 70 ? '4' : (val < 80 ? '4+' : (val < 90 ? '5-' : (val < 99 ? '5' : '5+')))));
+        }
+      },
+      {
+        countryCode: 'us',
+        title: 'USA',
+        languageCodes: ['us', 'en-US', 'en'],
+        language: 'en',
+        percentsToMark: function (val) {
+          return val < 50 ? 'D' : (val < 60 ? 'C' : (val < 70 ? 'B-' : (val < 80 ? 'B' : (val < 90 ? 'A-' : (val < 99 ? 'A' : 'A+')))));
+        }
+      },
+      {
+        countryCode: 'ie',
+        title: 'Ireland',
+        languageCodes: ['ie', 'en-IE', 'ga-IE', 'gd-IE', 'ga', 'en-GB', 'en'],
+        language: 'en',
+        percentsToMark: function (val) {
+          return val < 50 ? 'D' : (val < 60 ? 'C' : (val < 70 ? 'B-' : (val < 80 ? 'B' : (val < 90 ? 'A-' : (val < 99 ? 'A' : 'A+')))));
+        }
+      }
     ];
     var fallbackCountryCode = 'ru';
     var currentCountry = null;
@@ -27,6 +51,7 @@ angular.module('literatorioApp')
       getCountryByCode: getCountryByCode,
       getCurrentCountry: getCurrentCountry,
       setCurrentCountry: setCurrentCountry,
+      getMarkForPercents: getMarkForPercents,
       determineCountryByLanguage: determineCountryByLanguage
     };
 
@@ -116,5 +141,23 @@ angular.module('literatorioApp')
       });
 
       return detectedCountry;
+    }
+
+    /**
+     * Returns localized mark for percents result
+     * @param {number} percents
+     * @param {Object} [country]
+     * @returns {string}
+     */
+    function getMarkForPercents(percents, country) {
+      if (!country) {
+        country = getCurrentCountry();
+      }
+      
+      if (!country.percentsToMark) {
+        return null;
+      }
+
+      return country.percentsToMark(percents);
     }
   });

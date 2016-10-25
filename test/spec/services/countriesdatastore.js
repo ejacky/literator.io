@@ -66,4 +66,14 @@ describe('Service: CountriesDataStore', function () {
     expect(detectedCountry).toBeDefined();
     expect(detectedCountry.countryCode).toBe(allCountries[2].countryCode);
   });
+
+  it('should return proper mark for percents', function () {
+    var country = CountriesDataStore.getCountryByCode('ru');
+
+    expect(CountriesDataStore.getMarkForPercents(100, country)).toBe('5+');
+    expect(CountriesDataStore.getMarkForPercents(45, country)).toBe('3');
+    expect(CountriesDataStore.getMarkForPercents(79, country)).toBe('4+');
+    expect(CountriesDataStore.getMarkForPercents(95, country)).toBe('5');
+  });
+  
 });

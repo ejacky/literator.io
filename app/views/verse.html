@@ -35,12 +35,24 @@
     </div>
 
     <div class="bottom">
-      <div class="ending" ng-show="isFinished">
+      <div class="ending" ng-if="isBottomVisible">
         <div class="result" ng-show="!isSkipped">
-          {{ 'VIEW_VERSE_RESULT_MESSAGE' | translate }} <span class="time"><span ng-if="finishedInSeconds > 60">{{ finishedInSeconds / 60 | number: 0 }} {{ 'VIEW_VERSE_RESULT_MINUTES' | translate }}</span> {{ finishedInSeconds % 60 | number: 0 }} {{ 'VIEW_VERSE_RESULT_SECONDS' | translate }}</span>
+          <div class="result-text">
+            <div class="line-1">{{ 'VIEW_VERSE_RESULT_LINE_1' | translate }}</div>
+            <div class="line-2">{{ resultPercentsAnimated }}%</div>
+            <div class="line-3">{{ 'VIEW_VERSE_RESULT_LINE_3' | translate }} <span ng-if="resultSeconds > 60">{{ resultSeconds / 60 | number: 0 }} {{ 'VIEW_VERSE_RESULT_MINUTES' | translate }}</span> {{ resultSeconds % 60 | number: 0 }} {{ 'VIEW_VERSE_RESULT_SECONDS' | translate }}</div>
+          </div>
+          <div class="result-visual" ng-class="{'show-mark': isMarkVisible}">
+            <div class="empty"></div>
+            <div class="filled" ng-style="{height: resultPercentsAnimated + '%'}">
+              <div class="filler"></div>
+            </div>
+            <div class="mark" ng-class="{'high': resultPercents > 70}">{{ ::resultMark }}</div>
+          </div>
         </div>
-
-        <ng-include src="'views/share.html'" ng-if="verse.title" ng-controller="ShareCtrl" ng-init='shareTitle = ("VIEW_VERSE_SHARE_TITLE_PRE" | translate) + " \"" + verse.title + "\" (" + author.shortName + ")"'></ng-include>
+        
+        <h3 class="share-title" ng-show="resultPercents > 60">{{ 'VIEW_VERSE_SHARE_MARK_TITLE' | translate }}</h3>
+        <ng-include src="'views/share.html'" ng-if="verse.title" ng-controller="ShareCtrl" ng-init='shareTitle = (resultPercents > 60 ? (("VIEW_VERSE_SHARE_MARK_PRE" | translate) + " " + resultMark + ". ") : "") + ("VIEW_VERSE_SHARE_TITLE_PRE" | translate) + " \"" + verse.title + "\" (" + author.shortName + ")"'></ng-include>
 
         <div class="buttons">
           <div><a href="" class="button another-verse" ng-click="onAnotherVerseButtonClick()">{{ 'VIEW_VERSE_ANOTHER_VERSE_BTN' | translate }}</a></div>
