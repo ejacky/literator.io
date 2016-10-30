@@ -1,0 +1,60 @@
+.view-catalog {
+  width: 90%;
+  max-width: 1108px;
+  margin: 0 auto 2em;
+  text-align: center;
+
+  &.leaving {
+    animation-duration: 1.2s;
+    animation-fill-mode: forwards;
+    animation-name: fade-out;
+  }
+
+  h3, h4 {
+    margin: 1.2em 0 0.3em;
+    font-size: 1.4em;
+  }
+
+  p {
+    margin: 0.6em 0;
+  }
+  
+  .list {
+    text-align: left;
+    display: flex;
+    flex-flow: row wrap;
+    
+    h4 {
+      font-size: 1.2em;
+    }
+    
+    ul {
+      padding-left: 2em;
+      list-style: disc;
+    }
+    
+    li {
+      margin: 0.2em 0;
+      
+      .description {
+      }
+    }
+    
+    .item {
+      min-width: 280px;
+      width: 50%;
+      
+      .author {
+        img {
+          margin-left: 0.2em;
+          height: 0.8em;
+        }
+      }
+    }
+  }
+  
+  .bottom {
+    margin-top: 3em;
+    text-align: center;
+  }
+}

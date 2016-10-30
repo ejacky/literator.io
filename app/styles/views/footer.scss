@@ -30,12 +30,12 @@
     vertical-align: middle;
 
     animation-name: footer-slide;
-    animation-duration: 6s;
+    animation-duration: 5s;
     animation-iteration-count: infinite;
     animation-direction:alternate;
 
     &:nth-of-type(1) {
-      animation-delay: 6s;
+      animation-delay: -5s;
     }
 
     &:hover {

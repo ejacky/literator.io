@@ -48,6 +48,11 @@ angular
         controller: 'VerseCtrl',
         controllerAs: 'verse'
       })
+      .when('/catalog', {
+        templateUrl: 'views/catalog.html',
+        controller: 'CatalogCtrl',
+        controllerAs: 'catalog'
+      })
       .otherwise({
         redirectTo: '/'
       });

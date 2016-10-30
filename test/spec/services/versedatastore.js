@@ -124,6 +124,18 @@ describe('Service: VerseDataStore', function () {
     $httpBackend.flush();
   });
 
+  it('should return verses for author passed', function () {
+    VerseDataStore.getVersesForAuthor('pushkin-a-s').then(function(verses) {
+      expect(verses.length).toBe(1)
+    });
+
+    VerseDataStore.getVersesForAuthor('lermontov-m-yu').then(function(verses) {
+      expect(verses.length).toBe(1)
+    });
+
+    $httpBackend.flush();
+  });
+
   it('should return random verse for author passed', function () {
     VerseDataStore.getRandomVerseForAuthor('pushkin-a-s').then(function(verse){
       expect(verse).toBeDefined('verse should be defined');

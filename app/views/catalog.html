@@ -1,0 +1,14 @@
+<div class="view-catalog" ng-class="{leaving: isLeaving}">
+  <h3 class="title">{{ 'VIEW_CATALOG_TITLE' | translate }}</h3>
+  <div class="list">
+    <div class="item" ng-repeat="author in ::authors | filter: authorsFilter | orderBy: 'shortName.substring(0,1)'">
+      <h4 class="author">{{ ::author.shortName }} <a ng-href="{{ ::author.wikiLink }}" ng-show="::author.wikiLink" target="_blank" title="Wiki"><img src="images/common/ext_link_icon.svg" /></a></h4>
+      <ul>
+        <li ng-repeat="verse in ::author.verses"><a ng-href="#{{ ::verse.url }}" ng-click="onVerseLinkClick($event, verse)">{{ ::verse.title }}<span ng-if="verse.title.length < 6 && verse.description" class="description"> / {{ ::verse.description }}</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="bottom">
+    <a href="" class="button" ng-click="onRandomVerseButtonClick()">{{ 'VIEW_CATALOG_RANDOM_VERSE_BTN' | translate }}</a>
+  </div>
+</div>

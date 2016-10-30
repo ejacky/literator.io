@@ -8,13 +8,27 @@ describe('Service: VerseAuthor', function () {
   var VerseAuthor;
   var verseAuthor = null;
   var mockData = {
-    'id': 'pushkin_a_s',
+    'name': 'pushkin_a_s',
     'fullName': 'Пушкин Александр Сергеевич',
     'shortName': 'Пушкин А. С.'
   };
 
+  // Mock services
+  beforeEach(inject(function($q, VerseDataStore, Verse) {
+    spyOn(VerseDataStore, 'getVersesForAuthor').and.callFake(function(name) {
+      if (name === 'pushkin_a_s') {
+        return $q.resolve([
+          new Verse({}),
+          new Verse({})
+        ]);
+      }
+
+      return $q.resolve([]);
+    });
+  }));
+
   // instantiate service
-  beforeEach(inject(function (_VerseAuthor_) {
+  beforeEach(inject(function(_VerseAuthor_) {
     VerseAuthor = _VerseAuthor_;
   }));
 
@@ -30,4 +44,10 @@ describe('Service: VerseAuthor', function () {
     expect(verseAuthor.shortName).toBe(mockData.shortName);
   });
 
+  // This test doesn't work properly, dunno why
+  xit('should return verses', function() {
+    verseAuthor.getVerses().then(function(verses) {
+      expect(verses.length).toBe(3); // should fail!
+    });
+  });
 });
