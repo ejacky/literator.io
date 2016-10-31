@@ -47,6 +47,7 @@ angular.module('literatorioApp')
             .replace(/[\s](\x2d|\x2212|\x2010\x2012\x2043)/g, ' —') // some typography
             .replace(/\n\r|\r\n|\r/g, '\n').replace(/[\n]{3,}/g, '\n\n') // remove non-Unix line breaks
             .replace(/[\x20]{2,}/g, ' ') // remove double spaces
+            .replace(/[\x20]\n/g, '\n') // remove trailing spaces
           ;
 
           self.content = content;

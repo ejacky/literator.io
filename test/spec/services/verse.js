@@ -98,6 +98,16 @@ describe('Service: Verse', function () {
     $httpBackend.flush();
   });
 
+  it('should cleanup from trailing spaces', function () {
+    $httpBackend.expectGET(verse.path + '/content.txt').respond('content \ncontent \ncontent\ncontent content');
+
+    verse.loadContent().then(function(){
+      expect(verse.content).toBe('content\ncontent\ncontent\ncontent content');
+    });
+
+    $httpBackend.flush();
+  });
+
   it('should properly normalize string to easy difficulty', function () {
     expect(verse.normalizeStringToDifficulty('The quick brown fox {jumps over the {lazy dog}}', Verse.prototype.DIFFICULTY_EASY)).toBe('The quick brown fox jumps over the {lazy dog}');
 
