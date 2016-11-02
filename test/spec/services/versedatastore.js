@@ -40,10 +40,20 @@ describe('Service: VerseDataStore', function () {
       },
 
       {
+        "name": "u-lukomorya-dub-zelyonyj-2",
+        "title": "У лукоморья дуб зелёный 2",
+        "description": "Из поэмы \"Руслан и Людмила\"",
+        "path": "/resources/verses/pushkin_a_s/u-lukomorya-dub-zelyonyj",
+        "authorName": "pushkin-a-s",
+        "isWellKnown": true
+      },
+
+      {
         "name": "parus",
         "title": "Парус",
         "year": 1832,
-        "authorName": "lermontov-m-yu"
+        "authorName": "lermontov-m-yu",
+        "isWellKnown": true
       }
     ]
   };
@@ -108,13 +118,18 @@ describe('Service: VerseDataStore', function () {
     });
 
     VerseDataStore.getRandomVerse('kz').then(function(verse){
-      expect(verse).toBeDefined('verse for "ru" should be defined');
-      expect(verse.title).toBe(mockedStructure.verses[0].title);
+      expect(verse).toBeDefined('verse for "kz" should be defined');
+      expect(verse.title).toBe(mockedStructure.verses[1].title);
+    });
+
+    VerseDataStore.getRandomVerse('kz').then(function(verse){
+      expect(verse).toBeDefined('verse for "kz" should be defined 2');
+      expect(verse.title).toBe(mockedStructure.verses[1].title);
     });
 
     VerseDataStore.getRandomVerse('us').then(function(verse){
       expect(verse).toBeDefined('verse for "us" should be defined');
-      expect(verse.title).toBe(mockedStructure.verses[1].title);
+      expect(verse.title).toBe(mockedStructure.verses[2].title);
     });
 
     VerseDataStore.getRandomVerse('zz').then(function(verse){
@@ -126,7 +141,7 @@ describe('Service: VerseDataStore', function () {
 
   it('should return verses for author passed', function () {
     VerseDataStore.getVersesForAuthor('pushkin-a-s').then(function(verses) {
-      expect(verses.length).toBe(1)
+      expect(verses.length).toBe(2)
     });
 
     VerseDataStore.getVersesForAuthor('lermontov-m-yu').then(function(verses) {

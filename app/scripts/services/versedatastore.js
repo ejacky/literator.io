@@ -72,14 +72,16 @@ angular.module('literatorioApp')
     }
 
     /**
-     * Returns random verse
+     * Returns random verse. It will choose only from "well known" verses (isWellKnown flag). 
      * @returns {Promise.<Verse|null>}
      */
     function getRandomVerse(countryCode) {
+      var promise = null;
+      
       if (countryCode) {
         var authorNames;
 
-        return getAuthorsList(countryCode).then(function(authors) {
+        promise = getAuthorsList(countryCode).then(function(authors) {
           // Get only names
           authorNames = authors.map(function(author) {
             return author.name;
@@ -88,17 +90,24 @@ angular.module('literatorioApp')
           return getDataStructure();
         }).then(function(data) {
           // Get only verses of authorNames
-          var verses = data.verses.filter(function(verse) {
+          return data.verses.filter(function(verse) {
             return authorNames.indexOf(verse.authorName) !== -1;
           });
-
-          return verses && verses.length ? new Verse(_.sample(verses)) : null;
         });
       } else {
-        return getDataStructure().then(function(data) {
-          return data.verses && data.verses.length ? new Verse(_.sample(data.verses)) : null;
+        promise = getDataStructure().then(function(data) {
+          return data.verses;
         });
       }
+
+      return promise.then(function(verses) {
+        // Get only "well known" verses
+        verses = verses.filter(function(verse) {
+          return verse.isWellKnown;
+        });
+        
+        return verses.length ? new Verse(_.sample(verses)) : null;
+      });
     }
 
     /**
