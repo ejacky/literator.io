@@ -50,7 +50,12 @@
     }
     
     .other {
-      display: none; // TODO: uncomment later (CARD-87)
+      opacity: 0;
+      
+      animation-duration: 1s;
+      animation-delay: 3s;
+      animation-fill-mode: forwards;
+      animation-name: fade-in;
     }
   }
 }

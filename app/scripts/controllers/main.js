@@ -8,7 +8,8 @@
  * Controller of the literatorioApp
  */
 angular.module('literatorioApp')
-  .controller('MainCtrl', function ($rootScope, $scope, $location, $timeout, $translate, VerseDataStore, Analytics) {
+  .controller('MainCtrl', function ($rootScope, $scope, $location, $timeout, $translate, VerseDataStore, 
+                                    CountriesDataStore, Analytics) {
 
     var otherTimers = [];
     
@@ -19,16 +20,20 @@ angular.module('literatorioApp')
      * Initializes controller
      */
     function init() {
+      var currentCountry = CountriesDataStore.getCurrentCountry();
+      
       // Set page title
       $translate('COMMON_APP_NAME').then(function(translation) {
         $rootScope.global.pageTitle = translation;
       });
 
       // Populate scope
+      $scope.isCatalogEnabled = currentCountry ? currentCountry.isCatalogEnabled : false;
       $scope.isLeaving = false;
       $scope.onStartButtonClick = onStartButtonClick;
 
       // Add event listeners
+      $scope.$on('CountriesDataStore.countryChange', onCountryChange);
       $scope.$on('$destroy', onDestroy);
 
       // Show header and footer
@@ -66,6 +71,15 @@ angular.module('literatorioApp')
       $rootScope.$broadcast('HeaderCtrl.doHide');
       $rootScope.$broadcast('FooterCtrl.doHide');
       $rootScope.$broadcast('GitHubRibbonCtrl.doHide');
+    }
+
+    /**
+     * Callback firing on country change
+     * @param event
+     * @param data
+     */
+    function onCountryChange(event, data) {
+      $scope.isCatalogEnabled = data.country.isCatalogEnabled;
     }
 
     /**

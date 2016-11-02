@@ -17,6 +17,7 @@ angular.module('literatorioApp')
         title: 'Россия',
         languageCodes: ['ru', 'ru-RU'],
         language: 'ru',
+        isCatalogEnabled: false, // need to enable later (CARD-93)
         percentsToMark: function (val) {
           return val < 50 ? '3' : (val < 60 ? '4-' : (val < 70 ? '4' : (val < 80 ? '4+' : (val < 90 ? '5-' : (val < 99 ? '5' : '5+')))));
         }
@@ -26,6 +27,7 @@ angular.module('literatorioApp')
         title: 'USA',
         languageCodes: ['us', 'en-US', 'en'],
         language: 'en',
+        isCatalogEnabled: false,
         percentsToMark: function (val) {
           return val < 50 ? 'D' : (val < 60 ? 'C' : (val < 70 ? 'B-' : (val < 80 ? 'B' : (val < 90 ? 'A-' : (val < 99 ? 'A' : 'A+')))));
         }
@@ -35,6 +37,7 @@ angular.module('literatorioApp')
         title: 'Ireland',
         languageCodes: ['ie', 'en-IE', 'ga-IE', 'gd-IE', 'ga', 'en-GB', 'en'],
         language: 'en',
+        isCatalogEnabled: false,
         percentsToMark: function (val) {
           return val < 50 ? 'D' : (val < 60 ? 'C' : (val < 70 ? 'B-' : (val < 80 ? 'B' : (val < 90 ? 'A-' : (val < 99 ? 'A' : 'A+')))));
         }
@@ -108,6 +111,7 @@ angular.module('literatorioApp')
       } catch (e) {}
 
       $rootScope.global.currentLang = country.language;
+      $rootScope.$broadcast('CountriesDataStore.countryChange', {country: country});
     }
 
     /**
