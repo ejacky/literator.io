@@ -552,6 +552,12 @@ module.exports = function (grunt) {
     execSync('git subtree push --prefix dist origin gh-pages');
   });
 
+  grunt.registerTask('verses', 'Updating verses structure', function () {
+    var execSync = require('child_process').execSync;
+
+    execSync('node app/resources/verses/packager.js', {stdio: 'inherit'});
+  });
+
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
