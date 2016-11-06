@@ -76,12 +76,12 @@
       //display: inline-block;
       white-space: pre-line;
       opacity: 0;
-      transform: translate(1.5em, 0) scale(1.8);
+      //transform: translate(1.5em, 0) scale(1.8);
       //transform: translate(0, 1.5em) scale(1.8);
 
       animation-duration: 0.5s;
       animation-fill-mode: forwards;
-      animation-name: fade-in, reset-transform;
+      animation-name: fade-in/*, reset-transform*/;
     }
 
     input {
