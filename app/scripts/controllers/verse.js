@@ -428,6 +428,8 @@ angular.module('literatorioApp')
       // Speedup narrative
       typingInterval = 30;
       resolveCurrentBlock();
+      stopNarrative();
+      continueNarrative();
     }
 
     /**
