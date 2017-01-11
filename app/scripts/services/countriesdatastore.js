@@ -17,7 +17,7 @@ angular.module('literatorioApp')
         title: 'Россия',
         languageCodes: ['ru', 'ru-RU'],
         language: 'ru',
-        isCatalogEnabled: false, // need to enable later (CARD-93)
+        isCatalogEnabled: true, // need to enable later (CARD-93)
         percentsToMark: function (val) {
           return val < 50 ? '3' : (val < 60 ? '4-' : (val < 70 ? '4' : (val < 80 ? '4+' : (val < 90 ? '5-' : (val < 99 ? '5' : '5+')))));
         }

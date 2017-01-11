@@ -5,9 +5,18 @@
     </a>
   </div>
   <div class="menu">
-    <a href="" class="button start" ng-click="onStartButtonClick()">{{ 'VIEW_MAIN_START_BTN' | translate }}</a>
-    <p class="other" ng-show="isCatalogEnabled">
-      <a href="#/catalog">{{ 'VIEW_MAIN_VERSES_LIST' | translate }}</a>
+    <div>
+      <a href="" class="button start" ng-click="onStartButtonClick()">{{ 'VIEW_MAIN_START_BTN' | translate }}</a>
+    </div>
+    <div class="other">
+      <div class="monogram">
+        <img src="images/common/mono-narrow.svg" />
+      </div>
+      <p ng-show="isCatalogEnabled">
+        <a href="#/catalog">{{ 'VIEW_MAIN_VERSES_LIST' | translate }}</a>
+      </p>
+    </div>
+  </div>
     </p>
   </div>
 </div>

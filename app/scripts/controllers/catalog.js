@@ -18,8 +18,11 @@ angular.module('literatorioApp')
      */
     function init() {
       Analytics.trackEvent('web', 'catalog-init');
-      
-      $rootScope.global.pageTitle = $translate.instant('VIEW_CATALOG_TITLE') + ' | ' + $translate.instant('COMMON_APP_NAME');
+
+      // Set page title
+      $translate().then(function() {
+        $rootScope.global.pageTitle = $translate.instant('VIEW_CATALOG_TITLE') + ' | ' + $translate.instant('COMMON_APP_NAME');
+      });
 
       // Load data
       VerseDataStore.getAuthorsList(CountriesDataStore.getCurrentCountry().countryCode)
