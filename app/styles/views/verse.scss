@@ -66,14 +66,14 @@
     }
 
     .width-spacer {
-      white-space: pre;
+      white-space: pre-wrap;
       height: 1px;
       visibility: hidden;
       overflow: hidden;
     }
     
     .pieces {
-      white-space: pre;
+      white-space: pre-wrap;
     }
 
     span {
