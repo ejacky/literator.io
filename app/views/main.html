@@ -9,7 +9,7 @@
       <a href="" class="button start" ng-click="onStartButtonClick()">{{ 'VIEW_MAIN_START_BTN' | translate }}</a>
     </div>
     <div class="other">
-      <div class="monogram">
+      <div class="monogram" ng-show="isCatalogEnabled">
         <img src="images/common/mono-narrow.svg" />
       </div>
       <p ng-show="isCatalogEnabled">
