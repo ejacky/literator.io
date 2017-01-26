@@ -81,5 +81,46 @@
     animation-delay: 3s;
     animation-fill-mode: forwards;
     animation-name: fade-in;
+    
+    .view-share {
+      position: absolute;
+      top: -0.9rem;
+      left: 50%;
+      transform: translateX(-50%);
+
+      @media screen and (max-width: 760px) {
+        top: -3rem;
+      }
+
+      transition: opacity 0.5s;
+      opacity: 0;
+      pointer-events: none;
+      
+      a {
+        $width: 2em;
+        width: $width;
+        height: $width;
+        border-radius: $width / 2;
+      }
+    }
+    
+    .share-link {
+      transition: opacity 0.5s;
+      opacity: 1;
+    }
+
+    &.share-show {
+      .view-share {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .share-link {
+        @media screen and (min-width: 760px) {
+          opacity: 0;
+          pointer-events: none;
+        }
+      }
+    }
   }
 }

@@ -17,6 +17,17 @@
       </p>
     </div>
   </div>
-    </p>
+  <div class="bottom" ng-class="{'share-show': isSharePanelShown}">
+    <div>
+      &nbsp;&nbsp;&nbsp; {{ 'VIEW_MAIN_WE_IN' | translate }}
+      <a class="vk" target="_blank" href="https://vk.com/literatorio" ng-click="onSocialClick('vk')">VK</a> /
+      <a class="fb" target="_blank" href="https://www.facebook.com/LiteratorioApp/" ng-click="onSocialClick('fb')">Facebook</a>
+      &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+      <a href="" ng-click="onShareClick()" class="share-link">{{ 'VIEW_MAIN_SHARE' | translate }}</a>
+      &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+      <a href="#/support">{{ 'VIEW_MAIN_SUPPORT_PROJECT' | translate }}</a>
+      &nbsp;&nbsp;&nbsp;
+    </div>
+    <ng-include src="'views/share.html'" ng-controller="ShareCtrl" ng-init='shareTitle = ("VIEW_MAIN_SHARE_TITLE" | translate)'></ng-include>
   </div>
 </div>

@@ -8,7 +8,7 @@
  * Controller of the literatorioApp
  */
 angular.module('literatorioApp')
-  .controller('HeaderCtrl', function ($scope, Analytics) {
+  .controller('HeaderCtrl', function ($scope) {
 
     init();
 
@@ -18,7 +18,6 @@ angular.module('literatorioApp')
      */
     function init() {
       $scope.isVisible = false;
-      $scope.onSocialClick = onSocialClick;
 
       $scope.$on('HeaderCtrl.doShow', show);
       $scope.$on('HeaderCtrl.doHide', hide);
@@ -36,9 +35,5 @@ angular.module('literatorioApp')
      */
     function show() {
       $scope.isVisible = true;
-    }
-    
-    function onSocialClick(snName) {
-      Analytics.trackEvent('web', 'header-social-click', snName);
     }
   });

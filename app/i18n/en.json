@@ -3,6 +3,10 @@
 
   "VIEW_MAIN_START_BTN": "Start",
   "VIEW_MAIN_VERSES_LIST": "List of poems",
+  "VIEW_MAIN_WE_IN": "Follow in",
+  "VIEW_MAIN_SUPPORT_PROJECT": "Support the project",
+  "VIEW_MAIN_SHARE": "Share",
+  "VIEW_MAIN_SHARE_TITLE": "Literator.io — let's remember favorite poems together!",
 
   "VIEW_VERSE_SHORT_YEAR": "",
   "VIEW_VERSE_RESULT_LINE_1": "You remembered",
@@ -31,7 +35,7 @@
   "VIEW_ABOUT_VERSES_HOW_TO_ADD": "Didn't find your favorite poem? You could add it",
   "VIEW_ABOUT_VERSES_HOW_TO_ADD_LINK": "here.",
   "VIEW_ABOUT_CONTACTS_TITLE": "Questions and suggestions",
-  "VIEW_ABOUT_SOCIAL_TITLE": "Follow us in social networks",
+  "VIEW_ABOUT_SOCIAL_TITLE": "Follow us for updates",
 
   "VIEW_CATALOG_TITLE": "List of poems",
   "VIEW_CATALOG_RANDOM_VERSE_BTN": "Random poem",

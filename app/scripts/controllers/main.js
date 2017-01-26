@@ -31,6 +31,8 @@ angular.module('literatorioApp')
       $scope.isCatalogEnabled = currentCountry ? currentCountry.isCatalogEnabled : false;
       $scope.isLeaving = false;
       $scope.onStartButtonClick = onStartButtonClick;
+      $scope.onShareClick = onShareClick;
+      $scope.onSocialClick = onSocialClick;
 
       // Add event listeners
       $scope.$on('CountriesDataStore.countryChange', onCountryChange);
@@ -80,6 +82,23 @@ angular.module('literatorioApp')
      */
     function onCountryChange(event, data) {
       $scope.isCatalogEnabled = data.country.isCatalogEnabled;
+    }
+
+    /**
+     * Callback firing on "Share" link click
+     */
+    function onShareClick() {
+      Analytics.trackEvent('web', 'main-share-click');
+      
+      $scope.isSharePanelShown = !$scope.isSharePanelShown;
+    }
+
+    /**
+     * Callback firing on social link click
+     * @param snName
+     */
+    function onSocialClick(snName) {
+      Analytics.trackEvent('web', 'main-social-click', snName);
     }
 
     /**
