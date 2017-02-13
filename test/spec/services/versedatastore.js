@@ -141,11 +141,11 @@ describe('Service: VerseDataStore', function () {
 
   it('should return verses for author passed', function () {
     VerseDataStore.getVersesForAuthor('pushkin-a-s').then(function(verses) {
-      expect(verses.length).toBe(2)
+      expect(verses.length).toBe(2);
     });
 
     VerseDataStore.getVersesForAuthor('lermontov-m-yu').then(function(verses) {
-      expect(verses.length).toBe(1)
+      expect(verses.length).toBe(1);
     });
 
     $httpBackend.flush();

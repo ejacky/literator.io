@@ -1,0 +1,22 @@
+<div class="view-support">
+  <h3>{{ 'VIEW_SUPPORT_TITLE' | translate }}</h3>
+  <h4>{{ 'VIEW_SUPPORT_SHARE_TITLE' | translate }}</h4>
+  <p>
+    <ng-include src="'views/share.html'" ng-controller="ShareCtrl" ng-init='shareTitle = ("VIEW_MAIN_SHARE_TITLE" | translate)'></ng-include>
+  </p>
+  <h3>{{ 'VIEW_SUPPORT_DONATE_TITLE' | translate }}</h3>
+  <h4>{{ 'VIEW_SUPPORT_DONATE_PAYPAL' | translate }}</h4>
+  <p>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" ng-submit="onPaypalClick()">
+      <input type="hidden" name="cmd" value="_s-xclick">
+      <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----">
+      <input type="image" src="https://www.paypalobjects.com/en_US/RU/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+      <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+    </form>
+  </p>
+  <h4 ng-if="global.currentLang === 'ru'">{{ 'VIEW_SUPPORT_DONATE_YANDEX' | translate }}</h4>
+  <p  class="yandex">
+    <iframe frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/quickpay/button-widget?account=41001165403721&quickpay=small&yamoney-payment-type=on&button-text=06&button-size=m&button-color=orange&targets=%D0%9D%D0%B0+%D1%80%D0%B0%D0%B7%D0%B2%D0%B8%D1%82%D0%B8%D0%B5+Literator.io&default-sum=100&successURL=" width="209" height="36"></iframe>
+    <iframe frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/quickpay/button-widget?account=41001165403721&quickpay=small&mobile-payment-type=on&button-text=06&button-size=m&button-color=orange&targets=%D0%9D%D0%B0+%D1%80%D0%B0%D0%B7%D0%B2%D0%B8%D1%82%D0%B8%D0%B5+Literator.io&default-sum=100&successURL=" width="209" height="36"></iframe>
+  </p>
+</div>

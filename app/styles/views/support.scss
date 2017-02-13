@@ -1,8 +1,8 @@
-.view-about {
+.view-support {
   margin: auto;
   font-size: 1rem;
   text-align: center;
-  padding-bottom: 2em;
+  padding-bottom: 1em;
 
   max-width: 600px;
   @media screen and (max-width: 500px) {
@@ -14,12 +14,21 @@
     width: 100%;
   }
 
-  h3 {
-    margin: 1.2em 0 0.3em;
-    font-size: 1.4em;
+  h4 {
+    margin-top: 0.7em;
   }
 
-  p {
-    margin: 0.6em 0;
+  .view-share {
+    a {
+      $width: 3em;
+      width: $width;
+      height: $width;
+      border-radius: $width / 2;
+    }
+  }
+  
+  .yandex > * {
+    display: block;
+    margin: 0.3em auto;
   }
 }

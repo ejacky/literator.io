@@ -10,6 +10,7 @@
     <div class="content">
       <div>
         <div class="width-spacer">{{ ::verse.plainText }}</div>
+        <!-- TODO: go away from ng-repeat below -->
         <div class="pieces"><span ng-repeat="piece in versePieces track by $index">{{::piece + ''}}</span><input ng-class="{visible: currentBlock, hidden: !currentBlock}" ng-keyup="onInputFieldKeyup()" autocorrect="off" autocomplete="off" autocapitalize="off" maxlength="{{inputFieldMaxLength}}"/></div>
         <div class="author" ng-show="isFinished">
           <p class="name">{{ ::author.shortName }}</p>

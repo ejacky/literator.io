@@ -53,6 +53,11 @@ angular
         controller: 'CatalogCtrl',
         controllerAs: 'catalog'
       })
+      .when('/support', {
+        templateUrl: 'views/support.html',
+        controller: 'SupportCtrl',
+        controllerAs: 'support'
+      })
       .otherwise({
         redirectTo: '/'
       });
