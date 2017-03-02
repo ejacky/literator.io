@@ -33,6 +33,8 @@ angular.module('literatorioApp')
       $scope.onStartButtonClick = onStartButtonClick;
       $scope.onShareClick = onShareClick;
       $scope.onSocialClick = onSocialClick;
+      $scope.onCatalogClick = onCatalogClick;
+      $scope.onSupportClick = onSupportClick;
 
       // Add event listeners
       $scope.$on('CountriesDataStore.countryChange', onCountryChange);
@@ -99,6 +101,20 @@ angular.module('literatorioApp')
      */
     function onSocialClick(snName) {
       Analytics.trackEvent('web', 'main-social-click', snName);
+    }
+
+    /**
+     * Callback firing on catalog link click
+     */
+    function onCatalogClick() {
+      Analytics.trackEvent('web', 'main-catalog-click');
+    }
+
+    /**
+     * Callback firing on support link click
+     */
+    function onSupportClick() {
+      Analytics.trackEvent('web', 'main-support-click');
     }
 
     /**
