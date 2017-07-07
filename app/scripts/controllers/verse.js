@@ -62,6 +62,7 @@ angular.module('literatorioApp')
         remainingVersePieces = verse.getPieces();
         siteContentElement = $('#content');
         inputField = $('.view-verse input');
+        result.author.getVerses(); // load list of verses for author
 
         // Add event listeners
         $scope.$on('$destroy', onDestroy);
