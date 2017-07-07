@@ -12,7 +12,7 @@
     <a href="" class="button" ng-click="onRandomVerseButtonClick()">{{ 'VIEW_CATALOG_RANDOM_VERSE_BTN' | translate }}</a>
     <p class="disclaimer">
       <br/>{{ 'VIEW_CATALOG_DISCLAIMER_LINE_1' | translate }}
-      <br/>{{ 'VIEW_CATALOG_DISCLAIMER_LINE_2' | translate }} <a href="https://vk.com/topic-130142643_35492394" target="_blank">{{ 'VIEW_CATALOG_DISCLAIMER_LINE_2_LINK' | translate }}</a>
+      <br/>{{ 'VIEW_CATALOG_DISCLAIMER_LINE_2' | translate }} <a href="{{global.currentLang === 'ru' ? 'https://vk.com/topic-130142643_35492394' : 'https://www.facebook.com/LiteratorioApp'}}" target="_blank">{{ 'VIEW_CATALOG_DISCLAIMER_LINE_2_LINK' | translate }}</a>
     </p>
   </div>
 </div>
