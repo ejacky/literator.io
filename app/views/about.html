@@ -14,10 +14,10 @@
 
   <h3>{{ 'VIEW_ABOUT_VERSES_TITLE' | translate }}</h3>
   <p>{{ 'VIEW_ABOUT_VERSES_DISCLAIMER' | translate }}</p>
-  <p>{{ 'VIEW_ABOUT_VERSES_HOW_TO_ADD' | translate }} <a href="https://vk.com/topic-130142643_35492394" target="_blank">{{ 'VIEW_ABOUT_VERSES_HOW_TO_ADD_LINK' | translate }}</a></p>
+  <p>{{ 'VIEW_ABOUT_VERSES_HOW_TO_ADD' | translate }} <a href="{{global.currentLang === 'ru' ? 'https://vk.com/topic-130142643_35492394' : 'https://www.facebook.com/LiteratorioApp'}}" target="_blank">{{ 'VIEW_ABOUT_VERSES_HOW_TO_ADD_LINK' | translate }}</a></p>
 
   <h3>{{ 'VIEW_ABOUT_CONTACTS_TITLE' | translate }}</h3>
-  <p><a href="https://vk.com/literatorio" target="_blank">{{ 'VIEW_ABOUT_CONTACTS_LINK' | translate }}</a></p>
+  <p><a href="{{global.currentLang === 'ru' ? 'https://vk.com/literatorio' : 'https://www.facebook.com/LiteratorioApp'}}" target="_blank">{{ 'VIEW_ABOUT_CONTACTS_LINK' | translate }}</a></p>
   <p><br/><a href="#/support">{{ 'VIEW_ABOUT_SUPPORT_THE_PROJECT' | translate }}</a></p>
 </div>
 

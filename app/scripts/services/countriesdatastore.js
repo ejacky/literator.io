@@ -17,9 +17,19 @@ angular.module('literatorioApp')
         title: 'Россия',
         languageCodes: ['ru', 'ru-RU'],
         language: 'ru',
-        isCatalogEnabled: true, // need to enable later (CARD-93)
+        isCatalogEnabled: true,
         percentsToMark: function (val) {
           return val < 50 ? '3' : (val < 60 ? '4-' : (val < 70 ? '4' : (val < 80 ? '4+' : (val < 90 ? '5-' : (val < 99 ? '5' : '5+')))));
+        }
+      },
+      {
+        countryCode: 'en',
+        title: 'England',
+        languageCodes: ['en', 'en-GB', 'en-US', 'us'],
+        language: 'en',
+        isCatalogEnabled: true,
+        percentsToMark: function (val) {
+          return val < 50 ? 'D' : (val < 60 ? 'C' : (val < 70 ? 'B-' : (val < 80 ? 'B' : (val < 90 ? 'A-' : (val < 99 ? 'A' : 'A+')))));
         }
       },
       {
@@ -27,21 +37,21 @@ angular.module('literatorioApp')
         title: 'USA',
         languageCodes: ['us', 'en-US', 'en'],
         language: 'en',
-        isCatalogEnabled: false,
+        isCatalogEnabled: true,
         percentsToMark: function (val) {
           return val < 50 ? 'D' : (val < 60 ? 'C' : (val < 70 ? 'B-' : (val < 80 ? 'B' : (val < 90 ? 'A-' : (val < 99 ? 'A' : 'A+')))));
         }
       },
-      {
-        countryCode: 'ie',
-        title: 'Ireland',
-        languageCodes: ['ie', 'en-IE', 'ga-IE', 'gd-IE', 'ga', 'en-GB', 'en'],
-        language: 'en',
-        isCatalogEnabled: false,
-        percentsToMark: function (val) {
-          return val < 50 ? 'D' : (val < 60 ? 'C' : (val < 70 ? 'B-' : (val < 80 ? 'B' : (val < 90 ? 'A-' : (val < 99 ? 'A' : 'A+')))));
-        }
-      }
+      // {
+      //   countryCode: 'ie',
+      //   title: 'Ireland',
+      //   languageCodes: ['ie', 'en-IE', 'ga-IE', 'gd-IE', 'ga', 'en-GB', 'en'],
+      //   language: 'en',
+      //   isCatalogEnabled: false,
+      //   percentsToMark: function (val) {
+      //     return val < 50 ? 'D' : (val < 60 ? 'C' : (val < 70 ? 'B-' : (val < 80 ? 'B' : (val < 90 ? 'A-' : (val < 99 ? 'A' : 'A+')))));
+      //   }
+      // }
     ];
     var fallbackCountryCode = 'ru';
     var currentCountry = null;

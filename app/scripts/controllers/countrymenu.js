@@ -8,7 +8,7 @@
  * Controller of the literatorioApp
  */
 angular.module('literatorioApp')
-  .controller('CountryMenuCtrl', function ($scope, CountriesDataStore) {
+  .controller('CountryMenuCtrl', function ($scope, $route, CountriesDataStore) {
 
     init();
 
@@ -20,7 +20,12 @@ angular.module('literatorioApp')
       // Populate scope
       $scope.countries = CountriesDataStore.getAvailableCountries();
       $scope.currentCountry = CountriesDataStore.getCurrentCountry();
+      $scope.notCurrentCountry = notCurrentCountry;
       $scope.onCountryChange = onCountryChange;
+    }
+    
+    function notCurrentCountry(country) {
+      return country.countryCode !== $scope.currentCountry.countryCode;
     }
 
     /**
@@ -30,5 +35,6 @@ angular.module('literatorioApp')
     function onCountryChange(country) {
       CountriesDataStore.setCurrentCountry(country);
       $scope.currentCountry = CountriesDataStore.getCurrentCountry();
+      $route.reload();
     }
   });
