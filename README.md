@@ -1,6 +1,6 @@
-# [Literator.io](http://bobrosoft.github.io/literator.io)
+# [Literator.io](https://bobrosoft.github.io/literator.io)
 
-Web App: [literator.io](http://bobrosoft.github.io/literator.io)
+Web App: [literator.io](https://bobrosoft.github.io/literator.io)
 
 Poems/verses repository: https://github.com/bobrosoft/literator.io-verses (see README there)
 
